@@ -2,11 +2,11 @@
 
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
-//defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'Users'.DS.'aftha'.DS.'Sites'.DS.'2. Eclipse Workspace'.DS.'Careers'.DS.'public');
-defined('SITE_ROOT') ? null : define('SITE_ROOT', 'C:'.DS.'xampp'.DS.'htdocs'.DS.'webdev'.DS.'Careers');
+defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'Users'.DS.'aftha'.DS.'Sites'.DS.'2. Eclipse Workspace'.DS.'Careers'.DS.'public');
+//defined('SITE_ROOT') ? null : define('SITE_ROOT', 'C:'.DS.'xampp'.DS.'htdocs'.DS.'webdev'.DS.'Careers');
 
-//require_once("config_mac.php");
-require_once("config_windows.php");
+require_once("config_mac.php");
+//require_once("config_windows.php");
 
 require_once("functions.php");
 
@@ -18,19 +18,13 @@ require_once("database_object.php");
 
 require_once("admin_level.php");
 require_once("admin_user.php");
-require_once("bus_bus_personnel.php");
-require_once("bus_personnel_role.php");
-require_once("bus_personnel.php");
-require_once("bus_route.php");
-require_once("bus_stop.php");
-require_once("bus.php");
-require_once("commuter.php");
-require_once("complaint_status.php");
-require_once("complaint_type.php");
-require_once("complaint.php");
+require_once("company.php");
+require_once("degree_program.php");
 require_once("object_type.php");
-require_once("photo_type.php");
-require_once("photograph.php");
-require_once("stop_route.php");
+require_once("photo.php");
+require_once("skill_student.php");
+require_once("skill.php");
+require_once("student.php");
+
 
 ?>

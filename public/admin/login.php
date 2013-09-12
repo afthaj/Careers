@@ -3,14 +3,14 @@ require_once("../../includes/initialize.php");
 
 
  if ($session->is_logged_in()){
- 	redirect_to("index.php");
+ 	//redirect_to("index.php");
  }
  
  $ot_object = new ObjectType();
  $object_type_admin = $ot_object->get_object_type_by_name("admin");
  
  $ot_object2 = new ObjectType();
- $object_type_bus_personnel = $ot_object2->get_object_type_by_name("bus_personnel");
+ $object_type_student = $ot_object2->get_object_type_by_name("student");
 
 if (isset($_POST['submit'])){
 	
@@ -31,16 +31,16 @@ if (isset($_POST['submit'])){
 			$session->message("username/password combination is incorrect. ");
 		}
 		
-	} else if ($object_type == $object_type_bus_personnel->id) {
+	} else if ($object_type == $object_type_student->id) {
 		
 		$username = trim($_POST['username']);
 		$password = trim($_POST['password']);
 		
-		$bus_personnel_object = new BusPersonnel();
-		$found_user_bus_personnel = $bus_personnel_object->authenticate($username, $password);
+		$student_object = new Student();
+		$found_user_student = $student_object->authenticate($username, $password);
 		
-		if ($found_user_bus_personnel){
-			$session->login($found_user_bus_personnel, $object_type_bus_personnel->id);
+		if ($found_user_student){
+			$session->login($found_user_student, $object_type_bus_personnel->id);
 			redirect_to("index.php");
 		} else {
 			$session->message("username/password combination is incorrect. ");
@@ -59,7 +59,7 @@ if (isset($_POST['submit'])){
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Login &middot; Gaman</title>
+    <title>Login &middot; <?php echo WEB_APP_NAME; ?></title>
     <?php require_once('../../includes/layouts/header_admin.php');?>
     
     <style type="text/css">
@@ -109,7 +109,7 @@ if (isset($_POST['submit'])){
 
     <div class="container">
 
-      <form class="form-signin" action="login.php" method="post">
+      <form class="form-signin" action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
         
         <div class="control-group">
         	<h2 class="form-signin-heading">Please sign in</h2>
@@ -134,7 +134,7 @@ if (isset($_POST['submit'])){
         	<label class="control-label">Login as:</label>
         		<select name="object_type">
         			<option value="<?php echo $object_type_admin->id; ?>"><?php echo $object_type_admin->display_name; ?></option>
-        			<option value="<?php echo $object_type_bus_personnel->id; ?>"><?php echo $object_type_bus_personnel->display_name; ?></option>
+        			<option value="<?php echo $object_type_student->id; ?>"><?php echo $object_type_student->display_name; ?></option>
         		</select>
         	</div>
         </div>

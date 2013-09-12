@@ -2,23 +2,26 @@
 
 require_once("database.php");
 
-class Photograph extends DatabaseObject {
+class Photo extends DatabaseObject {
 	
-	protected static $table_name = "photographs";
-	protected static $db_fields = array('id', 'related_object_type', 'related_object_id', 'photo_type', 'filename', 'file_type', 'size');
+	protected static $table_name = "photos";
+	protected static $db_fields = array('id', 'related_object_type', 'related_object_id', 'filename', 'file_type', 'size');
 	
 	public $id;
 	
 	public $related_object_type;
 	public $related_object_id;
 	
-	public $photo_type;
 	public $filename;
 	public $file_type;
 	public $size;
 	
 	private $temp_path;
-	protected $upload_dir = 'img/uploads';
+	
+	// change $upload_dir when changing between Mac and PC
+	
+	protected $upload_dir = 'img/uploads'; 				// for mac 
+	//protected $upload_dir = 'public/img/uploads';		// for PC
 	public $errors = array();
 	
 	protected $upload_errors = array(
@@ -52,108 +55,6 @@ class Photograph extends DatabaseObject {
 			
 			return true;
 		}
-	}
-	
-	public function attach_file_bus_personnel($file, $bus_personnel_id, $bus_personnel_first_name, $bus_personnel_last_name) {
-	
-		if (!$file || empty($file) || !is_array($file)){
-			$this->errors[] = "No file was uploaded";
-			return false;
-		} else if ($file['error'] != 0) {
-			$this->errors[] = $this->upload_errors[$file['error']];
-			return false;
-		} else {
-				
-			$this->temp_path = $file['tmp_name'];
-				
-			$path_parts = pathinfo($file['name']);
-			$this->filename = 'bus_personnel_prof_pic_'.$bus_personnel_id.'_'.$bus_personnel_first_name.'_'.$bus_personnel_last_name.'.'.$path_parts['extension'];
-				
-			$this->file_type = $file['type'];
-				
-			$this->size = $file['size'];
-				
-			return true;
-		}
-	}
-	
-	public function attach_file_commuter($file, $user_id, $user_first_name, $user_last_name){
-		if (!$file || empty($file) || !is_array($file)){
-			$this->errors[] = "No file was uploaded";
-			return false;
-		} else if ($file['error'] != 0) {
-			$this->errors[] = $this->upload_errors[$file['error']];
-			return false;
-		} else {
-	
-			$this->temp_path = $file['tmp_name'];
-	
-			$path_parts = pathinfo($file['name']);
-			$this->filename = 'commuter_prof_pic_'.$user_id.'_'.$user_first_name.'_'.$user_last_name.'.'.$path_parts['extension'];
-	
-			$this->file_type = $file['type'];
-	
-			$this->size = $file['size'];
-	
-			return true;
-		}
-	}
-	
-	public function attach_file_bus_stop($file, $stop_id, $photo_type) {
-		
-		if (!$file || empty($file) || !is_array($file)){
-			$this->errors[] = "No file was uploaded";
-			return false;
-		} else if ($file['error'] != 0) {
-			$this->errors[] = $this->upload_errors[$file['error']];
-			return false;
-		} else {
-				
-			$this->temp_path = $file['tmp_name'];
-				
-			$path_parts = pathinfo($file['name']);
-			$this->filename = 'bus_stop_pic_'.$stop_id.'_'.$photo_type.'.'.$path_parts['extension'];
-				
-			$this->file_type = $file['type'];
-				
-			$this->size = $file['size'];
-				
-			return true;
-		}
-	}
-	
-	public function attach_file_bus($file, $bus_id, $photo_type) {
-	
-		if (!$file || empty($file) || !is_array($file)){
-			$this->errors[] = "No file was uploaded";
-			return false;
-		} else if ($file['error'] != 0) {
-			$this->errors[] = $this->upload_errors[$file['error']];
-			return false;
-		} else {
-	
-			$this->temp_path = $file['tmp_name'];
-	
-			$path_parts = pathinfo($file['name']);
-			$this->filename = 'bus_pic_'.$bus_id.'_'.$photo_type.'.'.$path_parts['extension'];
-	
-			$this->file_type = $file['type'];
-	
-			$this->size = $file['size'];
-	
-			return true;
-		}
-	}
-	
-	public function comment_count(){
-		global $database;
-		
-		$sql = "SELECT COUNT(*) from comments WHERE photograph_id = ". $database->escape_value($this->id);
-		
-		$result_set = $database->query($sql);
-		$row = $database->fetch_array($result_set);
-		
-		return array_shift($row);
 	}
 	
 	public function save(){

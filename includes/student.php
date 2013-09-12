@@ -2,18 +2,19 @@
 
 require_once("database.php");
 
-class Commuter extends DatabaseObject {
+class Student extends DatabaseObject {
 	
-	protected static $table_name = "user_commuters";
-	protected static $db_fields = array('id', 'object_type', 'username', 'password', 'first_name', 'last_name', 'email_address');
+	protected static $table_name = "user_students";
+	protected static $db_fields = array('id', 'username', 'password', 'first_name', 'last_name', 'degree_program_id', 'email_address', 'telephone_number');
 	
 	public $id;
-	public $object_type;
 	public $username;
 	public $password;
 	public $first_name;
 	public $last_name;
+	public $degree_program_id;
 	public $email_address;
+	public $telephone_number;
 	
 	public function full_name(){
 		if (isset($this->first_name) && isset($this->last_name)){
@@ -34,7 +35,7 @@ class Commuter extends DatabaseObject {
 		$sql .= " LIMIT 1";
 	
 		$result_array = self::find_by_sql($sql);
-		
+	
 		return !empty($result_array) ? array_shift($result_array) : false;
 	}
 	

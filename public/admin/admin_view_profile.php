@@ -1,10 +1,10 @@
 <?php
 require_once("../../includes/initialize.php");
 
-if ($session->is_logged_in() && $session->object_type == 5){
+if ($session->is_logged_in() && $session->object_type == 3){
 	
 	$user = AdminUser::find_by_id($_SESSION['id']);
-	$p = new Photograph();
+	$p = new Photo();
 	$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
 	
 	$admin_levels = AdminLevel::find_all();
@@ -44,7 +44,7 @@ if ($session->is_logged_in() && $session->object_type == 5){
 	
 	if (isset($_POST['upload'])){
 	
-		$photo = new Photograph();
+		$photo = new Photo();
 		
 		$photo->related_object_type = '5';
 		$photo->related_object_id = $user->id;
@@ -60,14 +60,14 @@ if ($session->is_logged_in() && $session->object_type == 5){
 	
 	}
 	
-} else if ($session->is_logged_in() && $session->object_type == 4) {
+} else if ($session->is_logged_in() && $session->object_type == 2) {
 	
-	$user = BusPersonnel::find_by_id($_SESSION['id']);
-	$p = new Photograph();
+	$user = Student::find_by_id($_SESSION['id']);
+	$p = new Photo();
 	$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
 	
-	$roles = BusPersonnelRole::find_all();
-	$buses = Bus::find_all();
+	//$roles = BusPersonnelRole::find_all();
+	//$buses = Bus::find_all();
 	
 	if (isset($_POST['submit'])){
 		$user->username = $_POST['username'];
@@ -104,7 +104,7 @@ if ($session->is_logged_in() && $session->object_type == 5){
 	
 	if (isset($_POST['upload'])){
 	
-		$photo = new Photograph();
+		$photo = new Photo();
 		
 		$photo->related_object_type = '4';
 		$photo->related_object_id = $user->id;
@@ -145,20 +145,24 @@ if ($session->is_logged_in() && $session->object_type == 5){
       <header class="jumbotron subhead">
 		 <div class="container-fluid">
 		 
-		 <div class="span9">
-		 	<h1>User Profile</h1>
-		 	<h3><?php echo $user->full_name();?></h3>
-		 </div>
+		 <div class="row-fluid">
 		 
 		 <div class="span3">
 		 
 		 <?php 
          if (!empty($profile_picture->filename)) {
-         	echo '<img src="../../' . $profile_picture->image_path() . '" width="200" class="img-rounded pull-right" />'; 
+         	echo '<img src="../../' . $profile_picture->image_path() . '" width="200" class="img-rounded" />'; 
          } else {
-         	echo '<img src="../img/default-prof-pic.jpg" width="200" class="img-rounded pull-right" alt="Please upload a profile picture" />';
+         	echo '<img src="../img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Please upload a profile picture" />';
          }
          ?>
+		 
+		 </div>
+		 
+		 <div class="span9">
+		 	<h1>User Profile</h1>
+		 	<h3><?php echo $user->full_name();?></h3>
+		 </div>
 		 
 		 </div>
 		 
@@ -175,9 +179,9 @@ if ($session->is_logged_in() && $session->object_type == 5){
         
         <div class="span3">
 	        <div class="sidenav" data-spy="affix" data-offset-top="200">
-	        	<?php if ($session->is_logged_in() && $session->object_type == 5) { ?>
+	        	<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
 	        		<a href="admin_list_admin_users.php" class="btn btn-primary"> &larr; Back to Admin Users List</a>
-	        	<?php } else if ($session->is_logged_in() && $session->object_type == 4) {?>
+	        	<?php } else if ($session->is_logged_in() && $session->object_type == 2) {?>
 	        		<a href="index.php" class="btn btn-primary"> &larr; Back to Home</a>
 	        	<?php } ?>
 	        </div>

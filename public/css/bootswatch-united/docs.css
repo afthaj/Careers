@@ -91,8 +91,11 @@ theme name:
 united
 
 theme colours:
-#d44413
-#802c59
+#d44413 - #EF1C22
+
+#802c59 - #FFFFFF
+
+UCSC Red - #EF1C22
 
 */
 
@@ -185,7 +188,7 @@ theme colours:
   right: 0;
   bottom: 0;
   left: 0;
-  background: url(../../img/bs-docs-masthead-pattern.png) repeat center center;
+  background: url(../../img/masthead-pattern.png) repeat center center;
   opacity: .4;
 }
 @media
@@ -204,10 +207,10 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 .masthead {
   padding: 70px 0 80px;
   margin-bottom: 0;
-  color: #fff;
+  color: #FFF;
 }
 .masthead h1 {
-  font-size: 120px;
+  font-size: 80px;
   line-height: 1;
   letter-spacing: -2px;
 }
@@ -257,6 +260,7 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 .subhead {
   text-align: left;
   border-bottom: 1px solid #ddd;
+  color: #FFF;
 }
 .subhead h1 {
   font-size: 60px;
@@ -790,7 +794,7 @@ form.bs-docs-example {
 /* Sidenav for Docs
 -------------------------------------------------- */
 
-.bs-docs-sidenav {
+.sidenav {
   width: 228px;
   margin: 30px 0 0;
   padding: 0;
@@ -802,24 +806,24 @@ form.bs-docs-example {
      -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
           box-shadow: 0 1px 4px rgba(0,0,0,.065);
 }
-.bs-docs-sidenav > li > a {
+.sidenav > li > a {
   display: block;
   width: 190px \9;
   margin: 0 0 -1px;
   padding: 8px 14px;
   border: 1px solid #e5e5e5;
 }
-.bs-docs-sidenav > li:first-child > a {
+.sidenav > li:first-child > a {
   -webkit-border-radius: 6px 6px 0 0;
      -moz-border-radius: 6px 6px 0 0;
           border-radius: 6px 6px 0 0;
 }
-.bs-docs-sidenav > li:last-child > a {
+.sidenav > li:last-child > a {
   -webkit-border-radius: 0 0 6px 6px;
      -moz-border-radius: 0 0 6px 6px;
           border-radius: 0 0 6px 6px;
 }
-.bs-docs-sidenav > .active > a {
+.sidenav > .active > a {
   position: relative;
   z-index: 2;
   padding: 9px 15px;
@@ -830,27 +834,27 @@ form.bs-docs-example {
           box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
 }
 /* Chevrons */
-.bs-docs-sidenav .icon-chevron-right {
+.sidenav .icon-chevron-right {
   float: right;
   margin-top: 2px;
   margin-right: -6px;
   opacity: .25;
 }
-.bs-docs-sidenav > li > a:hover {
+.sidenav > li > a:hover {
   background-color: #f5f5f5;
 }
-.bs-docs-sidenav a:hover .icon-chevron-right {
+.sidenav a:hover .icon-chevron-right {
   opacity: .5;
 }
-.bs-docs-sidenav .active .icon-chevron-right,
-.bs-docs-sidenav .active a:hover .icon-chevron-right {
+.sidenav .active .icon-chevron-right,
+.sidenav .active a:hover .icon-chevron-right {
   background-image: url(../img/glyphicons-halflings-white.png);
   opacity: 1;
 }
-.bs-docs-sidenav.affix {
+.sidenav.affix {
   top: 40px;
 }
-.bs-docs-sidenav.affix-bottom {
+.sidenav.affix-bottom {
   position: absolute;
   top: auto;
   bottom: 270px;
@@ -868,10 +872,10 @@ form.bs-docs-example {
   .bs-docs-container {
     max-width: 970px;
   }
-  .bs-docs-sidenav {
+  .sidenav {
     width: 258px;
   }
-  .bs-docs-sidenav > li > a {
+  .sidenav > li > a {
     width: 230px \9; /* Override the previous IE8-9 hack */
   }
 }
@@ -894,7 +898,7 @@ form.bs-docs-example {
   }
 
   /* When affixed, space properly */
-  .bs-docs-sidenav {
+  .sidenav {
     top: 0;
     width: 218px;
     margin-top: 30px;
@@ -914,11 +918,11 @@ form.bs-docs-example {
     margin-top: -20px; /* Offset bottom margin on .navbar */
   }
   /* Adjust sidenav width */
-  .bs-docs-sidenav {
+  .sidenav {
     width: 166px;
     margin-top: 20px;
   }
-  .bs-docs-sidenav.affix {
+  .sidenav.affix {
     top: 0;
   }
 }
@@ -958,11 +962,11 @@ form.bs-docs-example {
   }
 
   /* Sidenav */
-  .bs-docs-sidenav {
+  .sidenav {
     width: auto;
     margin-bottom: 20px;
   }
-  .bs-docs-sidenav.affix {
+  .sidenav.affix {
     position: static;
     width: auto;
     top: 0;
@@ -1008,8 +1012,14 @@ form.bs-docs-example {
 
   /* center align subhead text like the masthead */
   .subhead h1,
+  .subhead h2,
+  .subhead h3,
+  .subhead h4,
+  .subhead h5,
+  .subhead h6,
+  .subhead img,
   .subhead p {
-    text-align: center;
+    text-align: left;
   }
 
   /* Marketing on home */

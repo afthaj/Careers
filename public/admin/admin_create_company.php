@@ -4,7 +4,7 @@ require_once("../../includes/initialize.php");
 if ($session->is_logged_in() && $session->object_type == 5){
 	
 	$user = AdminUser::find_by_id($_SESSION['id']);
-	$p = new Photograph();
+	$p = new Photo();
 	$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
 	
 	if (isset($_POST['submit'])) {

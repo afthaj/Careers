@@ -5,23 +5,18 @@ if (!$session->is_logged_in()){
 	redirect_to("login.php");
 } else {
 	// object_type = 5 is admin, 4 is bus_personnel, 6 is commuter 
-	 if ($_SESSION['object_type'] == 5 ){
+	 if ($_SESSION['object_type'] == 3 ){
 		$user = AdminUser::find_by_id($_SESSION['id']);
 		
-		$p = new Photograph();
+		$p = new Photo();
 		$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
 		
-	} else if ($_SESSION['object_type'] == 4 ){
-		$user = BusPersonnel::find_by_id($_SESSION['id']);
+	} else if ($_SESSION['object_type'] == 2 ){
+		$user = Student::find_by_id($_SESSION['id']);
 		
-		$p = new Photograph();
+		$p = new Photo();
 		$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
 		
-	} else if ($_SESSION['object_type'] == 6 ){
-		$user = Commuter::find_by_id($_SESSION['id']);
-		
-		$p = new Photograph();
-		$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
 	}
 }
 ?>
@@ -45,6 +40,7 @@ if (!$session->is_logged_in()){
 
       	<div class="jumbotron masthead">
 		  <div class="container">
+		  	<img src="../ico/logo-512x512.png" alt="UCSC Logo" width="250"/>
 		    <h1><?php echo WEB_APP_NAME; ?></h1>
 		    <p><?php echo WEB_APP_CATCH_PHRASE; ?></p>
 		  </div>

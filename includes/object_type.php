@@ -5,12 +5,12 @@ require_once("database.php");
 class ObjectType extends DatabaseObject {
 	
 	protected static $table_name = "object_types";
-	protected static $db_fields = array('id', 'user_flag', 'object_type_name', 'display_name');
+	protected static $db_fields = array('id', 'object_type_name', 'display_name', 'user_flag');
 	
 	public $id;
-	public $user_flag;
 	public $object_type_name;
 	public $display_name;
+	public $user_flag;
 	
 	public function get_object_type_by_name($object_type_name){
 		global $database;
