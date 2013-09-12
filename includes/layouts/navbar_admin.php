@@ -31,32 +31,6 @@
           	</ul>
           </li>
           
-          <li class="dropdown">
-          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Buses &amp; Personnel<b class="caret"></b></a>
-          	<ul class="dropdown-menu">
-          		<li><a href="admin_list_bus_personnel.php">View All Personnel</a></li>
-          		<?php if ($session->is_logged_in() && $session->object_type == 5) { ?>
-          		<li><a href="admin_create_bus_personnel.php">Add Personnel</a></li>
-          		<?php } ?>
-          		<li><a href="#">Search for Personnel</a></li>
-          		<li class="divider"></li>
-          		<li><a href="admin_list_buses.php">View All Buses</a></li>
-          		<?php if ($session->is_logged_in() && $session->object_type == 5) { ?>
-          		<li><a href="admin_create_bus.php">Add Bus</a></li>
-          		<?php } ?>
-          		<li><a href="#">Search for Bus</a></li>
-          	</ul>
-          </li>
-          
-          <li class="dropdown">
-          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Complaints <b class="caret"></b></a>
-          	<ul class="dropdown-menu">
-          		<li><a href="admin_list_complaints.php">View All Complaints</a></li>
-          		<li><a href="admin_create_complaint.php">Add Complaint</a></li>
-          		<li><a href="#">Search for Complaint</a></li>
-          	</ul>
-          </li>
-          
           <li<?php if (isset($page) && $page == 'test'){echo ' class="active"';}?>><a href="test.php">Test Page</a></li>
 
         </ul>

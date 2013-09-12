@@ -2,7 +2,7 @@
 require_once("../../includes/initialize.php");
 
 if (!$session->is_logged_in()){
-	//redirect_to("login.php");
+	redirect_to("login.php");
 } else {
 	// object_type = 5 is admin, 4 is bus_personnel, 6 is commuter 
 	 if ($_SESSION['object_type'] == 5 ){

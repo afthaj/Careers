@@ -25,25 +25,6 @@
           	</ul>
           </li>
           
-          <li class="dropdown">
-          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Buses &amp; Personnel<b class="caret"></b></a>
-          	<ul class="dropdown-menu">
-          		<li><a href="public_list_bus_personnel.php">View All Personnel</a></li>
-          		<li><a href="#">Search for Personnel</a></li>
-          		<li class="divider"></li>
-          		<li><a href="public_list_buses.php">View All Buses</a></li>
-          		<li><a href="#">Search for Bus</a></li>
-          	</ul>
-          </li>
-          
-          <li class="dropdown">
-          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Complaints <b class="caret"></b></a>
-          	<ul class="dropdown-menu">
-          		<li><a href="public_list_complaints.php">View All Complaints</a></li>
-          		<li><a href="public_create_complaint.php">Add Complaint</a></li>
-          	</ul>
-          </li>
-          
           <li<?php if (isset($page) && $page == 'test'){echo ' class="active"';}?>><a href="test.php">Test Page</a></li>
           
         </ul>
