@@ -5,7 +5,7 @@ require_once("database.php");
 class AdminUser extends DatabaseObject {
 	
 	protected static $table_name = "user_admins";
-	protected static $db_fields = array('id', 'username', 'password', 'admin_level', 'first_name', 'last_name', 'email_address');
+	protected static $db_fields = array('id', 'username', 'password', 'admin_level', 'first_name', 'last_name', 'email_address', 'telephone_number');
 	
 	public $id;
 	public $username;
@@ -14,6 +14,7 @@ class AdminUser extends DatabaseObject {
 	public $first_name;
 	public $last_name;
 	public $email_address;
+	public $telephone_number;
 	
 	public function full_name(){
 		if (isset($this->first_name) && isset($this->last_name)){
