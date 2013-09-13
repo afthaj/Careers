@@ -2,15 +2,23 @@
 require_once("../../includes/initialize.php");
 
 
- if ($session->is_logged_in()){
- 	//redirect_to("index.php");
- }
+if ($session->is_logged_in()){
+	//redirect_to("index.php");
+}
  
- $ot_object = new ObjectType();
- $object_type_admin = $ot_object->get_object_type_by_name("admin");
+$ot_object = new ObjectType();
+$object_type_admin = $ot_object->get_object_type_by_name("admin");
  
- $ot_object2 = new ObjectType();
- $object_type_student = $ot_object2->get_object_type_by_name("student");
+$ot_object2 = new ObjectType();
+$object_type_student = $ot_object2->get_object_type_by_name("student");
+ 
+$ot_object3 = new ObjectType();
+$object_type_company_user = $ot_object3->get_object_type_by_name("company_user");
+ 
+$user_login_object = new UserLogin();
+ 
+$ot = new ObjectType();
+$user_objects = $ot->get_user_objects();
 
 if (isset($_POST['submit'])){
 	
@@ -21,8 +29,7 @@ if (isset($_POST['submit'])){
 		$username = trim($_POST['username']);
 		$password = trim($_POST['password']);
 
-		$admin_user_object = new AdminUser();
-		$found_user_admin = $admin_user_object->authenticate($username, $password);
+		$found_user_admin = $user_login_object->authenticate($username, $password, $object_type_admin->id);
 		
 		if ($found_user_admin){
 			$session->login($found_user_admin, $object_type_admin->id);
@@ -36,11 +43,24 @@ if (isset($_POST['submit'])){
 		$username = trim($_POST['username']);
 		$password = trim($_POST['password']);
 		
-		$student_object = new Student();
-		$found_user_student = $student_object->authenticate($username, $password);
+		$found_user_student = $user_login_object->authenticate($username, $password, $object_type_student->id);
 		
 		if ($found_user_student){
 			$session->login($found_user_student, $object_type_bus_personnel->id);
+			redirect_to("index.php");
+		} else {
+			$session->message("username/password combination is incorrect. ");
+		}
+		
+	} else if ($object_type == $object_type_company_user->id) {
+		
+		$username = trim($_POST['username']);
+		$password = trim($_POST['password']);
+		
+		$found_user_company_user = $user_login_object->authenticate($username, $password, $object_type_company_user->id);
+		
+		if ($found_user_company_user){
+			$session->login($found_user_company_user, $object_type_company_user->id);
 			redirect_to("index.php");
 		} else {
 			$session->message("username/password combination is incorrect. ");
@@ -133,8 +153,9 @@ if (isset($_POST['submit'])){
         	<div class="controls">
         	<label class="control-label">Login as:</label>
         		<select name="object_type">
-        			<option value="<?php echo $object_type_admin->id; ?>"><?php echo $object_type_admin->display_name; ?></option>
-        			<option value="<?php echo $object_type_student->id; ?>"><?php echo $object_type_student->display_name; ?></option>
+        		<?php foreach($user_objects as $user_object) { ?>
+        			<option value="<?php echo $user_object->id; ?>"><?php echo $user_object->display_name; ?></option>
+        		<?php } ?>
         		</select>
         	</div>
         </div>

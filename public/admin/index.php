@@ -1,30 +1,35 @@
 <?php
 require_once("../../includes/initialize.php");
 
-if (!$session->is_logged_in()){
-	redirect_to("login.php");
-} else {
-	// object_type = 5 is admin, 4 is bus_personnel, 6 is commuter 
-	 if ($_SESSION['object_type'] == 3 ){
+$user_login_object = new UserLogin();
+
+if ($session->is_logged_in()){
+	
+	if ($session->object_type == 3){
+		//admin
 		$user = AdminUser::find_by_id($_SESSION['id']);
 		
-		$p = new Photo();
-		$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
 		
-	} else if ($_SESSION['object_type'] == 2 ){
+	} else if ($session->object_type == 2){
+		//student
 		$user = Student::find_by_id($_SESSION['id']);
 		
-		$p = new Photo();
-		$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
 		
-	}
-}
+	} else if ($session->object_type == 5){
+		//company_user
+		$user = CompanyUser::find_by_id($_SESSION['id']);
+		
+		
+	} 
+	
+} 
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Admin Home &middot; <?php echo WEB_APP_NAME; ?></title>
+    <title>Home &middot; <?php echo WEB_APP_NAME; ?></title>
     <?php require_once('../../includes/layouts/header_admin.php');?>
     
   </head>

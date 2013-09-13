@@ -25,6 +25,15 @@ class ObjectType extends DatabaseObject {
 		
 	}
 	
+	public function get_user_objects(){
+		global $database;
+	
+		$sql  = "SELECT * FROM " . static::$table_name;
+		$sql .= " WHERE user_flag = '1'";
+	
+		return self::find_by_sql($sql); 
+	
+	}
 	
 }
 

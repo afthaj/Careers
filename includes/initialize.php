@@ -18,6 +18,7 @@ require_once("database_object.php");
 
 require_once("admin_level.php");
 require_once("admin_user.php");
+require_once("company_user.php");
 require_once("company.php");
 require_once("degree_program.php");
 require_once("object_type.php");
@@ -25,6 +26,7 @@ require_once("photo.php");
 require_once("skill_student.php");
 require_once("skill.php");
 require_once("student.php");
+require_once("user_login.php");
 
 
 ?>

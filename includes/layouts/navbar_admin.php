@@ -41,9 +41,7 @@
           <?php if (isset($session->id) && ($session->object_type == 3 || $session->object_type == 2) ) { // object_type 3 is admin and 2 is student ?>
           	<li class="dropdown">
           	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          	<?php
-          	
-          	echo $user->full_name(); ?> <b class="caret"></b>
+          	<?php if ($user) { echo $user_login_object->get_full_name($user->login_id); } ?> <b class="caret"></b>
           	</a>
           	<ul class="dropdown-menu">
           		<li><a href="admin_view_profile.php">View Profile</a></li>

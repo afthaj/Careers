@@ -4,14 +4,12 @@ require_once("database.php");
 
 class Photo extends DatabaseObject {
 	
-	protected static $table_name = "photos";
+	protected static $table_name = "obj_photos";
 	protected static $db_fields = array('id', 'related_object_type', 'related_object_id', 'filename', 'file_type', 'size');
 	
 	public $id;
-	
 	public $related_object_type;
 	public $related_object_id;
-	
 	public $filename;
 	public $file_type;
 	public $size;
@@ -21,7 +19,7 @@ class Photo extends DatabaseObject {
 	// change $upload_dir when changing between Mac and PC
 	
 	//protected $upload_dir = 'img/uploads'; 				// for mac 
-	protected $upload_dir = 'public/img/uploads';		// for PC
+	protected $upload_dir = 'public/img/uploads';			// for PC
 	public $errors = array();
 	
 	protected $upload_errors = array(

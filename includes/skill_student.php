@@ -4,7 +4,7 @@ require_once("database.php");
 
 class SkillStudent extends DatabaseObject {
 	
-	protected static $table_name = "skills_students";
+	protected static $table_name = "obj_skills_students";
 	protected static $db_fields = array('id', 'skill_id', 'student_id');
 	
 	public $id;

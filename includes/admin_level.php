@@ -4,7 +4,7 @@ require_once("database.php");
 
 class AdminLevel extends DatabaseObject {
 	
-	protected static $table_name = "admin_levels";
+	protected static $table_name = "user_admin_levels";
 	protected static $db_fields = array('id', 'admin_level_name');
 	
 	public $id;
