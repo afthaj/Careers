@@ -1,127 +1,133 @@
 <?php
 require_once("../../includes/initialize.php");
 
-if ($session->is_logged_in() && $session->object_type == 3){
-	
-	$user = AdminUser::find_by_id($_SESSION['id']);
-	$p = new Photo();
-	$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
-	
-	$admin_levels = AdminLevel::find_all();
-	
-	if (isset($_POST['submit'])){
-		$user->username = $_POST['username'];
-		$user->first_name = $_POST['first_name'];
-		$user->last_name = $_POST['last_name'];
-		$user->email_address = $_POST['email_address'];
-		$user->admin_level = $_POST['admin_level'];
-	
-		if ($user->update()){
-			$session->message("Success! Your details were updated. ");
-			redirect_to('admin_view_profile.php');
-		} else {
-			$session->message("Error! Your details could not be updated. ");
-		}
-	}
-	
-	if (isset($_POST['update'])){
-	
-		if ($_POST['old_password'] == $user->password){
-				
-			$user->password = $_POST['new_password'];
-				
+//init code
+$user_login_object = new UserLogin();
+
+//check login
+if ($session->is_logged_in()){
+
+	if ($session->object_type == 3){
+		//admin
+		$user = $user_login_object->get_user($_SESSION['id']);
+		
+		$admin_levels = AdminLevel::find_all();
+		
+		if (isset($_POST['submit'])){
+			$user->username = $_POST['username'];
+			$user->first_name = $_POST['first_name'];
+			$user->last_name = $_POST['last_name'];
+			$user->email_address = $_POST['email_address'];
+			$user->admin_level = $_POST['admin_level'];
+		
 			if ($user->update()){
-				$session->message("Success! Your password was updated. ");
+				$session->message("Success! Your details were updated. ");
 				redirect_to('admin_view_profile.php');
 			} else {
-				$session->message("Error! Your password could not be updated. ");
+				$session->message("Error! Your details could not be updated. ");
 			}
-		} else {
-			$session->message("Error! The existing password did not match. ");
 		}
-	
-	}
-	
-	if (isset($_POST['upload'])){
-	
-		$photo = new Photo();
 		
-		$photo->related_object_type = '5';
-		$photo->related_object_id = $user->id;
-		$photo->photo_type = 9; // photo_type 9 is "User Profile"
-		$photo->attach_file_admin_user($_FILES['file_upload'], $user->id, $user->first_name, $user->last_name);
-	
-		if ($photo->save()){
-			$session->message("Success! The photo was uploaded successfully. ");
-			redirect_to('admin_list_admin_users.php');
-		} else {
-			$message = join("<br />", $photo->errors);
+		if (isset($_POST['update'])){
+		
+			if ($_POST['old_password'] == $user->password){
+		
+				$user->password = $_POST['new_password'];
+		
+				if ($user->update()){
+					$session->message("Success! Your password was updated. ");
+					redirect_to('admin_view_profile.php');
+				} else {
+					$session->message("Error! Your password could not be updated. ");
+				}
+			} else {
+				$session->message("Error! The existing password did not match. ");
+			}
+		
 		}
-	
-	}
-	
-} else if ($session->is_logged_in() && $session->object_type == 2) {
-	
-	$user = Student::find_by_id($_SESSION['id']);
-	$p = new Photo();
-	$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
-	
-	//$roles = BusPersonnelRole::find_all();
-	//$buses = Bus::find_all();
-	
-	if (isset($_POST['submit'])){
-		$user->username = $_POST['username'];
-		$user->first_name = $_POST['first_name'];
-		$user->last_name = $_POST['last_name'];
-		$user->nic_number = $_POST['nic_number'];
-		$user->telephone_number = $_POST['telephone_number'];
-	
-		if ($user->update()){
-			$session->message("Success! Your details were updated. ");
-			redirect_to('admin_view_profile.php');
-		} else {
-			$session->message("Error! Your details could not be updated. ");
+		
+		if (isset($_POST['upload'])){
+		
+			$photo = new Photo();
+		
+			$photo->related_object_type = '5';
+			$photo->related_object_id = $user->id;
+			$photo->photo_type = 9; // photo_type 9 is "User Profile"
+			$photo->attach_file_admin_user($_FILES['file_upload'], $user->id, $user->first_name, $user->last_name);
+		
+			if ($photo->save()){
+				$session->message("Success! The photo was uploaded successfully. ");
+				redirect_to('admin_list_admin_users.php');
+			} else {
+				$message = join("<br />", $photo->errors);
+			}
+		
 		}
-	}
-	
-	if (isset($_POST['update'])){
-	
-		if ($_POST['old_password'] == $user->password){
-	
-			$user->password = $_POST['new_password'];
-	
+
+
+	} else if ($session->object_type == 2){
+		//student
+		$user = $user_login_object->get_user($_SESSION['id']);
+		
+		if (isset($_POST['submit'])){
+			$user->username = $_POST['username'];
+			$user->first_name = $_POST['first_name'];
+			$user->last_name = $_POST['last_name'];
+			$user->nic_number = $_POST['nic_number'];
+			$user->telephone_number = $_POST['telephone_number'];
+		
 			if ($user->update()){
-				$session->message("Success! Your password was updated. ");
+				$session->message("Success! Your details were updated. ");
 				redirect_to('admin_view_profile.php');
 			} else {
-				$session->message("Error! Your password could not be updated. ");
+				$session->message("Error! Your details could not be updated. ");
 			}
-		} else {
-			$session->message("Error! The existing password did not match. ");
 		}
-	
-	}
-	
-	if (isset($_POST['upload'])){
-	
-		$photo = new Photo();
 		
-		$photo->related_object_type = '4';
-		$photo->related_object_id = $user->id;
-		$photo->photo_type = 9; // photo_type 9 is "User Profile"
-		$photo->attach_file_bus_personnel($_FILES['file_upload'], $user->id, $user->first_name, $user->last_name);
-	
-		if ($photo->save()){
-			$session->message("Success! The photo was uploaded successfully. ");
-			redirect_to('admin_view_profile.php');
-		} else {
-			$message = join("<br />", $photo->errors);
+		if (isset($_POST['update'])){
+		
+			if ($_POST['old_password'] == $user->password){
+		
+				$user->password = $_POST['new_password'];
+		
+				if ($user->update()){
+					$session->message("Success! Your password was updated. ");
+					redirect_to('admin_view_profile.php');
+				} else {
+					$session->message("Error! Your password could not be updated. ");
+				}
+			} else {
+				$session->message("Error! The existing password did not match. ");
+			}
+		
 		}
-	
+		
+		if (isset($_POST['upload'])){
+		
+			$photo = new Photo();
+		
+			$photo->related_object_type = '4';
+			$photo->related_object_id = $user->id;
+			$photo->photo_type = 9; // photo_type 9 is "User Profile"
+			$photo->attach_file_bus_personnel($_FILES['file_upload'], $user->id, $user->first_name, $user->last_name);
+		
+			if ($photo->save()){
+				$session->message("Success! The photo was uploaded successfully. ");
+				redirect_to('admin_view_profile.php');
+			} else {
+				$message = join("<br />", $photo->errors);
+			}
+		
+		}
+
+
+	} else if ($session->object_type == 5){
+		//company_user
+		$user = $user_login_object->get_user($_SESSION['id']);
+
+
 	}
-	
-} else {
-	redirect_to("login.php");
+
 }
 
 ?>
@@ -178,7 +184,7 @@ if ($session->is_logged_in() && $session->object_type == 3){
         <div class="row-fluid">
         
         <div class="span3">
-	        <div class="sidenav" data-spy="affix" data-offset-top="200">
+	        <div class="sidenav" data-spy="affix" data-offset-top="275">
 	        	<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
 	        		<a href="admin_list_admin_users.php" class="btn btn-primary"> &larr; Back to Admin Users List</a>
 	        	<?php } else if ($session->is_logged_in() && $session->object_type == 2) {?>
@@ -192,13 +198,107 @@ if ($session->is_logged_in() && $session->object_type == 3){
 	    <section>
 	    
 	    <ul class="nav nav-tabs">
-	      <li class="active"><a href="#user_details" data-toggle="tab">Profile</a></li>
+	      <li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+	      <li><a href="#research" data-toggle="tab">Research</a></li>
+	      <li><a href="#work_experience" data-toggle="tab">Work Experience</a></li>
+	      <li><a href="#education" data-toggle="tab">Education</a></li>
+	      <li><a href="#user_details" data-toggle="tab">Profile</a></li>
 	      <li><a href="#password_update" data-toggle="tab">Password</a></li>
 	      <li><a href="#profile_picture" data-toggle="tab">Profile Picture</a></li>
 	    </ul>
 	    
 	    <div id="myTabContent" class="tab-content">
-	      <div class="tab-pane active in" id="user_details">
+	    
+	    <div class="tab-pane active in" id="overview">
+	      	
+	      	<div class="well">
+      			<h3>Executive Summary</h3>
+      			<br />
+      			<textarea rows="10" class="span12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae lorem nec mollis. Nam a aliquam nunc. Quisque elit justo, sagittis vel orci in, tincidunt dapibus nunc. Proin et lacus molestie, porttitor ligula at, laoreet lorem. Nulla purus risus, ornare non pellentesque eu, sagittis ac turpis. Nunc interdum metus quam, eu consequat tellus aliquet sed. Nam risus felis, pulvinar vitae tincidunt in, accumsan quis neque. Integer fermentum magna risus, vitae aliquam quam fringilla nec.</textarea>
+      		</div>
+      		
+      		<div class="well">
+      			<h4>Skills &amp; Expertise</h4>
+      			<br />
+      			<textarea rows="10" class="span12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae lorem nec mollis. Nam a aliquam nunc. Quisque elit justo, sagittis vel orci in, tincidunt dapibus nunc. Proin et lacus molestie, porttitor ligula at, laoreet lorem. Nulla purus risus, ornare non pellentesque eu, sagittis ac turpis. Nunc interdum metus quam, eu consequat tellus aliquet sed. Nam risus felis, pulvinar vitae tincidunt in, accumsan quis neque. Integer fermentum magna risus, vitae aliquam quam fringilla nec.</textarea>
+      		</div>
+      		
+      		<div class="well">
+      			<ul>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			<li>Lorem ipsum dolor sit amet</li>
+      			</ul>
+      		</div>
+	      
+	    </div>
+	      
+	    <div class="tab-pane fade" id="research">
+      		
+      		<div class="well">
+      			<h4>Research Project</h4>
+      			<br />
+      			<h5>Project Title</h5>
+      			<p>Lorum ipsum dolor</p>
+      			<h5>Project Description</h5>
+      			<p>Aenean aliquam leo libero, ut tempor lorem cursus vitae. Donec porttitor diam orci, nec mollis diam pulvinar a. In tempus fermentum libero tempus mollis. Vestibulum volutpat nulla sed neque consequat, vel venenatis magna vestibulum. Duis placerat quam non pretium congue.</p>
+      		</div>
+	      	
+	      	<div class="well">
+      			<h4>Published Material</h4>
+      			<br />
+      		</div>
+	      	
+	    </div>
+	      	
+	    <div class="tab-pane fade" id="work_experience">
+	   		
+	    	<div class="well">
+      			<h4>Work Experience</h4>
+      			<br />
+      		</div>
+	    	
+	    </div>
+	      	
+	    <div class="tab-pane fade" id="education">
+	   		
+	    	<div class="well">
+      			<h4>Education</h4>
+      			<br />
+      		</div>
+	    	
+	    </div>
+	    
+	    <div class="tab-pane fade" id="user_details">
 	      
 	      <?php echo $message; ?>
 	      	      
@@ -281,9 +381,9 @@ if ($session->is_logged_in() && $session->object_type == 3){
 	           </div>
 	        </form>
 	        
-	      </div>
+	     </div>
 	      
-	      <div class="tab-pane fade" id="password_update">
+	     <div class="tab-pane fade" id="password_update">
 	    	
 	    	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id="tab" class="form-horizontal">
 	    		<div class="control-group">
@@ -307,9 +407,9 @@ if ($session->is_logged_in() && $session->object_type == 3){
 	        	</div>
 	        	
 	    	</form>
-	      </div>
+	     </div>
 	      
-	      <div class="tab-pane fade" id="profile_picture">
+	     <div class="tab-pane fade" id="profile_picture">
 	      
 		  <?php 
           if (!empty($profile_picture->filename)) {
@@ -330,9 +430,9 @@ if ($session->is_logged_in() && $session->object_type == 3){
 	      </form>
 	      <?php } ?>
 	    	
-	      </div>
+	     </div>
 	      
-	  	  </div>
+	  	</div>
 	  	
 	  	</section>
 	  	

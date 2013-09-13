@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </a>
 
-      <a class="brand" href="index.php"><?php echo WEB_APP_NAME;?></a>
+      <a class="brand" href="index.php"><?php echo WEB_APP_SHORT_NAME; ?></a>
       
       <div class="nav-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
@@ -41,12 +41,16 @@
           <?php if (isset($session->id) && ($session->object_type == 3 || $session->object_type == 2) ) { // object_type 3 is admin and 2 is student ?>
           	<li class="dropdown">
           	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          	<?php if ($user) { echo $user_login_object->get_full_name($user->login_id); } ?> <b class="caret"></b>
+          	<?php if (isset($user->id)) { echo $user->full_name(); } ?> <b class="caret"></b>
           	</a>
           	<ul class="dropdown-menu">
           		<li><a href="admin_view_profile.php">View Profile</a></li>
           		<li><a href="logout.php">Logout</a></li>
           		<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
+          		<li class="divider"></li>
+          		<li><a href="admin_list_students.php">View All Students</a></li>
+          		<li><a href="admin_create_student.php">Add Student</a></li>
+          		<li><a href="#">Search for Student</a></li>
           		<li class="divider"></li>
           		<li><a href="admin_list_admin_users.php">View All Admin Users</a></li>
           		<li><a href="admin_create_admin_user.php">Add Admin User</a></li>

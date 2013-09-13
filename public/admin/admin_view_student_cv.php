@@ -213,25 +213,19 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 	      	
 	      	<div class="tab-pane active in" id="overview">
 	      	
-	      	<div class="row-fluid">
+	      	<div class="well">
       			<h3>Executive Summary</h3>
       			<br />
-      		</div>
-      		
-      		<div class="row-fluid">
       			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae lorem nec mollis. Nam a aliquam nunc. Quisque elit justo, sagittis vel orci in, tincidunt dapibus nunc. Proin et lacus molestie, porttitor ligula at, laoreet lorem. Nulla purus risus, ornare non pellentesque eu, sagittis ac turpis. Nunc interdum metus quam, eu consequat tellus aliquet sed. Nam risus felis, pulvinar vitae tincidunt in, accumsan quis neque. Integer fermentum magna risus, vitae aliquam quam fringilla nec.</p>
       		</div>
       		
-      		<div class="row-fluid">
+      		<div class="well">
       			<h4>Skills &amp; Expertise</h4>
       			<br />
-      		</div>
-      		
-      		<div class="row-fluid">
       			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae lorem nec mollis. Nam a aliquam nunc. Quisque elit justo, sagittis vel orci in, tincidunt dapibus nunc. Proin et lacus molestie, porttitor ligula at, laoreet lorem. Nulla purus risus, ornare non pellentesque eu, sagittis ac turpis. Nunc interdum metus quam, eu consequat tellus aliquet sed. Nam risus felis, pulvinar vitae tincidunt in, accumsan quis neque. Integer fermentum magna risus, vitae aliquam quam fringilla nec.</p>
       		</div>
       		
-      		<div class="row-fluid">
+      		<div class="well">
       			<ul>
       			<li>Lorem ipsum dolor sit amet</li>
       			<li>Lorem ipsum dolor sit amet</li>
@@ -272,22 +266,16 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 	      
 	      	<div class="tab-pane fade" id="research">
       		
-      		<div class="row-fluid">
+      		<div class="well">
       			<h4>Research Project</h4>
       			<br />
-      		</div>
-      		
-      		<div class="row-fluid">
       			<h5>Project Title</h5>
       			<p>Lorum ipsum dolor</p>
-      		</div>
-      		
-      		<div class="row-fluid">
       			<h5>Project Description</h5>
       			<p>Aenean aliquam leo libero, ut tempor lorem cursus vitae. Donec porttitor diam orci, nec mollis diam pulvinar a. In tempus fermentum libero tempus mollis. Vestibulum volutpat nulla sed neque consequat, vel venenatis magna vestibulum. Duis placerat quam non pretium congue.</p>
       		</div>
 	      	
-	      	<div class="row-fluid">
+	      	<div class="well">
       			<h4>Published Material</h4>
       			<br />
       		</div>
@@ -296,7 +284,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 	      	
 	      	<div class="tab-pane fade" id="work_experience">
 	   		
-	    	<div class="row-fluid">
+	    	<div class="well">
       			<h4>Work Experience</h4>
       			<br />
       		</div>
@@ -305,7 +293,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 	      	
 	      	<div class="tab-pane fade" id="education">
 	   		
-	    	<div class="row-fluid">
+	    	<div class="well">
       			<h4>Education</h4>
       			<br />
       		</div>

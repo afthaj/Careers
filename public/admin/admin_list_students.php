@@ -1,30 +1,37 @@
 <?php
 require_once("../../includes/initialize.php");
 
-if ($session->is_logged_in() && $session->object_type == 3){
-	
-	$user = AdminUser::find_by_id($_SESSION['id']);
-	$p = new Photo();
-	$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
-	
-} else if ($session->is_logged_in() && $session->object_type == 2){
-	
-	$user = Student::find_by_id($_SESSION['id']);
-	$p = new Photo();
-	$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
-	
-} else {
-	redirect_to("login.php");
-}
+//init code
 
 $students = Student::find_all();
+$user_login_object = new UserLogin();
+
+//check login
+
+if ($session->is_logged_in()){
+
+	if ($session->object_type == 3){
+		//admin
+		$user = $user_login_object->get_user($_SESSION['id']);
+		
+	} else if ($session->object_type == 2){
+		//student
+		$user = $user_login_object->get_user($_SESSION['id']);
+		
+	} else if ($session->object_type == 5){
+		//company_user
+		$user = $user_login_object->get_user($_SESSION['id']);
+		
+	}
+
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Buses List &middot; <?php echo WEB_APP_NAME; ?></title>
+    <title>Students' List &middot; <?php echo WEB_APP_NAME; ?></title>
     <?php require_once('../../includes/layouts/header_admin.php');?>
   </head>
 
@@ -51,7 +58,7 @@ $students = Student::find_all();
         <?php if ($session->is_logged_in() && $session->object_type == 3){ ?>
         <div class="row-fluid">
         	<br />
-	        <a href="admin_create_bus_personnel.php" class="btn btn-primary">Add New Student</a>
+	        <a href="admin_create_student.php" class="btn btn-primary">Add New Student</a>
 	        <br />
         </div>
         <?php } ?>
@@ -72,35 +79,37 @@ $students = Student::find_all();
 		        <?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
 		        <td>&nbsp;</td>
 		        <td>&nbsp;</td>
+		        <?php } else { ?>
+		        <td>&nbsp;</td>
 		        <?php } ?>
 	        </tr>
         	
-        	<?php for($i = 0; $i < count($students) ; $i++){ 
-        	
-        		 ?>
+        	<?php for($i = 0; $i < count($students) ; $i++){
+        		
+        		$student = $user_login_object->get_user($students[$i]->login_id);
+        		
+        		?>
         		
         		<tr align="center">
         			<td>
         			<?php
 	        		
-	        		$pic = new Photo();
-	        		
-	        		$bus_personnel_profile_picture = $pic->get_profile_picture('4', $students[$i]->id);
-	        		
-	        		if (!empty($bus_personnel_profile_picture->filename)) {
-	        			echo '<img src="../../' . $bus_personnel_profile_picture->image_path() . '" width="100" class="img-rounded" />';
+	        		if (!empty($student_profile_picture->filename)) {
+	        			echo '<img src="../../' . $student_profile_picture->image_path() . '" width="100" class="img-rounded" />';
 	        		} else {
 	        			echo '<img src="../img/default-prof-pic.jpg" width="100" class="img-rounded" alt="Please upload a profile picture" />';
 	        		}
 	        		
 	        		?>
         			</td>
-	        		<td><?php echo $students[$i]->first_name; ?></td>
-	        		<td><?php echo $students[$i]->last_name; ?></td>
+	        		<td><?php echo $student->first_name; ?></td>
+	        		<td><?php echo $student->last_name; ?></td>
 	        		<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
 	        		<td><a href="admin_read_update_student.php?studentid=<?php echo $students[$i]->id; ?>" class="btn btn-warning btn-block">Edit</a></td>
 	        		<td><a href="admin_delete_student.php?studentid=<?php echo $students[$i]->id; ?>" class="btn btn-danger btn-block">Delete</a></td>
-	        		<?php } ?>        		
+	        		<?php } else { ?>
+	        		<td><a href="admin_view_student_cv.php?studentid=<?php echo $students[$i]->id; ?>" class="btn btn-warning btn-block">View CV</a></td>
+	        		<?php } ?>
         		</tr>
         		
         	<?php  }?>

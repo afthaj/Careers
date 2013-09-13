@@ -16,24 +16,10 @@ class UserLogin extends DatabaseObject {
 	public $email_address;
 	public $telephone_number;
 	
-	public function get_first_name($id){
+	public function get_user($id){
 		global $database;
-		$user_login = new UserLogin();
 	
-		$sql  = "SELECT first_name FROM " . static::$table_name;
-		$sql .= " WHERE id = " . $id;
-		$sql .= " LIMIT 1";
-		
-		$result_array = self::find_by_sql($sql);
-		
-		return !empty($result_array) ? array_shift($result_array) : false;
-	}
-	
-	public function get_last_name($id){
-		global $database;
-		$user_login = new UserLogin();
-	
-		$sql  = "SELECT last_name FROM " . static::$table_name;
+		$sql  = "SELECT * FROM " . static::$table_name;
 		$sql .= " WHERE id = " . $id;
 		$sql .= " LIMIT 1";
 	
@@ -42,11 +28,12 @@ class UserLogin extends DatabaseObject {
 		return !empty($result_array) ? array_shift($result_array) : false;
 	}
 	
-	public function get_full_name($id){
-		$fname = $this->get_first_name($id);
-		$lname = $this->get_first_name($id);
-		
-		return $fname . " " . $lname;
+	public function full_name(){
+		if (isset($this->first_name) && isset($this->last_name)){
+			return $this->first_name . " " . $this->last_name;
+		} else {
+			return "";
+		}
 	}
 	
 	public static function authenticate($username="", $password="", $object_type){

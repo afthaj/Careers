@@ -796,20 +796,22 @@ form.bs-docs-example {
 -------------------------------------------------- */
 
 .sidenav {
-  width: 228px;
+  /*width: 228px;*/
   margin: 30px 0 0;
   padding: 0;
   background-color: #fff;
+  /*
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
   -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
      -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
           box-shadow: 0 1px 4px rgba(0,0,0,.065);
+  */
 }
 .sidenav > li > a {
   display: block;
-  width: 190px \9;
+  /*width: 190px;*/
   margin: 0 0 -1px;
   padding: 8px 14px;
   border: 1px solid #e5e5e5;
@@ -849,7 +851,7 @@ form.bs-docs-example {
 }
 .sidenav .active .icon-chevron-right,
 .sidenav .active a:hover .icon-chevron-right {
-  background-image: url(../img/glyphicons-halflings-white.png);
+  background-image: url(../../img/glyphicons-halflings-white.png);
   opacity: 1;
 }
 .sidenav.affix {
@@ -901,7 +903,7 @@ form.bs-docs-example {
   /* When affixed, space properly */
   .sidenav {
     top: 0;
-    width: 218px;
+    /* width: 218px; */
     margin-top: 30px;
     margin-right: 0;
   }
@@ -1013,6 +1015,7 @@ form.bs-docs-example {
 
   /* center align subhead text like the masthead */
   .subhead h1,
+  .subhead h3,
   .subhead p {
     text-align: center;
   }
