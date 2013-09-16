@@ -1,36 +1,40 @@
 <?php
-require_once("../../includes/initialize.php");
+require_once("../includes/initialize.php");
 
 //init code
-
 $user_login_object = new UserLogin();
 $student_object = new Student();
+$admin_user_object = new AdminUser();
+$company_user_object = new CompanyUser();
+$company_object = new Company();
 
 //check login
-
 if ($session->is_logged_in()){
 	
-	if (isset($_GET['studentid'])){
-		$student_to_read_update = $student_object->find_by_id($_GET['studentid']);
-		$details_of_student_to_read_update = $user_login_object->get_user($student_to_read_update->login_id);
+	if (isset($_GET['s'])){
+		$details_of_student_to_read_update = $user_login_object->get_user_by_username($_GET['s']);
+		$student_to_read_update = $student_object->get_user($details_of_student_to_read_update->id);
 	
 	} else {
 		$session->message("No Student has been selected to view.");
-		redirect_to("admin_list_students.php");
+		redirect_to("list_students.php");
 	}
 	
 	if ($session->object_type == 3){
 		//admin
 		$user = $user_login_object->get_user($_SESSION['id']);
+		$admin_user = $admin_user_object->get_user($user->id);
 
 	} else if ($session->object_type == 2){
 		//student
 		$user = $user_login_object->get_user($_SESSION['id']);
-
+		$student = $student_object->get_user($user->id);
+		
 	} else if ($session->object_type == 5){
 		//company_user
 		$user = $user_login_object->get_user($_SESSION['id']);
-
+		$company_user = $company_user_object->get_user($user->id);
+		
 	}
 
 }
@@ -120,7 +124,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 <html lang="en">
   <head>
     <title>Student Profile &middot; <?php echo WEB_APP_NAME; ?></title>
-    <?php require_once('../../includes/layouts/header_admin.php');?>
+    <?php require_once('../includes/layouts/header.php');?>
   </head>
 
   <body>
@@ -130,7 +134,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
     <div id="wrap">
 
       <!-- Fixed navbar -->
-      <?php require_once('../../includes/layouts/navbar_admin.php');?>
+      <?php require_once('../includes/layouts/navbar.php');?>
       
       <header class="jumbotron subhead">
 		 <div class="container-fluid">
@@ -141,9 +145,9 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 		 
 		 <?php 
          if (!empty($profile_picture_of_bus_personnel->filename)) {
-         	echo '<img src="../../' . $profile_picture_of_student->image_path() . '" width="200" class="img-rounded" />'; 
+         	echo '<img src="../' . $profile_picture_of_student->image_path() . '" width="200" class="img-rounded" />'; 
          } else {
-         	echo '<img src="../img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Please upload a profile picture" />';
+         	echo '<img src="img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Please upload a profile picture" />';
          } 
          ?>
 		 
@@ -167,8 +171,10 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       
         <div class="span3 sidebar">
 	        <div class="sidenav" data-spy="affix" data-offset-top="275">
-	        	<a href="admin_list_students.php" class="btn btn-primary btn-block"> &larr; Back to Students' List</a><br />
-	        	
+	        	<a href="list_students.php" class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back to List of Students</a><br />
+	        	<?php if ($session->object_type == 2 && $user->username == $_GET['s']) { ?>
+	        	<a href="view_profile.php" class="btn btn-success btn-block"><i class="icon-edit icon-white"></i> Edit Details</a><br />
+	        	<?php } ?>
 	        	<div class="well">
 	        		<h4>Student Details</h4><br />
 	        		
@@ -178,16 +184,21 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 	        		<h5>Degree Program</h5>
 	        		<p><?php echo $degree_program_of_student_to_read_update->display_name; ?></p>
 	        		
-	        		<?php if ($session->is_logged_in() && $session->object_type == 3) {?>
-	        		<h5>Email Address</h5>
-	        		<p><?php echo $details_of_student_to_read_update->email_address;?></p>
+	        		<?php if ($session->is_logged_in()) { 
+	        			
+	        			if ($session->object_type == 5 && $company_object->find_by_id($company_user->company_id)->verified_flag != 1) { 
+	        			
+	        			 } else { ?>
 	        		
-	        		<h5>Tel. Number</h5>
-	        		<p><?php echo $details_of_student_to_read_update->telephone_number;?></p>
-	        		<br />
-	        		<a href="#" class="btn btn-success" target="_blank">Download CV</a>
+		        		<h5>Email Address</h5>
+		        		<p><?php echo $details_of_student_to_read_update->email_address;?></p>
+		        		
+		        		<h5>Tel. Number</h5>
+		        		<p><?php echo $details_of_student_to_read_update->telephone_number;?></p>
+		        		<br />
+		        		<a href="#" class="btn btn-success" target="_blank">Download CV</a>
 	        		
-	        		<?php } ?>
+	        		<?php } } ?>
 	        	</div>
 	        	
 	        </div>
@@ -317,9 +328,9 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       <div id="push"></div>
     </div>
 
-    <?php require_once('../../includes/layouts/footer_admin.php');?>
+    <?php require_once('../includes/layouts/footer.php');?>
 
-    <?php require_once('../../includes/layouts/scripts_admin.php');?>
+    <?php require_once('../includes/layouts/scripts.php');?>
 
   </body>
 </html>

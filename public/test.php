@@ -1,10 +1,14 @@
 <?php
 require_once("../includes/initialize.php");
 
-if (!$session->is_logged_in()){
-	//redirect_to("login.php");
+if ($session->is_logged_in() && $session->object_type == 3){
+	
+	$user = AdminUser::find_by_id($_SESSION['id']);
+	$p = new Photo();
+	$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
+	
 } else {
-	$admin_user = AdminUser::find_by_id($_SESSION['id']);
+	redirect_to("login.php");
 }
 ?>
 
@@ -38,18 +42,66 @@ if (!$session->is_logged_in()){
       <div class="container-fluid">
        	  
        	  <div class="row-fluid">
-       	  	<div class="sidenav" data-spy="affix" data-offset-top="200">
-	        	<a href="#" class="btn btn-primary"> &larr; Back </a>
-	        </div>
-       	  <div class="span3">
-       	  </div>
-       	  
-       	  <div class="span6">
-       	  	<?php echo $session->message; ?>
        	  	
-       	  	
-       	  	
-       	  </div>
+	       	  <div class="span3">
+	       	  	<div class="sidenav" data-spy="affix" data-offset-top="200">
+		        	<a href="#" class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back </a>
+		        </div>
+	       	  </div>
+	       	  
+	       	  <div class="span9">
+	       	  <div class="row-fluid">
+	       	  <section>
+	       	  
+       	  	  	<?php echo $session->message; ?>
+       	  	  	
+       	  	  	<?php 
+       	  	  	
+       	  	  	$time = time();
+       	  	  	
+       	  	  	echo $time;
+       	  	  	
+       	  	  	echo '<br /><br />';
+       	  	  	
+       	  	  	print_r(getdate($time));
+       	  	  	
+       	  	  	echo '<br /><br />';
+       	  	  	
+       	  	  	print date("r", $time);
+       	  	  	
+       	  	  	echo '<br /><br />';
+       	  	  	
+       	  	  	print date("d/m/y h:i:s a", $time);
+       	  	  	
+       	  	  	echo '<br /><br />';
+       	  	  	
+       	  	  	print date("d/m/Y h:i:s a", mktime(13, 29, 45, 11, 18, 1988));
+       	  	  	
+       	  	  	?>
+       	  	  	
+       	  	  </section>
+       	  	  
+       	  	  </div>
+       	  	  
+       	  	  <div class="row-fluid">
+       	  	  <section>
+       	  	  	<div id="chart_div" style="width: 100%;"></div>
+       	  	  </section>
+       	  	  </div>
+       	  	  
+       	  	  <div class="row-fluid">
+       	  	  <section>
+       	  	  	<div id="chart_2_div" style="width: 100%;"></div>
+       	  	  </section>
+       	  	  </div>
+       	  	  
+       	  	  <div class="row-fluid">
+       	  	  <section>
+       	  	  	<div id="chart_3_div" style="width: 100%;"></div>
+       	  	  </section>
+       	  	  </div>
+	       	  
+	       	  </div>
        	  
 	      </div>
 	      

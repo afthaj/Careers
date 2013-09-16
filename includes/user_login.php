@@ -28,6 +28,18 @@ class UserLogin extends DatabaseObject {
 		return !empty($result_array) ? array_shift($result_array) : false;
 	}
 	
+	public function get_user_by_username($un){
+		global $database;
+	
+		$sql  = "SELECT * FROM " . static::$table_name;
+		$sql .= " WHERE username = '" . $un . "'";
+		$sql .= " LIMIT 1";
+	
+		$result_array = self::find_by_sql($sql);
+	
+		return !empty($result_array) ? array_shift($result_array) : false;
+	}
+	
 	public function full_name(){
 		if (isset($this->first_name) && isset($this->last_name)){
 			return $this->first_name . " " . $this->last_name;

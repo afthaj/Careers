@@ -1,5 +1,5 @@
 <?php
-require_once("../../includes/initialize.php");
+require_once("../includes/initialize.php");
 
 if ($session->is_logged_in() && $session->object_type == 5) {
 	
@@ -18,7 +18,7 @@ if ($session->is_logged_in() && $session->object_type == 5) {
 <html lang="en">
   <head>
     <title>Admin User List &middot; <?php echo WEB_APP_NAME; ?></title>
-    <?php require_once('../../includes/layouts/header_admin.php');?>
+    <?php require_once('../includes/layouts/header.php');?>
   </head>
 
   <body>
@@ -29,7 +29,7 @@ if ($session->is_logged_in() && $session->object_type == 5) {
 
       <!-- Fixed navbar -->
       <?php $page = 'admin_user_list';?>
-      <?php require_once('../../includes/layouts/navbar_admin.php');?>
+      <?php require_once('../includes/layouts/navbar.php');?>
       
       <header class="jumbotron subhead">
 		 <div class="container-fluid">
@@ -44,7 +44,7 @@ if ($session->is_logged_in() && $session->object_type == 5) {
         
         <div class="row-fluid">
 	        <br />
-	        <a href="admin_create_admin_user.php" class="btn btn-primary">Add New Admin User</a>
+	        <a href="create_admin_user.php" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i> Add New Admin User</a>
 	        <br /><br />
         </div>
         
@@ -77,9 +77,9 @@ if ($session->is_logged_in() && $session->object_type == 5) {
         		$user_profile_picture = $pic->get_profile_picture('5', $users[$i]->id);
         		
         		if (!empty($user_profile_picture->filename)) {
-        			echo '<img src="../../' . $user_profile_picture->image_path() . '" width="100" class="img-rounded" />';
+        			echo '<img src="../' . $user_profile_picture->image_path() . '" width="100" class="img-rounded" />';
         		} else {
-        			echo '<img src="../img/default-prof-pic.jpg" width="100" class="img-rounded" alt="Please upload a profile picture" />';
+        			echo '<img src="img/default-prof-pic.jpg" width="100" class="img-rounded" alt="Please upload a profile picture" />';
         		}
         		
         		?>
@@ -88,8 +88,8 @@ if ($session->is_logged_in() && $session->object_type == 5) {
         		<td><?php echo $users[$i]->username; ?></td>
         		<td><?php echo $users[$i]->email_address; ?></td>
         		<td><?php echo $admin_level->get_admin_level($users[$i]->admin_level)->admin_level_name; ?></td>
-        		<td><a href="admin_read_update_admin_user.php?adminid=<?php echo $users[$i]->id; ?>" class="btn btn-warning btn-block">Edit</a></td>
-        		<td><a href="admin_delete_admin_user.php?adminid=<?php echo $user->id; ?>" class="btn btn-danger btn-block">Delete</a></td>        		
+        		<td><a href="read_update_admin_user.php?adminid=<?php echo $users[$i]->id; ?>" class="btn btn-warning btn-block">Edit</a></td>
+        		<td><a href="delete_admin_user.php?adminid=<?php echo $user->id; ?>" class="btn btn-danger btn-block">Delete</a></td>        		
         		</tr>
         		
         	<?php 
@@ -107,9 +107,9 @@ if ($session->is_logged_in() && $session->object_type == 5) {
       <div id="push"></div>
     </div>
 
-    <?php require_once('../../includes/layouts/footer_admin.php');?>
+    <?php require_once('../includes/layouts/footer.php');?>
 
-    <?php require_once('../../includes/layouts/scripts_admin.php');?>
+    <?php require_once('../includes/layouts/scripts.php');?>
 
   </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-require_once("../../includes/initialize.php");
+require_once("../includes/initialize.php");
 
 if ($session->is_logged_in() && $session->object_type == 5){
 	
@@ -60,8 +60,8 @@ $buses = Bus::find_all();
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Add New Bus Personnel &middot; <?php echo WEB_APP_NAME; ?></title>
-    <?php require_once('../../includes/layouts/header_admin.php');?>
+    <title>Add New Skill &middot; <?php echo WEB_APP_NAME; ?></title>
+    <?php require_once('../includes/layouts/header.php');?>
   </head>
 
   <body>
@@ -71,13 +71,13 @@ $buses = Bus::find_all();
     <div id="wrap">
 
       <!-- Fixed navbar -->
-      <?php require_once('../../includes/layouts/navbar_admin.php');?>
+      <?php require_once('../includes/layouts/navbar.php');?>
 
       <!-- Begin page content -->
       
       <header class="jumbotron subhead">
         <div class="container-fluid">
-          <h1>Add New Bus Personnel</h1>
+          <h1>Add New Skill</h1>
         </div>
       </header>
       
@@ -89,7 +89,7 @@ $buses = Bus::find_all();
         
         <div class="span3">
         	<div class="sidenav" data-spy="affix" data-offset-top="200">
-        		<a href="admin_list_bus_personnel.php" class="btn btn-primary"> &larr; Back to Personnel List</a>
+        		<a href="list_skills.php" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i> Back to List of Skills</a>
         	</div>
         </div>
 
@@ -178,9 +178,9 @@ $buses = Bus::find_all();
       <div id="push"></div>
     </div>
 
-    <?php require_once('../../includes/layouts/footer_admin.php');?>
+    <?php require_once('../includes/layouts/footer.php');?>
 
-    <?php require_once('../../includes/layouts/scripts_admin.php');?>
+    <?php require_once('../includes/layouts/scripts.php');?>
 
   </body>
 </html>

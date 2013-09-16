@@ -1,5 +1,5 @@
 <?php
-require_once("../../includes/initialize.php");
+require_once("../includes/initialize.php");
 
 if ($session->is_logged_in() && $session->object_type == 5){
 	
@@ -22,7 +22,7 @@ if ($session->is_logged_in() && $session->object_type == 5){
 	
 		if ($user_to_create->create()){
 			$session->message("Success! The Admin User has been added. ");
-			redirect_to('admin_list_admin_users.php');
+			redirect_to('list_admin_users.php');
 		} else {
 			$session->message("Error! The Admin User could not be added. ");
 		}
@@ -40,7 +40,7 @@ if ($session->is_logged_in() && $session->object_type == 5){
 <html lang="en">
   <head>
     <title>Add Admin User &middot; <?php echo WEB_APP_NAME; ?></title>
-    <?php require_once('../../includes/layouts/header_admin.php');?>
+    <?php require_once('../includes/layouts/header.php');?>
   </head>
 
   <body>
@@ -50,7 +50,7 @@ if ($session->is_logged_in() && $session->object_type == 5){
     <div id="wrap">
 
       <!-- Fixed navbar -->
-      <?php require_once('../../includes/layouts/navbar_admin.php');?>
+      <?php require_once('../includes/layouts/navbar.php');?>
       
       <header class="jumbotron subhead">
 	      <div class="container-fluid">
@@ -68,7 +68,7 @@ if ($session->is_logged_in() && $session->object_type == 5){
       
         <div class="span3">
         	<div class="sidenav" data-spy="affix" data-offset-top="200">
-        		<a href="admin_list_admin_users.php" class="btn btn-primary"> &larr; Back to Admin Users List</a>
+        		<a href="list_admin_users.php" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i> Back to List of Admin Users</a>
         	</div>  
         </div>
                 
@@ -145,9 +145,9 @@ if ($session->is_logged_in() && $session->object_type == 5){
       <div id="push"></div>
     </div>
 
-    <?php require_once('../../includes/layouts/footer_admin.php');?>
+    <?php require_once('../includes/layouts/footer.php');?>
 
-    <?php require_once('../../includes/layouts/scripts_admin.php');?>
+    <?php require_once('../includes/layouts/scripts.php');?>
 
   </body>
 </html>

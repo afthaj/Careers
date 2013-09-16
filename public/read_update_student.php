@@ -5,6 +5,8 @@ require_once("../../includes/initialize.php");
 
 $user_login_object = new UserLogin();
 $student_object = new Student();
+$admin_user_object = new AdminUser();
+$company_user_object = new CompanyUser();
 
 //check login
 
@@ -22,14 +24,17 @@ if ($session->is_logged_in()){
 	if ($session->object_type == 3){
 		//admin
 		$user = $user_login_object->get_user($_SESSION['id']);
+		$admin_user = $admin_user_object->get_user($user->id);
 
 	} else if ($session->object_type == 2){
 		//student
 		$user = $user_login_object->get_user($_SESSION['id']);
+		$student = $student_object->get_user($user->id);
 
 	} else if ($session->object_type == 5){
 		//company_user
 		$user = $user_login_object->get_user($_SESSION['id']);
+		$company_user = $company_user_object->get_user($user->id);
 
 	}
 
@@ -167,7 +172,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       
         <div class="span3 sidebar">
 	        <div class="sidenav" data-spy="affix" data-offset-top="275">
-	        	<a href="admin_list_students.php" class="btn btn-primary btn-block"> &larr; Back to Students' List</a><br />
+	        	<a href="admin_list_students.php" class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back to Students' List</a><br />
 	        	
 	        	<div class="well">
 	        		<h4>Student Details</h4><br />
@@ -207,6 +212,9 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 	      <li><a href="#research" data-toggle="tab">Research</a></li>
 	      <li><a href="#work_experience" data-toggle="tab">Work Experience</a></li>
 	      <li><a href="#education" data-toggle="tab">Education</a></li>
+	      <li><a href="#user_details" data-toggle="tab">Profile</a></li>
+	      <li><a href="#password_update" data-toggle="tab">Password</a></li>
+	      <li><a href="#profile_picture" data-toggle="tab">Profile Picture</a></li>
 	    </ul>
 	    
 	    <div id="tab_content" class="tab-content">
@@ -311,6 +319,140 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       		</div>
 	    	
 	      	</div>
+	      	
+	      	<div class="tab-pane fade" id="user_details">
+	      
+	      <?php echo $message; ?>
+	      	      
+	        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id="tab" class="form-horizontal">
+	            
+	            <div class="control-group">
+	            	<label for="username" class="control-label">Username</label>
+	            
+		            <div class="controls">
+		            	<input type="text" name="username" value="<?php echo $user->username; ?>" />
+		            </div>
+	            </div>
+	            
+	            <?php if ($session->is_logged_in() && $session->object_type == 5) { ?>
+	            <div class="control-group">
+	            	<label for="admin_level" class="control-label">Admin Level</label>
+	            
+		            <div class="controls">
+			            <select name="admin_level">
+			            <?php for ($i = 0; $i < count($admin_levels); $i++) {?>
+			            	<option value="<?php echo $admin_levels[$i]->id; ?>"<?php if (!empty($user->admin_level) && $user->admin_level == $admin_levels[$i]->id) echo ' selected = "selected"'; ?>><?php echo $admin_levels[$i]->admin_level_name; ?></option>
+			            <?php } ?>
+						</select>
+		            </div>
+	            </div>
+	            <?php } else if ($session->is_logged_in() && $session->object_type == 4) {?>
+	            <div class="control-group">
+	            <label for="role" class="control-label">Role</label>
+		            <div class="controls">
+		            	<select name="role"<?php if (!($session->is_logged_in() && $session->object_type == 5)){ echo ' disabled';}?>>
+		            	<?php foreach($roles as $role){ ?>
+		            		<option value="<?php echo $role->id; ?>"<?php if($user->role==$role->id){echo ' selected="selected"';}?>><?php echo $role->role_name; ?></option>
+		            	<?php } ?>
+						</select>
+		            </div>
+	            </div>
+	            <?php } ?>
+	            
+	            <div class="control-group">
+	            	<label for="first_name" class="control-label">First Name</label>
+	            
+		            <div class="controls">
+		            	<input type="text" name="first_name" value="<?php echo $user->first_name; ?>" />
+		            </div>
+	            </div>
+	            
+	            <div class="control-group">
+	            	<label for="last_name" class="control-label">Last Name</label>
+	            
+		            <div class="controls">
+		            	<input type="text" name="last_name" value="<?php echo $user->last_name; ?>" />
+		            </div>
+	            </div>
+	            
+	            <?php if ($session->is_logged_in() && $session->object_type == 5) { ?>
+	            <div class="control-group">
+	            	<label for="email_address" class="control-label">Email Address</label>
+		            <div class="controls">
+		            	<input type="text" name="email_address" value="<?php echo $user->email_address; ?>" />
+		            </div>
+	           </div>
+	           <?php } else if ($session->is_logged_in() && $session->object_type == 4) {?>
+	           <div class="control-group">
+	            	<label for="nic_number" class="control-label">NIC Number</label>
+		            <div class="controls">
+		            	<input type="text" name="nic_number" value="<?php echo $user->nic_number; ?>" />
+		            </div>
+	           </div>
+	           
+	           <div class="control-group">
+	            	<label for="telephone_number" class="control-label">Telephone Number</label>
+		            <div class="controls">
+		            	<input type="text" name="telephone_number" value="<?php echo $user->telephone_number; ?>" />
+		            </div>
+	           </div>
+	            <?php } ?> 
+	            
+	           <div class="form-actions">
+	           		<button class="btn btn-primary" name="submit">Submit</button>
+	           </div>
+	        </form>
+	        
+	     </div>
+	      
+	     <div class="tab-pane fade" id="password_update">
+	    	
+	    	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id="tab" class="form-horizontal">
+	    		<div class="control-group">
+	        		<label for="old_password" class="control-label">Old Password</label>
+	        	
+		        	<div class="controls">
+		        		<input type="password" name="old_password">
+		        	</div>
+	        	</div>
+	    		
+	    		<div class="control-group">
+	        		<label for="new_password" class="control-label">New Password</label>
+	        	
+		        	<div class="controls">
+		        		<input type="password" name="new_password">
+		        	</div>
+	        	</div>
+	        	
+	        	<div class="form-actions">
+	        	    <button class="btn btn-primary" name="update">Update</button>
+	        	</div>
+	        	
+	    	</form>
+	     </div>
+	      
+	     <div class="tab-pane fade" id="profile_picture">
+	      
+		  <?php 
+          if (!empty($profile_picture->filename)) {
+          	echo '<h5>You have already uploaded a Profile Picture</h5>';
+          	echo '<a href="#" class="btn btn-danger"/>Delete and Reupload</a>';
+          } else { 
+          ?>
+		  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+		      <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+		        	
+		      <div class="control-group">
+		      	<input type="file" name="file_upload" />
+		      </div>
+		        	
+		      <div class="form-actions">
+		      	<button type="submit" class="btn btn-primary" name="upload">Upload</button>
+		      </div>	        	
+	      </form>
+	      <?php } ?>
+	    	
+	     </div>
 	      
 	    </div>
 	    

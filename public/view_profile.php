@@ -1,8 +1,11 @@
 <?php
-require_once("../../includes/initialize.php");
+require_once("../includes/initialize.php");
 
 //init code
 $user_login_object = new UserLogin();
+$student_object = new Student();
+$admin_user_object = new AdminUser();
+$company_user_object = new CompanyUser();
 
 //check login
 if ($session->is_logged_in()){
@@ -10,6 +13,7 @@ if ($session->is_logged_in()){
 	if ($session->object_type == 3){
 		//admin
 		$user = $user_login_object->get_user($_SESSION['id']);
+		$admin_user = $admin_user_object->get_user($user->id);
 		
 		$admin_levels = AdminLevel::find_all();
 		
@@ -68,6 +72,7 @@ if ($session->is_logged_in()){
 	} else if ($session->object_type == 2){
 		//student
 		$user = $user_login_object->get_user($_SESSION['id']);
+		$student = $student_object->get_user($user->id);
 		
 		if (isset($_POST['submit'])){
 			$user->username = $_POST['username'];
@@ -124,8 +129,8 @@ if ($session->is_logged_in()){
 	} else if ($session->object_type == 5){
 		//company_user
 		$user = $user_login_object->get_user($_SESSION['id']);
-
-
+		$company_user = $company_user_object->get_user($user->id);
+		
 	}
 
 }
@@ -136,7 +141,7 @@ if ($session->is_logged_in()){
 <html lang="en">
   <head>
     <title>User Profile &middot; <?php echo WEB_APP_NAME; ?></title>
-    <?php require_once('../../includes/layouts/header_admin.php');?>
+    <?php require_once('../includes/layouts/header.php');?>
   </head>
 
   <body>
@@ -146,7 +151,7 @@ if ($session->is_logged_in()){
     <div id="wrap">
 
       <!-- Fixed navbar -->
-      <?php require_once('../../includes/layouts/navbar_admin.php');?>
+      <?php require_once('../includes/layouts/navbar.php');?>
       
       <header class="jumbotron subhead">
 		 <div class="container-fluid">
@@ -157,9 +162,9 @@ if ($session->is_logged_in()){
 		 
 		 <?php 
          if (!empty($profile_picture->filename)) {
-         	echo '<img src="../../' . $profile_picture->image_path() . '" width="200" class="img-rounded" />'; 
+         	echo '<img src="../' . $profile_picture->image_path() . '" width="200" class="img-rounded" />'; 
          } else {
-         	echo '<img src="../img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Please upload a profile picture" />';
+         	echo '<img src="img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Please upload a profile picture" />';
          }
          ?>
 		 
@@ -185,10 +190,9 @@ if ($session->is_logged_in()){
         
         <div class="span3">
 	        <div class="sidenav" data-spy="affix" data-offset-top="275">
-	        	<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
-	        		<a href="admin_list_admin_users.php" class="btn btn-primary"> &larr; Back to Admin Users List</a>
-	        	<?php } else if ($session->is_logged_in() && $session->object_type == 2) {?>
-	        		<a href="index.php" class="btn btn-primary"> &larr; Back to Home</a>
+	        	<a href="list_students.php" class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back to List of Students</a><br />
+	        	<?php if ($session->object_type == 2) { ?>
+	        	<a href="view_student_cv.php?s=<?php echo $user->username; ?>" class="btn btn-success btn-block"><i class="icon-info-sign icon-white"></i> View CV</a><br />
 	        	<?php } ?>
 	        </div>
         </div>
@@ -198,18 +202,20 @@ if ($session->is_logged_in()){
 	    <section>
 	    
 	    <ul class="nav nav-tabs">
+	      <?php if ($session->object_type == 2) { ?>
 	      <li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
 	      <li><a href="#research" data-toggle="tab">Research</a></li>
 	      <li><a href="#work_experience" data-toggle="tab">Work Experience</a></li>
 	      <li><a href="#education" data-toggle="tab">Education</a></li>
-	      <li><a href="#user_details" data-toggle="tab">Profile</a></li>
+	      <?php } ?>
+	      <li<?php if ($session->object_type != 2){echo ' class="active"';}?>><a href="#user_details" data-toggle="tab">Profile</a></li>
 	      <li><a href="#password_update" data-toggle="tab">Password</a></li>
 	      <li><a href="#profile_picture" data-toggle="tab">Profile Picture</a></li>
 	    </ul>
 	    
 	    <div id="myTabContent" class="tab-content">
-	    
-	    <div class="tab-pane active in" id="overview">
+	    <?php if ($session->object_type == 2) { ?>
+	    <div class="tab-pane <?php if ($session->object_type == 2) {echo 'active in';} else {echo 'fade';} ?>" id="overview">
 	      	
 	      	<div class="well">
       			<h3>Executive Summary</h3>
@@ -297,8 +303,9 @@ if ($session->is_logged_in()){
       		</div>
 	    	
 	    </div>
+	    <?php } ?>
 	    
-	    <div class="tab-pane fade" id="user_details">
+	    <div class="tab-pane <?php if ($session->object_type == 2) {echo 'fade';} else {echo 'active in';} ?>" id="user_details">
 	      
 	      <?php echo $message; ?>
 	      	      
@@ -449,9 +456,9 @@ if ($session->is_logged_in()){
       <div id="push"></div>
     </div>
 
-    <?php require_once('../../includes/layouts/footer_admin.php');?>
+    <?php require_once('../includes/layouts/footer.php');?>
 
-    <?php require_once('../../includes/layouts/scripts_admin.php');?>
+    <?php require_once('../includes/layouts/scripts.php');?>
 
   </body>
 </html>

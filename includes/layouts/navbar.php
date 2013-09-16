@@ -7,47 +7,56 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      
-      <a class="brand" href="index.php"><?php echo WEB_APP_NAME;?></a>
+
+      <a class="brand" href="index.php"><?php echo WEB_APP_SHORT_NAME; ?></a>
       
       <div class="nav-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
-          <li<?php if (isset($page) && $page == 'index'){echo ' class="active"';}?>><a href="index.php">Home</a></li>
+          <li<?php if (isset($page) && $page == 'index'){echo ' class="active"';}?>><a href="index.php"><i class="icon-home icon-white"></i></a></li>
           
           <li class="dropdown">
-          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Bus Routes &amp; Stops <b class="caret"></b></a>
+          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Students &amp; Skills <b class="caret"></b></a>
           	<ul class="dropdown-menu">
-          		<li><a href="public_list_stops.php">View All Stops</a></li>
-          		<li><a href="#">Search for Bus Stop</a></li>
+          		<li><a href="list_students.php"><i class="icon-info-sign"></i> View All Students</a></li>
+          		<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
+          		<li><a href="create_student.php"><i class="icon-plus"></i> Add Student</a></li>
+          		<?php } ?>
+          		<li><a href="#"><i class="icon-search"></i> Search for Student</a></li>
           		<li class="divider"></li>
-          		<li><a href="public_list_routes.php">View All Bus Routes</a></li>
-          		<li><a href="#">Search for Bus Route</a></li>
+          		<li><a href="list_skills.php"><i class="icon-info-sign"></i> View Skills</a></li>
+          		<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
+          		<li><a href="create_skill.php"><i class="icon-plus"></i> Add Skill</a></li>
+          		<?php } ?>
+          		<li><a href="#"><i class="icon-search"></i> Search for Skill</a></li>
           	</ul>
           </li>
           
           <li<?php if (isset($page) && $page == 'test'){echo ' class="active"';}?>><a href="test.php">Test Page</a></li>
-          
+
         </ul>
         <ul class="nav navbar-nav pull-right">
           
-          <li><a href="./admin">Admin Area</a></li>
-          
-          <?php 
-          
-          if (isset($session->id) && $session->object_type == 6) { // object_type 6 commuter
-          	
-          	?>
+          <?php if (isset($session->id) && ($session->object_type == 3 || $session->object_type == 2 || $session->object_type == 5) ) { // object_type 3 is admin, 2 is student, 5 is company_user ?>
           	<li class="dropdown">
           	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          	<?php
-          	
-          	echo $user->full_name(); ?> <b class="caret"></b></a>
+          	<i class="icon-user icon-white"></i> <?php if (isset($user->id)) { echo $user->full_name(); } ?> <b class="caret"></b>
+          	</a>
           	<ul class="dropdown-menu">
-          		<li><a href="public_view_profile.php">View Profile</a></li>
-          		<li><a href="logout.php">Logout</a></li>
+          		<li><a href="view_profile.php"><i class="icon-wrench"></i> View Profile</a></li>
+          		<li><a href="logout.php"><i class="icon-off"></i> Logout</a></li>
+          		<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
+          		<li class="divider"></li>
+          		<li><a href="list_students.php"><i class="icon-info-sign"></i> View All Students</a></li>
+          		<li><a href="create_student.php"><i class="icon-plus"></i> Add Student</a></li>
+          		<li><a href="#"><i class="icon-search"></i> Search for Student</a></li>
+          		<li class="divider"></li>
+          		<li><a href="list_admin_users.php"><i class="icon-info-sign"></i> View All Admin Users</a></li>
+          		<li><a href="create_admin_user.php"><i class="icon-plus"></i> Add Admin User</a></li>
+          		<li><a href="#"><i class="icon-search"></i> Search for Admin User</a></li>
+          		<?php } ?>
           	</ul>
           	</li>
-          <?php	} else { ?>
+          <?php } else { ?>
           	<li><a href="login.php">Login</a></li>
           <?php } ?>
           

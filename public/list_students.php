@@ -1,5 +1,5 @@
 <?php
-require_once("../../includes/initialize.php");
+require_once("../includes/initialize.php");
 
 //init code
 
@@ -32,7 +32,7 @@ if ($session->is_logged_in()){
 <html lang="en">
   <head>
     <title>Students' List &middot; <?php echo WEB_APP_NAME; ?></title>
-    <?php require_once('../../includes/layouts/header_admin.php');?>
+    <?php require_once('../includes/layouts/header.php'); ?>
   </head>
 
   <body>
@@ -42,7 +42,7 @@ if ($session->is_logged_in()){
     <div id="wrap">
 
       <!-- Fixed navbar -->
-      <?php require_once('../../includes/layouts/navbar_admin.php');?>
+      <?php require_once('../includes/layouts/navbar.php');?>
 
       <!-- Begin page content -->
       
@@ -58,7 +58,7 @@ if ($session->is_logged_in()){
         <?php if ($session->is_logged_in() && $session->object_type == 3){ ?>
         <div class="row-fluid">
         	<br />
-	        <a href="admin_create_student.php" class="btn btn-primary">Add New Student</a>
+	        <a href="create_student.php" class="btn btn-primary"><i class="icon-plus icon-white"></i> Add New Student</a>
 	        <br />
         </div>
         <?php } ?>
@@ -95,9 +95,9 @@ if ($session->is_logged_in()){
         			<?php
 	        		
 	        		if (!empty($student_profile_picture->filename)) {
-	        			echo '<img src="../../' . $student_profile_picture->image_path() . '" width="100" class="img-rounded" />';
+	        			echo '<img src="../' . $student_profile_picture->image_path() . '" width="100" class="img-rounded" />';
 	        		} else {
-	        			echo '<img src="../img/default-prof-pic.jpg" width="100" class="img-rounded" alt="Please upload a profile picture" />';
+	        			echo '<img src="img/default-prof-pic.jpg" width="100" class="img-rounded" alt="Please upload a profile picture" />';
 	        		}
 	        		
 	        		?>
@@ -105,10 +105,10 @@ if ($session->is_logged_in()){
 	        		<td><?php echo $student->first_name; ?></td>
 	        		<td><?php echo $student->last_name; ?></td>
 	        		<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
-	        		<td><a href="admin_read_update_student.php?studentid=<?php echo $students[$i]->id; ?>" class="btn btn-warning btn-block">Edit</a></td>
-	        		<td><a href="admin_delete_student.php?studentid=<?php echo $students[$i]->id; ?>" class="btn btn-danger btn-block">Delete</a></td>
+	        		<td><a href="read_update_student.php?studentid=<?php echo $students[$i]->id; ?>" class="btn btn-warning btn-block"><i class="icon-edit icon-white"></i> Edit</a></td>
+	        		<td><a href="delete_student.php?studentid=<?php echo $students[$i]->id; ?>" class="btn btn-danger btn-block"><i class="icon-remove icon-white"></i> Delete</a></td>
 	        		<?php } else { ?>
-	        		<td><a href="admin_view_student_cv.php?studentid=<?php echo $students[$i]->id; ?>" class="btn btn-warning btn-block">View CV</a></td>
+	        		<td><a href="view_student_cv.php?s=<?php echo $student->username; ?>" class="btn btn-info btn-block"><i class="icon-info-sign icon-white"></i> View CV</a></td>
 	        		<?php } ?>
         		</tr>
         		
@@ -129,9 +129,9 @@ if ($session->is_logged_in()){
       <div id="push"></div>
     </div>
 
-    <?php require_once('../../includes/layouts/footer_admin.php');?>
+    <?php require_once('../includes/layouts/footer.php');?>
 
-    <?php require_once('../../includes/layouts/scripts_admin.php');?>
+    <?php require_once('../includes/layouts/scripts.php');?>
 
   </body>
 </html>

@@ -4,11 +4,11 @@
     <meta name="author" content="">
 
     <!-- CSS -->
-    <link href="css/bootswatch-united/bootstrap.css" rel="stylesheet">
+    <link href="css/bootswatch-cerulean/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/prettify.css" rel="stylesheet">
-    <link href="css/bootswatch-united/docs.css" rel="stylesheet">
-    <link href="css/bootswatch-united/gaman-styles.css" rel="stylesheet">
+    <link href="css/bootswatch-cerulean/docs.css" rel="stylesheet">
+    <link href="css/bootswatch-cerulean/gaman-styles.css" rel="stylesheet">
 
     <link href="css/flexslider.css" rel="stylesheet" />
     <link href="css/responsiveslides.css" rel="stylesheet" />
@@ -75,11 +75,11 @@
     <![endif]-->
 
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="./ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="ico/favicon.ico">
     
     <script src="js/jquery.js"></script>
     
@@ -89,7 +89,7 @@
     <script src="js/bootstrap-button.js"></script>
     <script src="js/bootstrap-carousel.js"></script>
     <script src="js/bootstrap-collapse.js"></script>
-    <script src="../../public/js/bootstrap-dropdown.js"></script>
+    <script src="../public/js/bootstrap-dropdown.js"></script>
 	<script src="js/bootstrap-modal.js"></script>
     <script src="js/bootstrap-popover.js"></script>
     <script src="js/bootstrap-scrollspy.js"></script>
@@ -103,9 +103,9 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/prettify.js"></script>
     
-    <script defer src="./js/jquery.flexslider.js"></script>
-    <script defer src="./js/responsiveslides.js"></script>
+    <!-- flexslider -->
     
+    <script defer src="js/jquery.flexslider.js"></script>
     <script type="text/javascript">
 		$(window).load(function(){
 	      $('.flexslider').flexslider({
@@ -116,7 +116,12 @@
 	      });
 	    });
 	</script>
+	
+	<!-- end flexslider -->
     
+    <!-- responsive slides -->
+    
+    <script defer src="js/responsiveslides.js"></script>
     <script>
     // You can also use "$(window).load(function() {"
     $(function () {
@@ -138,4 +143,92 @@
 
     });
   </script>
+  
+  <!-- end responsive slides -->
+  
+  <!-- Google Charts -->
+  
+  <script type="text/javascript" src="js/jsapi.js"></script>
+  <script type="text/javascript">
+
+  google.load("visualization", "1", {packages:["corechart"]});
+
+  google.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Year', titleTextStyle: {color: 'blue'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+     <script type="text/javascript">
+
+     google.load("visualization", "1", {packages:["corechart"]});
+
+     google.setOnLoadCallback(drawChart);
+
+     function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Company Performance'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_2_div'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+    <script type="text/javascript">
+    
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1', {'packages':['corechart']});
+      
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+      
+    function drawChart() {
+      var jsonData = $.ajax({
+          url: "ajax_files/getData.php",
+          dataType:"json",
+          async: false
+          }).responseText;
+          
+      // Create our data table out of JSON data loaded from server.
+      var data = new google.visualization.DataTable(jsonData);
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.PieChart(document.getElementById('chart_3_div'));
+      chart.draw(data, {width: 800, height: 480, title: 'Breakdown of Vegies'});
+    }
+
+    </script>
+    
+    
+    
+    <!-- End Google Charts -->
+    
+    <!-- Google Maps -->
+    
+    
+    
     

@@ -30,6 +30,7 @@ class ObjectType extends DatabaseObject {
 	
 		$sql  = "SELECT * FROM " . static::$table_name;
 		$sql .= " WHERE user_flag = '1'";
+		$sql .= " ORDER BY object_type_name";
 	
 		return self::find_by_sql($sql); 
 	

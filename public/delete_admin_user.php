@@ -1,5 +1,5 @@
 <?php
-require_once("../../includes/initialize.php");
+require_once("../includes/initialize.php");
 
 if (!$session->is_logged_in()){
 	redirect_to("login.php");
@@ -17,10 +17,10 @@ $user_to_delete = AdminUser::find_by_id($_GET['adminid']);
 
 if ($user_to_delete && $user_to_delete->delete()){
 	$session->message("Success! The user has been deleted. ");
-	redirect_to("admin_list_admin_users.php");
+	redirect_to("list_admin_users.php");
 } else {
 	$session->message("Error. The user could not be deleted. ");
-	redirect_to("admin_list_admin_users.php");
+	redirect_to("list_admin_users.php");
 }
 
 ?>

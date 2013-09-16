@@ -1,15 +1,29 @@
 <?php
 require_once("../includes/initialize.php");
 
-if ($session->is_logged_in() && $session->object_type == 6){
+$user_login_object = new UserLogin();
+
+if ($session->is_logged_in()){
 	
-	$user = Commuter::find_by_id($_SESSION['id']);
-	$p = new Photograph();
-	$profile_picture = $p->get_profile_picture($user->id, "commuter");
+	if ($session->object_type == 3){
+		//admin
+		$user = $user_login_object->get_user($_SESSION['id']);
+		
+		
+	} else if ($session->object_type == 2){
+		//student
+		$user = $user_login_object->get_user($_SESSION['id']);
+		
+		
+	} else if ($session->object_type == 5){
+		//company_user
+		$user = $user_login_object->get_user($_SESSION['id']);
+		
+		
+	} 
 	
-} else if ($session->is_logged_in() && $session->object_type != 6) {
-	//redirect_to("login.php");
-}
+} 
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +45,8 @@ if ($session->is_logged_in() && $session->object_type == 6){
 
       	<div class="jumbotron masthead">
 		  <div class="container">
-		    <h1><?php echo WEB_APP_NAME; ?></h1>
+		  	<img src="../ico/logo-512x512.png" alt="UCSC Logo" width="250"/>
+		    <h1><?php echo INSTITUTE_SHORT_NAME . " " . WEB_APP_NAME; ?></h1>
 		    <p><?php echo WEB_APP_CATCH_PHRASE; ?></p>
 		  </div>
 		</div>
@@ -73,7 +88,7 @@ if ($session->is_logged_in() && $session->object_type == 6){
     </div>
 
     <?php require_once('../includes/layouts/footer.php');?>
-    
+
     <?php require_once('../includes/layouts/scripts.php');?>
 
   </body>
