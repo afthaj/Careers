@@ -123,10 +123,9 @@ theme colours:
   line-height: 1;
 }
 .jumbotron p {
-  font-size: 24px;
   font-weight: 300;
-  line-height: 1.25;
-  margin-bottom: 30px;
+  line-height: 2.5;
+  margin: 30px 0;
 }
 
 /* Link styles (used on .masthead-links as well) */
@@ -207,13 +206,19 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   color: #fff;
 }
 .masthead h1 {
-  font-size: 120px;
+  font-size: 100px;
   line-height: 1;
   letter-spacing: -2px;
   color: #fff;
 }
-.masthead p {
+.masthead h3 {
   font-size: 40px;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin: 20px 0;
+  color: #fff;
+}
+.masthead p {
   font-weight: 200;
   line-height: 1.25;
 }

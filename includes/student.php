@@ -5,7 +5,7 @@ require_once("database.php");
 class Student extends DatabaseObject {
 	
 	protected static $table_name = "user_students";
-	protected static $db_fields = array('id', 'login_id', 'degree_program_id', 'executive_summary', 'research_project_title', 'research_project_desc');
+	protected static $db_fields = array('id', 'login_id', 'degree_program_id', 'executive_summary', 'research_project_title', 'research_project_desc', 'cv_file_name');
 	
 	public $id;
 	public $login_id;
@@ -13,6 +13,7 @@ class Student extends DatabaseObject {
 	public $executive_summary;
 	public $research_project_title;
 	public $research_project_desc;
+	public $cv_file_name;
 	
 	
 	public function get_user($id){

@@ -63,7 +63,7 @@ if ($session->is_logged_in()){
         </div>
         <?php } ?>
         
-        <div class="row-fluid">
+        <div class="row">
         
         <div class="span12">
         
@@ -79,10 +79,10 @@ if ($session->is_logged_in()){
         		
         		?>
         
-	        	<li class="span2">
+	        	<li class="span3">
 				  	<div class="thumbnail">
-				    <img src="img/default-prof-pic.jpg" data-src="js/holder.js/300x200" width="200" alt="Please upload a profile picture" />
-				    <h3><?php echo $student->full_name(); ?></h3>
+				    <a href="view_student_cv.php?s=<?php echo $student->username; ?>"><img src="img/default-prof-pic.jpg" data-src="js/holder.js/300x200" alt="Default profile picture" /></a>
+				    <h3 align="center"><a href="view_student_cv.php?s=<?php echo $student->username; ?>" class="btn btn-primary btn-block"><?php echo $student->full_name(); ?></a></h3>
 				    </div>
 				</li>
 				

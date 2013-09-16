@@ -165,11 +165,11 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       			<table class="table table-bordered table-hover">
       			
       			<thead>
-	      			<tr>
-	      				<td>Programming/Scripting Languages</td>
-	      				<td>Technologies</td>
-	      				<td>Subject Areas</td>
-	      				<td>Concepts</td>
+	      			<tr align="center">
+	      				<td><h5>Programming/Scripting Languages</h5></td>
+	      				<td><h5>Technologies</h5></td>
+	      				<td><h5>Subject Areas</h5></td>
+	      				<td><h5>Concepts</h5></td>
 	      			</tr>
       			</thead>
       			
