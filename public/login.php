@@ -46,7 +46,7 @@ if (isset($_POST['submit'])){
 		$found_user_student = $user_login_object->authenticate($username, $password, $object_type_student->id);
 		
 		if ($found_user_student){
-			$session->login($found_user_student, $object_type_bus_personnel->id);
+			$session->login($found_user_student, $object_type_student->id);
 			redirect_to("index.php");
 		} else {
 			$session->message("username/password combination is incorrect. ");

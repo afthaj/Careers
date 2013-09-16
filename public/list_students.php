@@ -71,6 +71,25 @@ if ($session->is_logged_in()){
         
         <?php if (!empty($session->message)) {echo $session->message; echo "<br /><br />";} ?>
         
+        <ul class="thumbnails">
+        
+        <?php for($i = 0; $i < count($students) ; $i++){
+        		
+        		$student = $user_login_object->get_user($students[$i]->login_id);
+        		
+        		?>
+        
+	        	<li class="span2">
+				  	<div class="thumbnail">
+				    <img src="img/default-prof-pic.jpg" data-src="js/holder.js/300x200" width="200" alt="Please upload a profile picture" />
+				    <h3><?php echo $student->full_name(); ?></h3>
+				    </div>
+				</li>
+				
+		<?php  } ?>
+				
+		</ul>
+        
         <table class="table table-bordered table-hover">
 	        <tr align="center">
 	        	<td>Profile Picture</td>
@@ -112,7 +131,7 @@ if ($session->is_logged_in()){
 	        		<?php } ?>
         		</tr>
         		
-        	<?php  }?>
+        	<?php  } ?>
         	
         </table>
         

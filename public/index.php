@@ -45,7 +45,7 @@ if ($session->is_logged_in()){
 
       	<div class="jumbotron masthead">
 		  <div class="container">
-		  	<img src="../ico/logo-512x512.png" alt="UCSC Logo" width="250"/>
+		  	<img src="ico/logo-512x512.png" alt="UCSC Logo" width="250"/>
 		    <h1><?php echo INSTITUTE_SHORT_NAME . " " . WEB_APP_NAME; ?></h1>
 		    <p><?php echo WEB_APP_CATCH_PHRASE; ?></p>
 		  </div>

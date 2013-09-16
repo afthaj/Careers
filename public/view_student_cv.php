@@ -11,6 +11,7 @@ $company_object = new Company();
 //check login
 if ($session->is_logged_in()){
 	
+	//GET request stuff
 	if (isset($_GET['s'])){
 		$details_of_student_to_read_update = $user_login_object->get_user_by_username($_GET['s']);
 		$student_to_read_update = $student_object->get_user($details_of_student_to_read_update->id);
@@ -20,6 +21,7 @@ if ($session->is_logged_in()){
 		redirect_to("list_students.php");
 	}
 	
+	//check object_type
 	if ($session->object_type == 3){
 		//admin
 		$user = $user_login_object->get_user($_SESSION['id']);
@@ -37,81 +39,8 @@ if ($session->is_logged_in()){
 		
 	}
 
-}
-
-if ($session->is_logged_in() && $session->object_type == 3){
-	
-	
-	
-	
-	
-	
-	if (isset($_POST['submit'])){
-		
-		$student_to_read_update->username = $_POST['username'];
-		$student_to_read_update->first_name = $_POST['first_name'];
-		$student_to_read_update->last_name = $_POST['last_name'];
-	
-		if ($student_to_read_update->update()){
-			$session->message("Success! The Student details were updated. ");
-			redirect_to('admin_list_students.php');
-		} else {
-			$session->message("Error! The Student details could not be updated. ");
-		}
-	}
-	
-	if (isset($_POST['assign'])){
-	
-		$buses_bus_personnel_to_read_update = new BusBusPersonnel();
-	
-		$buses_bus_personnel_to_read_update->bus_id = $_POST['bus_id'];
-		$buses_bus_personnel_to_read_update->bus_personnel_id = $student_to_read_update->id;
-	
-		if ($buses_bus_personnel_to_read_update->create()){
-			$session->message("Success! The Bus Personnel was assigned to the given Bus. ");
-			redirect_to('admin_list_bus_personnel.php');
-		} else {
-			$session->message("Error! The Bus Personnel was not assigned to the given Bus. ");
-		}
-	}
-	
-	if (isset($_POST['update'])){
-		if ($_POST['old_password'] == $student_to_read_update->password) {
-	
-			$student_to_read_update->password = $_POST['new_password'];
-	
-			if ($student_to_read_update->update()){
-				$session->message("Success! The user's password was updated. ");
-				redirect_to('admin_list_bus_personnel.php');
-			} else {
-				$session->message("Error! The user's password could not be updated. ");
-			}
-	
-		} else {
-			$session->message("Error! The existing password did not match. ");
-		}
-	}
-	
-	if (isset($_POST['upload'])){
-	
-		$photo_to_upload = new Photo();
-		
-		$photo_to_upload->related_object_type = '2';
-		$photo_to_upload->related_object_id = $_GET['studentid'];
-	
-		$photo_to_upload->attach_file_bus_personnel($_FILES['file_upload'], $student_to_read_update->id, $student_to_read_update->first_name, $student_to_read_update->last_name);
-	
-		if ($photo_to_upload->save()){
-			$session->message("Success! The photo was uploaded successfully. ");
-			redirect_to('admin_list_bus_personnel.php');
-		} else {
-			$message = join("<br />", $photo_to_upload->errors);
-		}
-	
-	}
-	
 } else {
-	//redirect_to("login.php");
+	redirect_to("login.php");
 }
 
 
@@ -227,50 +156,90 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 	      	<div class="well">
       			<h3>Executive Summary</h3>
       			<br />
-      			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae lorem nec mollis. Nam a aliquam nunc. Quisque elit justo, sagittis vel orci in, tincidunt dapibus nunc. Proin et lacus molestie, porttitor ligula at, laoreet lorem. Nulla purus risus, ornare non pellentesque eu, sagittis ac turpis. Nunc interdum metus quam, eu consequat tellus aliquet sed. Nam risus felis, pulvinar vitae tincidunt in, accumsan quis neque. Integer fermentum magna risus, vitae aliquam quam fringilla nec.</p>
+      			<p><?php echo $student_to_read_update->executive_summary; ?></p>
       		</div>
       		
       		<div class="well">
-      			<h4>Skills &amp; Expertise</h4>
-      			<br />
-      			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae lorem nec mollis. Nam a aliquam nunc. Quisque elit justo, sagittis vel orci in, tincidunt dapibus nunc. Proin et lacus molestie, porttitor ligula at, laoreet lorem. Nulla purus risus, ornare non pellentesque eu, sagittis ac turpis. Nunc interdum metus quam, eu consequat tellus aliquet sed. Nam risus felis, pulvinar vitae tincidunt in, accumsan quis neque. Integer fermentum magna risus, vitae aliquam quam fringilla nec.</p>
-      		</div>
-      		
-      		<div class="well">
-      			<ul>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			</ul>
+      			<h3>Skills &amp; Expertise</h3>
+      			
+      			<table class="table table-bordered table-hover">
+      			
+      			<thead>
+	      			<tr>
+	      				<td>Programming/Scripting Languages</td>
+	      				<td>Technologies</td>
+	      				<td>Subject Areas</td>
+	      				<td>Concepts</td>
+	      			</tr>
+      			</thead>
+      			
+      			<tbody>
+      				<tr valign="top">
+      					<td>
+      					<ul>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+		      			</ul>
+      					</td>
+      					<td>
+      					<ul>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+		      			</ul>
+      					</td>
+      					<td>
+      					<ul>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+		      			</ul>
+      					</td>
+      					<td>
+      					<ul>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+		      			</ul>
+      					</td>
+      				</tr>
+      			</tbody>
+      			
+      			</table>
+      			
       		</div>
 	      
 	      	</div>
@@ -278,17 +247,30 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 	      	<div class="tab-pane fade" id="research">
       		
       		<div class="well">
-      			<h4>Research Project</h4>
-      			<br />
-      			<h5>Project Title</h5>
-      			<p>Lorum ipsum dolor</p>
-      			<h5>Project Description</h5>
-      			<p>Aenean aliquam leo libero, ut tempor lorem cursus vitae. Donec porttitor diam orci, nec mollis diam pulvinar a. In tempus fermentum libero tempus mollis. Vestibulum volutpat nulla sed neque consequat, vel venenatis magna vestibulum. Duis placerat quam non pretium congue.</p>
+      			<h3>Research Project</h3>
+      			
+      			<h4>Project Title</h4>
+      			<p><?php echo $student_to_read_update->research_project_title; ?></p>
+      			
+      			<h4>Project Description</h4>
+      			<p><?php echo $student_to_read_update->research_project_desc; ?></p>
       		</div>
 	      	
 	      	<div class="well">
       			<h4>Published Material</h4>
-      			<br />
+      			
+      			<ul>
+	      			<li>Lorem ipsum dolor sit amet</li>
+	      			<li>Lorem ipsum dolor sit amet</li>
+	      			<li>Lorem ipsum dolor sit amet</li>
+	      			<li>Lorem ipsum dolor sit amet</li>
+	      			<li>Lorem ipsum dolor sit amet</li>
+	      			<li>Lorem ipsum dolor sit amet</li>
+	      			<li>Lorem ipsum dolor sit amet</li>
+	      			<li>Lorem ipsum dolor sit amet</li>
+	      			<li>Lorem ipsum dolor sit amet</li>
+      			</ul>
+      			
       		</div>
 	      	
 	   		</div>
@@ -296,8 +278,34 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 	      	<div class="tab-pane fade" id="work_experience">
 	   		
 	    	<div class="well">
-      			<h4>Work Experience</h4>
-      			<br />
+      			<h3>Work Experience</h3>
+      			
+      			<table class="table table-bordered table-hover">
+      			
+      			<thead>
+	      			<tr>
+	      				<td>Employer</td>
+	      				<td>Post</td>
+	      				<td>Duration</td>
+	      				<td>From</td>
+	      				<td>To</td>
+	      				
+	      			</tr>
+      			</thead>
+      			
+      			<tbody>
+      				<tr>
+      					<td>Employer 1</td>
+      					<td>BA</td>
+      					<td>3 Years</td>
+      					<td>January 2011</td>
+      					<td>December 2013</td>
+      					
+      				</tr>
+      			</tbody>
+      			
+      			</table>
+      			
       		</div>
 	    	
 	      	</div>
@@ -305,8 +313,68 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 	      	<div class="tab-pane fade" id="education">
 	   		
 	    	<div class="well">
-      			<h4>Education</h4>
-      			<br />
+      			<h3>Educational Qualifications</h3>
+      			
+      			<table class="table table-bordered table-hover">
+      			
+      			<thead>
+	      			<tr>
+	      				<td>Qualification</td>
+	      				<td>Institution</td>
+	      				<td>Year</td>
+	      			</tr>
+      			</thead>
+      			
+      			<tbody>
+      				<tr>
+      					<td>Bachelor of Science (ICT)</td>
+      					<td>University of Colombo School of Computing</td>
+      					<td>2014</td>
+      				</tr>
+      				<tr>
+      					<td>G. C. E. Advanced Level</td>
+      					<td>Wesley College, Colombo</td>
+      					<td>2008</td>
+      				</tr>
+      				<tr>
+      					<td>G. C. E. Ordinary Level</td>
+      					<td>Wesley College, Colombo</td>
+      					<td>2004</td>
+      				</tr>
+      			</tbody>
+      			
+      			</table>
+      			
+      		</div>
+      		
+      		<div class="well">
+      			<h4>Educational Institutions Attended</h4>
+      			
+      			<table class="table table-bordered table-hover">
+      			
+      			<thead>
+	      			<tr>
+	      				<td>Institution</td>
+	      				<td>From</td>
+	      				<td>To</td>
+	      			</tr>
+      			</thead>
+      			
+      			<tbody>
+      				<tr>
+      					<td>University of Colombo School of Computing</td>
+      					<td>2009</td>
+      					<td>2014</td>
+      				</tr>
+      				<tr>
+      					<td>Wesley College, Colombo</td>
+      					<td>1994</td>
+      					<td>2008</td>
+      				</tr>
+      			</tbody>
+      			
+      			</table>
+      			
       		</div>
 	    	
 	      	</div>

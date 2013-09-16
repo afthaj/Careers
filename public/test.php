@@ -1,11 +1,25 @@
 <?php
 require_once("../includes/initialize.php");
 
-if ($session->is_logged_in() && $session->object_type == 3){
+//init codde
+$user_login_object = new UserLogin();
+
+//check login
+if ($session->is_logged_in()){
 	
-	$user = AdminUser::find_by_id($_SESSION['id']);
-	$p = new Photo();
-	$profile_picture = $p->get_profile_picture($session->object_type, $user->id);
+	if ($session->object_type == 3) {
+		//admin_user
+		$user = $user_login_object->get_user($_SESSION['id']);
+		
+	} else if ($session->object_type == 2){
+		//student
+		$user = $user_login_object->get_user($_SESSION['id']);
+		
+	} else if ($session->object_type == 5){
+		//company_user
+		$user = $user_login_object->get_user($_SESSION['id']);
+		
+	}
 	
 } else {
 	redirect_to("login.php");
@@ -45,7 +59,7 @@ if ($session->is_logged_in() && $session->object_type == 3){
        	  	
 	       	  <div class="span3">
 	       	  	<div class="sidenav" data-spy="affix" data-offset-top="200">
-		        	<a href="#" class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back </a>
+		        	<a href="#" class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back</a>
 		        </div>
 	       	  </div>
 	       	  
