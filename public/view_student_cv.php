@@ -7,6 +7,17 @@ $student_object = new Student();
 $admin_user_object = new AdminUser();
 $company_user_object = new CompanyUser();
 $company_object = new Company();
+$student_company_object = new StudentCompany();
+$paper_object = new Paper();
+$student_paper_object = new StudentPaper();
+$month_object = new Month();
+$student_edu_qual_object = new StudentEduQual();
+$qualification_object = new EducationalQualification();
+$student_school_object = new StudentSchool();
+$school_object = new School();
+$skill_object = new Skill();
+$skill_type_object = new SkillType();
+$student_skill_object = new StudentSkill();
 
 //check login
 if ($session->is_logged_in()){
@@ -15,6 +26,24 @@ if ($session->is_logged_in()){
 	if (isset($_GET['s'])){
 		$details_of_student_to_read_update = $user_login_object->get_user_by_username($_GET['s']);
 		$student_to_read_update = $student_object->get_user($details_of_student_to_read_update->id);
+		
+		//get the student's papers
+		$papers_of_student = $student_paper_object->get_papers_of_student($student_to_read_update->id);
+		
+		//get the student's work experience
+		$employers = $student_company_object->get_companies_of_student($student_to_read_update->id);
+		
+		//get the student's educational qualifications
+		$qualifications = $student_edu_qual_object->get_edu_quals_of_student($student_to_read_update->id);
+		
+		//get the student's professional qualifications
+		
+		
+		//get the student's schools attended
+		$schools = $student_school_object->get_schools_of_student($student_to_read_update->id);
+		 
+		//get the student's skills
+		$skills = $student_skill_object->get_skills_for_student($student_to_read_update->id);
 	
 	} else {
 		$session->message("No Student has been selected to view.");
@@ -159,6 +188,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       			<p><?php echo $student_to_read_update->executive_summary; ?></p>
       		</div>
       		
+      		<?php if($skills) { ?>
       		<div class="well">
       			<h3>Skills &amp; Expertise</h3>
       			
@@ -177,62 +207,46 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       				<tr valign="top">
       					<td>
       					<ul>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
+      					<?php foreach($skills as $skill){ 
+      					
+      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 2){
+      						
+      						?>
+			      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
+			      		<?php } } ?>
 		      			</ul>
       					</td>
       					<td>
       					<ul>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
+      					<?php foreach($skills as $skill){ 
+      					
+      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 1){
+      						
+      						?>
+			      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
+			      		<?php } } ?>
 		      			</ul>
       					</td>
       					<td>
       					<ul>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
+			      		<?php foreach($skills as $skill){ 
+      					
+      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 3){
+      						
+      						?>
+			      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
+			      		<?php } } ?>
 		      			</ul>
       					</td>
       					<td>
       					<ul>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
-			      			<li>Lorem ipsum dolor sit amet</li>
+			      		<?php foreach($skills as $skill){ 
+      					
+      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 4){
+      						
+      						?>
+			      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
+			      		<?php } } ?>
 		      			</ul>
       					</td>
       				</tr>
@@ -241,6 +255,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       			</table>
       			
       		</div>
+      		<?php } ?>
 	      
 	      	</div>
 	      
@@ -255,28 +270,35 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       			<h4>Project Description</h4>
       			<p><?php echo $student_to_read_update->research_project_desc; ?></p>
       		</div>
-	      	
+	      	<?php if($papers_of_student) { ?>
 	      	<div class="well">
       			<h4>Published Material</h4>
       			
       			<ul>
-	      			<li>Lorem ipsum dolor sit amet</li>
-	      			<li>Lorem ipsum dolor sit amet</li>
-	      			<li>Lorem ipsum dolor sit amet</li>
-	      			<li>Lorem ipsum dolor sit amet</li>
-	      			<li>Lorem ipsum dolor sit amet</li>
-	      			<li>Lorem ipsum dolor sit amet</li>
-	      			<li>Lorem ipsum dolor sit amet</li>
-	      			<li>Lorem ipsum dolor sit amet</li>
-	      			<li>Lorem ipsum dolor sit amet</li>
+      			<?php foreach($papers_of_student as $paper_of_student){
+      				
+      				$paper = $paper_object->find_by_id($paper_of_student->paper_id)
+
+      				?>
+	      			<li>
+	      			<?php echo $paper->title; ?> <?php echo '(' . $paper->year . ')'; ?>
+	      			<ul>
+	      				
+	      				<li><b>Authors:</b> <?php echo $paper->authors; ?></li>
+	      				<li><b>Abstract:</b> <?php echo $paper->abstract; ?></li>
+	      			</ul>
+	      			</li>
+	      		<?php } ?>
       			</ul>
       			
       		</div>
+      		<?php } ?>
 	      	
 	   		</div>
 	      	
 	      	<div class="tab-pane fade" id="work_experience">
 	   		
+	   		<?php if($employers) { ?>
 	    	<div class="well">
       			<h3>Work Experience</h3>
       			
@@ -284,34 +306,39 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       			
       			<thead>
 	      			<tr>
-	      				<td>Employer</td>
-	      				<td>Post</td>
-	      				<td>Duration</td>
-	      				<td>From</td>
-	      				<td>To</td>
+	      				<td><h5>Employer</h5></td>
+	      				<td><h5>Post</h5></td>
+	      				<td align="center"><h5>From</h5></td>
+	      				<td align="center"><h5>To</h5></td>
 	      				
 	      			</tr>
       			</thead>
       			
       			<tbody>
+      			<?php foreach($employers as $e){ 
+      			
+      				$employer = $company_object->find_by_id($e->company_id);
+      				
+      				?>
       				<tr>
-      					<td>Employer 1</td>
-      					<td>BA</td>
-      					<td>3 Years</td>
-      					<td>January 2011</td>
-      					<td>December 2013</td>
-      					
+      					<td><?php echo $employer->name; ?></td>
+      					<td><?php echo $e->position; ?></td>
+      					<td align="center"><?php echo $month_object->find_by_id($e->start_month)->name . ' ' . $e->start_year; ?></td>
+      					<td align="center"><?php echo $month_object->find_by_id($e->end_month)->name . ' ' . $e->end_year; ?></td>
       				</tr>
+      			<?php } ?>
       			</tbody>
       			
       			</table>
       			
       		</div>
+      		<?php } ?>
 	    	
 	      	</div>
 	      	
 	      	<div class="tab-pane fade" id="education">
 	   		
+	   		<?php if($qualifications) { ?>
 	    	<div class="well">
       			<h3>Educational Qualifications</h3>
       			
@@ -319,27 +346,49 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       			
       			<thead>
 	      			<tr>
-	      				<td>Qualification</td>
-	      				<td>Institution</td>
-	      				<td>Year</td>
+	      				<td><h5>Qualification</h5></td>
+	      				<td><h5>Awarding Institution</h5></td>
+	      				<td align="center"><h5>Year</h5></td>
+	      			</tr>
+      			</thead>
+      			
+      			<tbody>
+      			<?php foreach($qualifications as $qualification){ 
+      			
+      				$students_qualification = $qualification_object->find_by_id($qualification->edu_qual_id);
+      				
+      				?>
+      				<tr>
+      					<td><?php echo $students_qualification->name; ?></td>
+      					<td><?php echo $school_object->find_by_id($qualification->school_id)->school_name; ?></td>
+      					<td align="center"><?php echo $qualification->year; ?></td>
+      				</tr>
+      			<?php } ?>
+      			</tbody>
+      			
+      			</table>
+      			
+      		</div>
+      		<?php } ?>
+      		
+      		<div class="well">
+      			<h4>Professional Qualifications</h4>
+      			
+      			<table class="table table-bordered table-hover">
+      			
+      			<thead>
+	      			<tr>
+	      				<td><h5>Qualification</h5></td>
+	      				<td><h5>Awarding Institution</h5></td>
+	      				<td align="center"><h5>Year</h5></td>
 	      			</tr>
       			</thead>
       			
       			<tbody>
       				<tr>
-      					<td>Bachelor of Science (ICT)</td>
-      					<td>University of Colombo School of Computing</td>
-      					<td>2014</td>
-      				</tr>
-      				<tr>
-      					<td>G. C. E. Advanced Level</td>
-      					<td>Wesley College, Colombo</td>
-      					<td>2008</td>
-      				</tr>
-      				<tr>
-      					<td>G. C. E. Ordinary Level</td>
-      					<td>Wesley College, Colombo</td>
-      					<td>2004</td>
+      					<td>Stage 4, CIMA</td>
+      					<td>The Chatered Institute for Management Accountancy</td>
+      					<td align="center">2013</td>
       				</tr>
       			</tbody>
       			
@@ -347,6 +396,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       			
       		</div>
       		
+      		<?php if($schools) { ?>
       		<div class="well">
       			<h4>Educational Institutions Attended</h4>
       			
@@ -354,28 +404,30 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       			
       			<thead>
 	      			<tr>
-	      				<td>Institution</td>
-	      				<td>From</td>
-	      				<td>To</td>
+	      				<td><h5>Institution</h5></td>
+	      				<td align="center"><h5>From</h5></td>
+	      				<td align="center"><h5>To</h5></td>
 	      			</tr>
       			</thead>
       			
       			<tbody>
+      			<?php foreach($schools as $school){ 
+      			
+      				$students_school = $school_object->find_by_id($school->school_id);
+      				
+      				?>
       				<tr>
-      					<td>University of Colombo School of Computing</td>
-      					<td>2009</td>
-      					<td>2014</td>
+      					<td><?php echo $students_school->school_name; ?></td>
+      					<td align="center"><?php echo $school->start_year; ?></td>
+      					<td align="center"><?php echo $school->end_year; ?></td>
       				</tr>
-      				<tr>
-      					<td>Wesley College, Colombo</td>
-      					<td>1994</td>
-      					<td>2008</td>
-      				</tr>
+      			<?php } ?>
       			</tbody>
       			
       			</table>
       			
       		</div>
+      		<?php } ?>
 	    	
 	      	</div>
 	      

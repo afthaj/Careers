@@ -13,8 +13,15 @@ class StudentSchool extends DatabaseObject {
 	public $start_year;
 	public $end_year;
 	
-	
-	
+	public function get_schools_of_student($studentid){
+		global $database;
+		
+		$sql  = "SELECT * FROM " . static::$table_name;
+		$sql .= " WHERE student_id = " . $studentid;
+		$sql .= " ORDER BY end_year DESC";
+		
+		return self::find_by_sql($sql);
+	}
 	
 }
 

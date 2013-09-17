@@ -1,5 +1,5 @@
 <?php
-require_once("../../includes/initialize.php");
+require_once("../includes/initialize.php");
 
 //init code
 
@@ -38,81 +38,8 @@ if ($session->is_logged_in()){
 
 	}
 
-}
-
-if ($session->is_logged_in() && $session->object_type == 3){
-	
-	
-	
-	
-	
-	
-	if (isset($_POST['submit'])){
-		
-		$student_to_read_update->username = $_POST['username'];
-		$student_to_read_update->first_name = $_POST['first_name'];
-		$student_to_read_update->last_name = $_POST['last_name'];
-	
-		if ($student_to_read_update->update()){
-			$session->message("Success! The Student details were updated. ");
-			redirect_to('admin_list_students.php');
-		} else {
-			$session->message("Error! The Student details could not be updated. ");
-		}
-	}
-	
-	if (isset($_POST['assign'])){
-	
-		$buses_bus_personnel_to_read_update = new BusBusPersonnel();
-	
-		$buses_bus_personnel_to_read_update->bus_id = $_POST['bus_id'];
-		$buses_bus_personnel_to_read_update->bus_personnel_id = $student_to_read_update->id;
-	
-		if ($buses_bus_personnel_to_read_update->create()){
-			$session->message("Success! The Bus Personnel was assigned to the given Bus. ");
-			redirect_to('admin_list_bus_personnel.php');
-		} else {
-			$session->message("Error! The Bus Personnel was not assigned to the given Bus. ");
-		}
-	}
-	
-	if (isset($_POST['update'])){
-		if ($_POST['old_password'] == $student_to_read_update->password) {
-	
-			$student_to_read_update->password = $_POST['new_password'];
-	
-			if ($student_to_read_update->update()){
-				$session->message("Success! The user's password was updated. ");
-				redirect_to('admin_list_bus_personnel.php');
-			} else {
-				$session->message("Error! The user's password could not be updated. ");
-			}
-	
-		} else {
-			$session->message("Error! The existing password did not match. ");
-		}
-	}
-	
-	if (isset($_POST['upload'])){
-	
-		$photo_to_upload = new Photo();
-		
-		$photo_to_upload->related_object_type = '2';
-		$photo_to_upload->related_object_id = $_GET['studentid'];
-	
-		$photo_to_upload->attach_file_bus_personnel($_FILES['file_upload'], $student_to_read_update->id, $student_to_read_update->first_name, $student_to_read_update->last_name);
-	
-		if ($photo_to_upload->save()){
-			$session->message("Success! The photo was uploaded successfully. ");
-			redirect_to('admin_list_bus_personnel.php');
-		} else {
-			$message = join("<br />", $photo_to_upload->errors);
-		}
-	
-	}
-	
 } else {
-	//redirect_to("login.php");
+	redirect_to("login.php");
 }
 
 
@@ -125,7 +52,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 <html lang="en">
   <head>
     <title>Student Profile &middot; <?php echo WEB_APP_NAME; ?></title>
-    <?php require_once('../../includes/layouts/header_admin.php');?>
+    <?php require_once('../includes/layouts/header.php');?>
   </head>
 
   <body>
@@ -135,7 +62,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
     <div id="wrap">
 
       <!-- Fixed navbar -->
-      <?php require_once('../../includes/layouts/navbar_admin.php');?>
+      <?php require_once('../includes/layouts/navbar.php');?>
       
       <header class="jumbotron subhead">
 		 <div class="container-fluid">
@@ -146,9 +73,9 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 		 
 		 <?php 
          if (!empty($profile_picture_of_bus_personnel->filename)) {
-         	echo '<img src="../../' . $profile_picture_of_student->image_path() . '" width="200" class="img-rounded" />'; 
+         	echo '<img src="../' . $profile_picture_of_student->image_path() . '" width="200" class="img-rounded" />'; 
          } else {
-         	echo '<img src="../img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Please upload a profile picture" />';
+         	echo '<img src="img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Please upload a profile picture" />';
          } 
          ?>
 		 
@@ -172,7 +99,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       
         <div class="span3 sidebar">
 	        <div class="sidenav" data-spy="affix" data-offset-top="275">
-	        	<a href="admin_list_students.php" class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back to Students' List</a><br />
+	        	<a href="list_students.php" class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back to Students' List</a><br />
 	        	
 	        	<div class="well">
 	        		<h4>Student Details</h4><br />
@@ -471,9 +398,9 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       <div id="push"></div>
     </div>
 
-    <?php require_once('../../includes/layouts/footer_admin.php');?>
+    <?php require_once('../includes/layouts/footer.php');?>
 
-    <?php require_once('../../includes/layouts/scripts_admin.php');?>
+    <?php require_once('../includes/layouts/scripts.php');?>
 
   </body>
 </html>

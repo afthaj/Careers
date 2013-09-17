@@ -13,8 +13,8 @@
     <link href="css/flexslider.css" rel="stylesheet" />
     <link href="css/responsiveslides.css" rel="stylesheet" />
     
-    <!-- FontAwesome CSS 
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+    <!-- FontAwesome CSS  
+    <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.css"/>
     -->
     
     <style type="text/css">

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 16, 2013 at 08:44 PM
+-- Generation Time: Sep 17, 2013 at 11:22 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `obj_companies` (
   `name` varchar(255) NOT NULL,
   `verified_flag` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `obj_companies`
@@ -67,7 +67,10 @@ INSERT INTO `obj_companies` (`id`, `name`, `verified_flag`) VALUES
 (2, 'Virtusa Corp.', 0),
 (3, 'Cambio Healthcare Systems', 0),
 (4, 'ThinkCube (Pvt) Ltd.', 0),
-(5, 'SimCentric Technologies', 0);
+(5, 'SimCentric Technologies', 0),
+(6, 'TNL Radio Networks (Pvt) Ltd.', 0),
+(7, 'HSBC DPL (Pvt.) Ltd.', 0),
+(8, 'British Council', 0);
 
 -- --------------------------------------------------------
 
@@ -101,18 +104,77 @@ INSERT INTO `obj_degree_programs` (`id`, `name`, `display_name`, `duration`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `obj_educational_qualifications`
+--
+
+CREATE TABLE IF NOT EXISTS `obj_educational_qualifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `obj_educational_qualifications`
+--
+
+INSERT INTO `obj_educational_qualifications` (`id`, `name`) VALUES
+(1, 'G. C. E. Advanced Level'),
+(2, 'G. C. E. Ordinary Level'),
+(3, 'Grade 5 Scholarship Exam');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `obj_months`
+--
+
+CREATE TABLE IF NOT EXISTS `obj_months` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `obj_months`
+--
+
+INSERT INTO `obj_months` (`id`, `name`) VALUES
+(1, 'January'),
+(2, 'February'),
+(3, 'March'),
+(4, 'April'),
+(5, 'May'),
+(6, 'June'),
+(7, 'July'),
+(8, 'August'),
+(9, 'September'),
+(10, 'October'),
+(11, 'November'),
+(12, 'December');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `obj_papers`
 --
 
 CREATE TABLE IF NOT EXISTS `obj_papers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `paper_name` text NOT NULL,
+  `title` text NOT NULL,
   `year` int(11) NOT NULL,
   `authors` text NOT NULL,
   `abstract` text NOT NULL,
   `file_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `obj_papers`
+--
+
+INSERT INTO `obj_papers` (`id`, `title`, `year`, `authors`, `abstract`, `file_name`) VALUES
+(1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 2012, 'Jaldin, A. Smith, J. Doe, J.', 'Integer non leo viverra, scelerisque ipsum sed, malesuada elit. Phasellus fringilla porttitor porta. Aenean adipiscing imperdiet porta. Aenean non elit id leo sodales placerat vitae et felis. Curabitur vel quam lectus. In bibendum molestie fringilla. Vivamus eget nulla in nibh ultricies blandit. Suspendisse tristique pulvinar placerat. Cras aliquet tempor urna id viverra. Ut nisi orci, bibendum nec quam sed, elementum commodo augue.', ''),
+(2, 'Integer non leo viverra, scelerisque ipsum sed, malesuada elit.', 2013, 'Amarasinghe, S. Jaldin, A. Perera A.', 'In porta posuere lobortis. Nullam in dolor eros. Curabitur tortor enim, varius ut vehicula ac, ultricies vel quam. Suspendisse potenti. Ut felis odio, tempus in vestibulum non, hendrerit non arcu. In hac habitasse platea dictumst. Praesent adipiscing interdum libero, nec commodo sapien mollis vel. Praesent auctor leo nec iaculis volutpat. Aenean porta nisl vel enim viverra interdum. Aliquam diam leo, rhoncus in molestie aliquet, scelerisque eget lorem. Praesent suscipit tortor quis enim cursus mattis. Ut porta vel lorem sit amet scelerisque. Sed accumsan ut turpis id luctus.', '');
 
 -- --------------------------------------------------------
 
@@ -141,7 +203,26 @@ CREATE TABLE IF NOT EXISTS `obj_schools` (
   `school_name` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `obj_schools`
+--
+
+INSERT INTO `obj_schools` (`id`, `school_name`, `location`) VALUES
+(1, 'Wesley College', 'Colombo'),
+(2, 'Ananda College', 'Colombo'),
+(3, 'Royal College', 'Colombo'),
+(4, 'St. Thomas'' College', 'Mt. Lavinia'),
+(5, 'Dharmasoka College', 'Ambalangoda'),
+(6, 'St. Aloysius College', 'Galle'),
+(7, 'Holy Family Convent', 'Bambalapitiya'),
+(8, 'Devi Balika Vidyalaya', 'Colombo'),
+(9, 'Museaus College', 'Colombo'),
+(10, 'Bishop''s College', 'Colombo'),
+(11, 'Methodist College', 'Colombo'),
+(12, 'Dharmaraja College', 'Kandy'),
+(13, 'University of Colombo School of Computing', 'Colombo');
 
 -- --------------------------------------------------------
 
@@ -154,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `obj_skills` (
   `skill_name` varchar(255) NOT NULL,
   `skill_type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=111 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=112 ;
 
 --
 -- Dumping data for table `obj_skills`
@@ -270,22 +351,8 @@ INSERT INTO `obj_skills` (`id`, `skill_name`, `skill_type`) VALUES
 (107, 'Customer Relationship Management', 3),
 (108, 'Bio-Informatics', 3),
 (109, 'Geographic IS', 3),
-(110, 'IS Security and Audit', 3);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `obj_skills_students`
---
-
-CREATE TABLE IF NOT EXISTS `obj_skills_students` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `skill_id` int(11) NOT NULL,
-  `student_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `skill_id` (`skill_id`,`student_id`),
-  KEY `student_id` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+(110, 'IS Security and Audit', 3),
+(111, 'SQL', 2);
 
 -- --------------------------------------------------------
 
@@ -325,9 +392,48 @@ CREATE TABLE IF NOT EXISTS `obj_students_companies` (
   `end_month` int(11) NOT NULL,
   `end_year` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `student_id` (`student_id`),
-  UNIQUE KEY `company_id` (`company_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `student_id` (`student_id`),
+  KEY `company_id` (`company_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `obj_students_companies`
+--
+
+INSERT INTO `obj_students_companies` (`id`, `student_id`, `company_id`, `position`, `start_month`, `start_year`, `end_month`, `end_year`) VALUES
+(3, 4, 2, 'Industrial Trainee', 4, 2012, 10, 2012),
+(4, 10, 2, 'Industrial Trainee', 4, 2012, 10, 2012),
+(5, 13, 1, 'Industrial Trainee', 4, 2012, 9, 2012),
+(6, 14, 1, 'Industrial Trainee', 4, 2012, 9, 2012),
+(7, 4, 6, 'News Editor/Presenter', 4, 2010, 10, 2011),
+(8, 4, 7, 'Customer Service Executive', 11, 2008, 7, 2009),
+(9, 4, 8, 'Customer Service Representative', 4, 2008, 6, 2008);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `obj_students_edu_quals`
+--
+
+CREATE TABLE IF NOT EXISTS `obj_students_edu_quals` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `edu_qual_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `student_id` (`student_id`),
+  KEY `edu_qual_id` (`edu_qual_id`),
+  KEY `school_id` (`school_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `obj_students_edu_quals`
+--
+
+INSERT INTO `obj_students_edu_quals` (`id`, `student_id`, `edu_qual_id`, `school_id`, `year`) VALUES
+(1, 4, 1, 1, 2008),
+(2, 4, 2, 1, 2004);
 
 -- --------------------------------------------------------
 
@@ -339,8 +445,19 @@ CREATE TABLE IF NOT EXISTS `obj_students_papers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `paper_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`id`),
+  KEY `paper_id` (`paper_id`),
+  KEY `student_id` (`student_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `obj_students_papers`
+--
+
+INSERT INTO `obj_students_papers` (`id`, `student_id`, `paper_id`) VALUES
+(1, 4, 1),
+(2, 4, 2),
+(3, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -357,7 +474,74 @@ CREATE TABLE IF NOT EXISTS `obj_students_schools` (
   PRIMARY KEY (`id`),
   KEY `student_id` (`student_id`),
   KEY `school_id` (`school_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `obj_students_schools`
+--
+
+INSERT INTO `obj_students_schools` (`id`, `student_id`, `school_id`, `start_year`, `end_year`) VALUES
+(1, 4, 1, 1994, 2008),
+(2, 4, 13, 2009, 2014);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `obj_students_skills`
+--
+
+CREATE TABLE IF NOT EXISTS `obj_students_skills` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `skill_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `student_id` (`student_id`),
+  KEY `skill_id` (`skill_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+
+--
+-- Dumping data for table `obj_students_skills`
+--
+
+INSERT INTO `obj_students_skills` (`id`, `student_id`, `skill_id`) VALUES
+(1, 4, 1),
+(2, 4, 4),
+(3, 4, 5),
+(4, 4, 12),
+(5, 4, 13),
+(6, 4, 19),
+(7, 4, 20),
+(8, 4, 21),
+(9, 4, 22),
+(10, 4, 24),
+(11, 4, 25),
+(12, 4, 26),
+(13, 4, 28),
+(14, 4, 29),
+(15, 4, 30),
+(16, 4, 31),
+(17, 4, 40),
+(18, 4, 41),
+(19, 4, 43),
+(20, 4, 45),
+(21, 4, 46),
+(22, 4, 47),
+(23, 4, 48),
+(24, 4, 49),
+(25, 4, 52),
+(26, 4, 53),
+(27, 4, 54),
+(28, 4, 55),
+(29, 4, 56),
+(30, 4, 57),
+(31, 4, 58),
+(32, 4, 59),
+(33, 4, 62),
+(34, 4, 63),
+(35, 4, 65),
+(36, 4, 66),
+(37, 4, 67),
+(38, 4, 111);
 
 -- --------------------------------------------------------
 
@@ -437,8 +621,9 @@ CREATE TABLE IF NOT EXISTS `user_logins` (
   `last_name` varchar(100) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `telephone_number` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+  PRIMARY KEY (`id`),
+  KEY `object_type` (`object_type`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `user_logins`
@@ -456,7 +641,9 @@ INSERT INTO `user_logins` (`id`, `object_type`, `username`, `password`, `first_n
 (9, 2, 'randika.malinga', '123', 'Randika', 'Malinga', '2009malinga@gmail.com', '+94774192561'),
 (10, 2, 'buddhi.de.silva', '123', 'Buddhi', 'De Silva', 'gbidsilva@gmail.com', '+94775033983'),
 (11, 2, 'laleen.pallegoda', '123', 'Laleen', 'Pallegoda', 'laleen.kp@gmail.com', '+94715574228'),
-(12, 2, 'dinuni.fernando', '123', 'Dinuni', 'Fernando', 'dinuni.fernando@gmail.com', '+94714293337');
+(12, 2, 'dinuni.fernando', '123', 'Dinuni', 'Fernando', 'dinuni.fernando@gmail.com', '+94714293337'),
+(13, 2, 'pasan.de.silva', '123', 'Pasan', 'De Silva', '$papers_of_student', '+94777302716'),
+(14, 2, 'sachith.seneviratne', '123', 'Sachith', 'Seneviratne', 'vihanga88@gmail.com', '+94779467439');
 
 -- --------------------------------------------------------
 
@@ -475,7 +662,7 @@ CREATE TABLE IF NOT EXISTS `user_students` (
   PRIMARY KEY (`id`),
   KEY `degree_program_id` (`degree_program_id`),
   KEY `login_id` (`login_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `user_students`
@@ -491,18 +678,13 @@ INSERT INTO `user_students` (`id`, `login_id`, `degree_program_id`, `executive_s
 (9, 9, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae ', 'Lorem ipsum dolor sit amet', 'consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae ', ''),
 (10, 10, 2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae ', 'Lorem ipsum dolor sit amet', 'consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae ', ''),
 (11, 11, 2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae ', 'Lorem ipsum dolor sit amet', 'consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae ', ''),
-(12, 12, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae ', 'Lorem ipsum dolor sit amet', 'consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae lorem nec mollis. Nam a aliq', '');
+(12, 12, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae ', 'Lorem ipsum dolor sit amet', 'consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae lorem nec mollis. Nam a aliq', ''),
+(13, 13, 2, 'Proin sed libero non metus rutrum ornare. Nulla commodo nibh at libero scelerisque egestas. Donec ac nibh sapien. Donec sed malesuada lectus, a condimentum magna. Nullam in aliquam elit, non ornare velit. Maecenas blandit interdum sapien, a adipiscing orci condimentum nec. Morbi quis augue id sapien consectetur ultricies at id magna.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Sed lectus velit, sodales eu bibendum id, dapibus et velit. In posuere mi turpis, eget tincidunt nunc pellentesque vitae. Nam interdum tristique gravida. Nulla bibendum risus non magna dictum commodo. Morbi est ligula, facilisis eu elit at, facilisis convallis massa. Vestibulum accumsan turpis sed dapibus viverra. Aliquam lacinia scelerisque elit vitae scelerisque. Integer tincidunt vehicula dolor, ac auctor urna vehicula ut. Sed at turpis suscipit, pulvinar enim sit amet, fringilla felis.', ''),
+(14, 14, 2, 'Proin sed libero non metus rutrum ornare. Nulla commodo nibh at libero scelerisque egestas. Donec ac nibh sapien. Donec sed malesuada lectus, a condimentum magna. Nullam in aliquam elit, non ornare velit. Maecenas blandit interdum sapien, a adipiscing orci condimentum nec. Morbi quis augue id sapien consectetur ultricies at id magna.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Sed lectus velit, sodales eu bibendum id, dapibus et velit. In posuere mi turpis, eget tincidunt nunc pellentesque vitae. Nam interdum tristique gravida. Nulla bibendum risus non magna dictum commodo. Morbi est ligula, facilisis eu elit at, facilisis convallis massa. Vestibulum accumsan turpis sed dapibus viverra. Aliquam lacinia scelerisque elit vitae scelerisque. Integer tincidunt vehicula dolor, ac auctor urna vehicula ut. Sed at turpis suscipit, pulvinar enim sit amet, fringilla felis.', '');
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `obj_skills_students`
---
-ALTER TABLE `obj_skills_students`
-  ADD CONSTRAINT `obj_skills_students_ibfk_1` FOREIGN KEY (`skill_id`) REFERENCES `obj_skills` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `obj_skills_students_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `user_students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `obj_students_companies`
@@ -512,6 +694,21 @@ ALTER TABLE `obj_students_companies`
   ADD CONSTRAINT `obj_students_companies_ibfk_2` FOREIGN KEY (`company_id`) REFERENCES `obj_companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `obj_students_edu_quals`
+--
+ALTER TABLE `obj_students_edu_quals`
+  ADD CONSTRAINT `obj_students_edu_quals_ibfk_3` FOREIGN KEY (`school_id`) REFERENCES `obj_schools` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `obj_students_edu_quals_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `user_students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `obj_students_edu_quals_ibfk_2` FOREIGN KEY (`edu_qual_id`) REFERENCES `obj_educational_qualifications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `obj_students_papers`
+--
+ALTER TABLE `obj_students_papers`
+  ADD CONSTRAINT `obj_students_papers_ibfk_2` FOREIGN KEY (`paper_id`) REFERENCES `obj_papers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `obj_students_papers_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `user_logins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `obj_students_schools`
 --
 ALTER TABLE `obj_students_schools`
@@ -519,10 +716,30 @@ ALTER TABLE `obj_students_schools`
   ADD CONSTRAINT `obj_students_schools_ibfk_2` FOREIGN KEY (`school_id`) REFERENCES `obj_schools` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `obj_students_skills`
+--
+ALTER TABLE `obj_students_skills`
+  ADD CONSTRAINT `obj_students_skills_ibfk_2` FOREIGN KEY (`skill_id`) REFERENCES `obj_skills` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `obj_students_skills_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `user_students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `user_company_users`
 --
 ALTER TABLE `user_company_users`
   ADD CONSTRAINT `user_company_users_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `obj_companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_logins`
+--
+ALTER TABLE `user_logins`
+  ADD CONSTRAINT `user_logins_ibfk_1` FOREIGN KEY (`object_type`) REFERENCES `object_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_students`
+--
+ALTER TABLE `user_students`
+  ADD CONSTRAINT `user_students_ibfk_2` FOREIGN KEY (`degree_program_id`) REFERENCES `obj_degree_programs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_students_ibfk_1` FOREIGN KEY (`login_id`) REFERENCES `user_logins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

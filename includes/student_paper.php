@@ -11,6 +11,16 @@ class StudentPaper extends DatabaseObject {
 	public $student_id;
 	public $paper_id;
 	
+	public function get_papers_of_student($studentid){
+		global $database;
+	
+		$sql  = "SELECT * FROM " . static::$table_name;
+		$sql .= " WHERE student_id = " . $studentid;
+	
+		return self::find_by_sql($sql);
+	
+	}
+	
 }
 
 

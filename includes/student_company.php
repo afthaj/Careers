@@ -16,7 +16,14 @@ class StudentCompany extends DatabaseObject {
 	public $end_month;
 	public $end_year;
 	
-	
+	public function get_companies_of_student($studentid){
+		global $database;
+		
+		$sql  = "SELECT * FROM " . static::$table_name;
+		$sql .= " WHERE student_id = " . $studentid;
+		
+		return self::find_by_sql($sql);
+	}
 	
 	
 }
