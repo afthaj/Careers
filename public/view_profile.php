@@ -7,6 +7,36 @@ $student_object = new Student();
 $admin_user_object = new AdminUser();
 $company_user_object = new CompanyUser();
 
+$month_object = new Month();
+$photo_object = new Photo();
+
+//for "work exerience"
+$company_object = new Company();
+$student_company_object = new StudentCompany();
+
+//for "published material"
+$paper_object = new Paper();
+$student_paper_object = new StudentPaper();
+
+//for "edu_quals"
+$qualification_object = new EducationalQualification();
+$student_edu_qual_object = new StudentEduQual();
+
+
+//for "schools attended"
+$school_object = new School();
+$student_school_object = new StudentSchool();
+
+//for "skills"
+$skill_object = new Skill();
+$skill_type_object = new SkillType();
+$student_skill_object = new StudentSkill();
+
+//for "prof_quals"
+$student_prof_qual_object = new StudentProfQuals();
+$prof_qual_object = new ProfessionalQualification();
+$prof_institution_object = new ProfessionalInstitution();
+
 //check login
 if ($session->is_logged_in()){
 
@@ -26,7 +56,7 @@ if ($session->is_logged_in()){
 		
 			if ($user->update()){
 				$session->message("Success! Your details were updated. ");
-				redirect_to('admin_view_profile.php');
+				redirect_to('view_profile.php');
 			} else {
 				$session->message("Error! Your details could not be updated. ");
 			}
@@ -40,7 +70,7 @@ if ($session->is_logged_in()){
 		
 				if ($user->update()){
 					$session->message("Success! Your password was updated. ");
-					redirect_to('admin_view_profile.php');
+					redirect_to('view_profile.php');
 				} else {
 					$session->message("Error! Your password could not be updated. ");
 				}
@@ -54,14 +84,14 @@ if ($session->is_logged_in()){
 		
 			$photo = new Photo();
 		
-			$photo->related_object_type = '5';
+			$photo->related_object_type = '3';
 			$photo->related_object_id = $user->id;
 			$photo->photo_type = 9; // photo_type 9 is "User Profile"
 			$photo->attach_file_admin_user($_FILES['file_upload'], $user->id, $user->first_name, $user->last_name);
 		
 			if ($photo->save()){
 				$session->message("Success! The photo was uploaded successfully. ");
-				redirect_to('admin_list_admin_users.php');
+				redirect_to('list_admin_users.php');
 			} else {
 				$message = join("<br />", $photo->errors);
 			}
@@ -73,6 +103,27 @@ if ($session->is_logged_in()){
 		//student
 		$user = $user_login_object->get_user($_SESSION['id']);
 		$student = $student_object->get_user($user->id);
+		
+		//get the student's papers
+		$papers_of_student = $student_paper_object->get_papers_of_student($student->id);
+		
+		//get the student's work experience
+		$employers = $student_company_object->get_companies_of_student($student->id);
+		
+		//get the student's educational qualifications
+		$edu_quals = $student_edu_qual_object->get_edu_quals_of_student($student->id);
+		
+		//get the student's professional qualifications
+		$prof_quals = $student_prof_qual_object->get_prof_quals_of_student($student->id);
+		
+		//get the student's schools attended
+		$schools = $student_school_object->get_schools_of_student($student->id);
+			
+		//get the student's skills
+		$skills = $student_skill_object->get_skills_for_student($student->id);
+		
+		//get the student's profile picture
+		$profile_picture_of_student = $photo_object->get_profile_picture(2, $student->id);
 		
 		if (isset($_POST['submit'])){
 			$user->username = $_POST['username'];
@@ -97,7 +148,7 @@ if ($session->is_logged_in()){
 		
 				if ($user->update()){
 					$session->message("Success! Your password was updated. ");
-					redirect_to('admin_view_profile.php');
+					redirect_to('view_profile.php');
 				} else {
 					$session->message("Error! Your password could not be updated. ");
 				}
@@ -111,14 +162,14 @@ if ($session->is_logged_in()){
 		
 			$photo = new Photo();
 		
-			$photo->related_object_type = '4';
+			$photo->related_object_type = '2';
 			$photo->related_object_id = $user->id;
 			$photo->photo_type = 9; // photo_type 9 is "User Profile"
-			$photo->attach_file_bus_personnel($_FILES['file_upload'], $user->id, $user->first_name, $user->last_name);
+			$photo->attach_file_student($_FILES['file_upload'], $user->id, $user->first_name);
 		
 			if ($photo->save()){
 				$session->message("Success! The photo was uploaded successfully. ");
-				redirect_to('admin_view_profile.php');
+				redirect_to('view_profile.php');
 			} else {
 				$message = join("<br />", $photo->errors);
 			}
@@ -161,8 +212,8 @@ if ($session->is_logged_in()){
 		 <div class="span3">
 		 
 		 <?php 
-         if (!empty($profile_picture->filename)) {
-         	echo '<img src="../' . $profile_picture->image_path() . '" width="200" class="img-rounded" />'; 
+         if (!empty($profile_picture_of_student->filename)) {
+         	echo '<img src="../' . $profile_picture_of_student->image_path() . '" width="200" class="img-rounded" />'; 
          } else {
          	echo '<img src="img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Please upload a profile picture" />';
          }
@@ -173,6 +224,7 @@ if ($session->is_logged_in()){
 		 <div class="span9">
 		 	<h1>User Profile</h1>
 		 	<h3><?php echo $user->full_name();?></h3>
+		 	<h4><?php echo $degree_program_of_student_to_read_update->display_name; ?></h4>
 		 </div>
 		 
 		 </div>
@@ -220,50 +272,93 @@ if ($session->is_logged_in()){
 	      	<div class="well">
       			<h3>Executive Summary</h3>
       			<br />
-      			<textarea rows="10" class="span12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae lorem nec mollis. Nam a aliquam nunc. Quisque elit justo, sagittis vel orci in, tincidunt dapibus nunc. Proin et lacus molestie, porttitor ligula at, laoreet lorem. Nulla purus risus, ornare non pellentesque eu, sagittis ac turpis. Nunc interdum metus quam, eu consequat tellus aliquet sed. Nam risus felis, pulvinar vitae tincidunt in, accumsan quis neque. Integer fermentum magna risus, vitae aliquam quam fringilla nec.</textarea>
+      			<textarea rows="10" class="span12"><?php echo $student->executive_summary; ?></textarea>
       		</div>
       		
       		<div class="well">
       			<h4>Skills &amp; Expertise</h4>
-      			<br />
-      			<textarea rows="10" class="span12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non tincidunt risus. Pellentesque aliquet, mi ut fermentum molestie, leo lorem facilisis risus, a feugiat urna ipsum sed neque. Aenean lobortis ante a lobortis sodales. Integer pretium vitae lorem nec mollis. Nam a aliquam nunc. Quisque elit justo, sagittis vel orci in, tincidunt dapibus nunc. Proin et lacus molestie, porttitor ligula at, laoreet lorem. Nulla purus risus, ornare non pellentesque eu, sagittis ac turpis. Nunc interdum metus quam, eu consequat tellus aliquet sed. Nam risus felis, pulvinar vitae tincidunt in, accumsan quis neque. Integer fermentum magna risus, vitae aliquam quam fringilla nec.</textarea>
-      		</div>
-      		
-      		<div class="well">
-      			<ul>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			<li>Lorem ipsum dolor sit amet</li>
-      			</ul>
+      			
+      			<table class="table table-bordered table-hover">
+      			
+      			<thead>
+	      			<tr align="center">
+	      				<td><h5>Programming/Scripting Languages</h5></td>
+	      				<td><h5>Technologies</h5></td>
+	      				<td><h5>Subject Areas</h5></td>
+	      				<td><h5>Concepts</h5></td>
+	      			</tr>
+      			</thead>
+      			
+      			<tbody>
+      				<tr valign="top">
+      					<td>
+      					<ul>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+      					</ul>
+      					</td>
+      					<td>
+      					<ul>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+      					</ul>
+      					</td>
+      					<td>
+      					<ul>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+      					</ul>
+      					</td>
+      					<td>
+      					<ul>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+			      			<li>Lorem ipsum dolor sit amet</li>
+      					</ul>
+      					</td>
+      				</tr>
+      			</tbody>
+      			
+      			</table>
+      			
       		</div>
 	      
 	    </div>
@@ -271,12 +366,13 @@ if ($session->is_logged_in()){
 	    <div class="tab-pane fade" id="research">
       		
       		<div class="well">
-      			<h4>Research Project</h4>
-      			<br />
-      			<h5>Project Title</h5>
-      			<p>Lorum ipsum dolor</p>
-      			<h5>Project Description</h5>
-      			<p>Aenean aliquam leo libero, ut tempor lorem cursus vitae. Donec porttitor diam orci, nec mollis diam pulvinar a. In tempus fermentum libero tempus mollis. Vestibulum volutpat nulla sed neque consequat, vel venenatis magna vestibulum. Duis placerat quam non pretium congue.</p>
+      			<h3>Research Project</h3>
+      			
+      			<h4>Project Title</h4>
+      			<textarea rows="10" class="span12"><?php echo $student->research_project_title; ?></textarea>
+      			
+      			<h4>Project Description</h4>
+      			<textarea rows="10" class="span12"><?php echo $student->research_project_desc; ?></textarea>
       		</div>
 	      	
 	      	<div class="well">

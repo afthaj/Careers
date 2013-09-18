@@ -6,18 +6,37 @@ $user_login_object = new UserLogin();
 $student_object = new Student();
 $admin_user_object = new AdminUser();
 $company_user_object = new CompanyUser();
+
+$month_object = new Month();
+$photo_object = new Photo();
+$degree_program_object = new DegreeProgram();
+
+//for "work exerience"
 $company_object = new Company();
 $student_company_object = new StudentCompany();
+
+//for "published material"
 $paper_object = new Paper();
 $student_paper_object = new StudentPaper();
-$month_object = new Month();
-$student_edu_qual_object = new StudentEduQual();
+
+//for "edu_quals"
 $qualification_object = new EducationalQualification();
-$student_school_object = new StudentSchool();
+$student_edu_qual_object = new StudentEduQual();
+
+//for "schools attended"
 $school_object = new School();
+$student_school_object = new StudentSchool();
+
+//for "skills"
 $skill_object = new Skill();
 $skill_type_object = new SkillType();
 $student_skill_object = new StudentSkill();
+
+//for "prof_quals"
+$student_prof_qual_object = new StudentProfQuals();
+$prof_qual_object = new ProfessionalQualification();
+$prof_institution_object = new ProfessionalInstitution();
+
 
 //check login
 if ($session->is_logged_in()){
@@ -27,6 +46,9 @@ if ($session->is_logged_in()){
 		$details_of_student_to_read_update = $user_login_object->get_user_by_username($_GET['s']);
 		$student_to_read_update = $student_object->get_user($details_of_student_to_read_update->id);
 		
+		//for student's degree program
+		$degree_program_of_student_to_read_update = $degree_program_object->find_by_id($student_to_read_update->degree_program_id);
+		
 		//get the student's papers
 		$papers_of_student = $student_paper_object->get_papers_of_student($student_to_read_update->id);
 		
@@ -34,16 +56,19 @@ if ($session->is_logged_in()){
 		$employers = $student_company_object->get_companies_of_student($student_to_read_update->id);
 		
 		//get the student's educational qualifications
-		$qualifications = $student_edu_qual_object->get_edu_quals_of_student($student_to_read_update->id);
+		$edu_quals = $student_edu_qual_object->get_edu_quals_of_student($student_to_read_update->id);
 		
 		//get the student's professional qualifications
-		
+		$prof_quals = $student_prof_qual_object->get_prof_quals_of_student($student_to_read_update->id);
 		
 		//get the student's schools attended
 		$schools = $student_school_object->get_schools_of_student($student_to_read_update->id);
 		 
 		//get the student's skills
 		$skills = $student_skill_object->get_skills_for_student($student_to_read_update->id);
+		
+		//get the student's profile picture
+        $profile_picture_of_student = $photo_object->get_profile_picture(2, $student_to_read_update->id);
 	
 	} else {
 		$session->message("No Student has been selected to view.");
@@ -72,10 +97,6 @@ if ($session->is_logged_in()){
 	redirect_to("login.php");
 }
 
-
-$dp = new DegreeProgram();
-$degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_update->degree_program_id);
-
 ?>
 
 <!DOCTYPE html>
@@ -102,10 +123,10 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 		 <div class="span3">
 		 
 		 <?php 
-         if (!empty($profile_picture_of_bus_personnel->filename)) {
+         if (!empty($profile_picture_of_student->filename)) {
          	echo '<img src="../' . $profile_picture_of_student->image_path() . '" width="200" class="img-rounded" />'; 
          } else {
-         	echo '<img src="img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Please upload a profile picture" />';
+         	echo '<img src="img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Default profile picture" />';
          } 
          ?>
 		 
@@ -338,7 +359,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
 	      	
 	      	<div class="tab-pane fade" id="education">
 	   		
-	   		<?php if($qualifications) { ?>
+	   		<?php if($edu_quals) { ?>
 	    	<div class="well">
       			<h3>Educational Qualifications</h3>
       			
@@ -353,15 +374,15 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       			</thead>
       			
       			<tbody>
-      			<?php foreach($qualifications as $qualification){ 
+      			<?php foreach($edu_quals as $edu_qual){ 
       			
-      				$students_qualification = $qualification_object->find_by_id($qualification->edu_qual_id);
+      				$edu_qualification = $qualification_object->find_by_id($edu_qual->edu_qual_id);
       				
       				?>
       				<tr>
-      					<td><?php echo $students_qualification->name; ?></td>
-      					<td><?php echo $school_object->find_by_id($qualification->school_id)->school_name; ?></td>
-      					<td align="center"><?php echo $qualification->year; ?></td>
+      					<td><?php echo $edu_qualification->name; ?></td>
+      					<td><?php echo $school_object->find_by_id($edu_qual->school_id)->school_name; ?></td>
+      					<td align="center"><?php echo $edu_qual->year; ?></td>
       				</tr>
       			<?php } ?>
       			</tbody>
@@ -371,6 +392,7 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       		</div>
       		<?php } ?>
       		
+      		<?php if ($prof_quals) { ?>
       		<div class="well">
       			<h4>Professional Qualifications</h4>
       			
@@ -385,16 +407,19 @@ $degree_program_of_student_to_read_update = $dp->find_by_id($student_to_read_upd
       			</thead>
       			
       			<tbody>
+      			<?php foreach ($prof_quals as $prof_qual) { ?>
       				<tr>
-      					<td>Stage 4, CIMA</td>
-      					<td>The Chatered Institute for Management Accountancy</td>
-      					<td align="center">2013</td>
+      					<td><?php echo $prof_qual_object->find_by_id($prof_qual->prof_qual_id)->name; ?></td>
+      					<td><?php echo $prof_institution_object->find_by_id($prof_qual->prof_institution_id)->prof_institution_name; ?></td>
+      					<td align="center"><?php echo $prof_qual->year; ?></td>
       				</tr>
+      			<?php } ?>
       			</tbody>
       			
       			</table>
       			
       		</div>
+      		<?php } ?>
       		
       		<?php if($schools) { ?>
       		<div class="well">

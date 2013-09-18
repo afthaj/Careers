@@ -48,7 +48,7 @@ if ($session->is_logged_in()){
 		  	<img src="ico/logo-512x512.png" alt="UCSC Logo" width="200"/>
 		    <h1><?php echo INSTITUTE_SHORT_NAME . " " . WEB_APP_NAME; ?></h1>
 		    <h3><?php echo WEB_APP_CATCH_PHRASE; ?></h3>
-		    <p><i class="icon-calendar icon-white"></i> 24th of October 2013 &middot; <i class="icon-time icon-white"></i> 9AM onwards &middot; <i class="icon-map-marker icon-white"></i> Prof. V. K. Samaranayake Auditorium, UCSC</p>
+		    <p><i class="icon-calendar icon-white"></i> 31st of October 2013 &middot; <i class="icon-time icon-white"></i> 9AM onwards &middot; <i class="icon-map-marker icon-white"></i> Prof. V. K. Samaranayake Auditorium, UCSC</p>
 		  </div>
 		</div>
       

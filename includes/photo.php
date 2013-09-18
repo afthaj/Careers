@@ -18,8 +18,9 @@ class Photo extends DatabaseObject {
 	
 	// change $upload_dir when changing between Mac and PC
 	
-	//protected $upload_dir = 'img/uploads'; 				// for mac 
-	protected $upload_dir = 'public/img/uploads';			// for PC
+	protected $upload_dir = 'img/uploads'; 				// for mac 
+	//protected $upload_dir = 'public/img/uploads';			// for PC
+	
 	public $errors = array();
 	
 	protected $upload_errors = array(
@@ -51,6 +52,28 @@ class Photo extends DatabaseObject {
 			
 			$this->size = $file['size'];
 			
+			return true;
+		}
+	}
+	
+	public function attach_file_student($file, $user_id, $user_first_name){
+		if (!$file || empty($file) || !is_array($file)){
+			$this->errors[] = "No file was uploaded";
+			return false;
+		} else if ($file['error'] != 0) {
+			$this->errors[] = $this->upload_errors[$file['error']];
+			return false;
+		} else {
+				
+			$this->temp_path = $file['tmp_name'];
+				
+			$path_parts = pathinfo($file['name']);
+			$this->filename = 'admin_prof_pic_'.$user_id.'_'.$user_first_name.'_'.$user_last_name.'.'.$path_parts['extension'];
+				
+			$this->file_type = $file['type'];
+				
+			$this->size = $file['size'];
+				
 			return true;
 		}
 	}

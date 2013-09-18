@@ -2,9 +2,9 @@
 
 require_once("database.php");
 
-class EducationalQualification extends DatabaseObject {
+class ProfessionalQualification extends DatabaseObject {
 	
-	protected static $table_name = "obj_edu_quals";
+	protected static $table_name = "obj_prof_quals";
 	protected static $db_fields = array('id', 'name');
 	
 	public $id;
