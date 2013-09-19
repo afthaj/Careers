@@ -98,6 +98,14 @@ if ($session->is_logged_in()){
        	  	  	$interval = $datetime1->diff($datetime2);
        	  	  	echo $interval->format('%R%a days');
        	  	  	
+       	  	  	echo '<br /><br />';
+       	  	  	
+       	  	  	echo PHP_OS;
+       	  	  	
+       	  	  	echo '<br /><br />';
+       	  	  	
+       	  	  	echo php_uname('s');
+       	  	  	
        	  	  	
        	  	  	?>
        	  	  	

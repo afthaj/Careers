@@ -744,7 +744,7 @@ h5,
 h6 {
   margin: 10px 0;
   font-family: 'Lato', 'Myriad Pro', sans-serif;
-  font-weight: bold;
+  font-weight: 300;
   line-height: 20px;
   color: #317eac;
   text-rendering: optimizelegibility;
@@ -756,7 +756,7 @@ h3 small,
 h4 small,
 h5 small,
 h6 small {
-  font-weight: normal;
+  font-weight: 300;
   line-height: 1;
   color: #999999;
 }

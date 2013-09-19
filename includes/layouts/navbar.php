@@ -13,26 +13,7 @@
       <div class="nav-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
           <li<?php if (isset($page) && $page == 'index'){echo ' class="active"';}?>><a href="index.php"><i class="icon-home icon-white"></i></a></li>
-          
-          <li class="dropdown">
-          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Students &amp; Skills <b class="caret"></b></a>
-          	<ul class="dropdown-menu">
-          		<li><a href="list_students.php"><i class="icon-info-sign"></i> View All Students</a></li>
-          		<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
-          		<li><a href="create_student.php"><i class="icon-plus"></i> Add Student</a></li>
-          		<?php } ?>
-          		<li><a href="#"><i class="icon-search"></i> Search for Student</a></li>
-          		<li class="divider"></li>
-          		<li><a href="list_skills.php"><i class="icon-info-sign"></i> View Skills</a></li>
-          		<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
-          		<li><a href="create_skill.php"><i class="icon-plus"></i> Add Skill</a></li>
-          		<?php } ?>
-          		<li><a href="#"><i class="icon-search"></i> Search for Skill</a></li>
-          	</ul>
-          </li>
-          
-          <li<?php if (isset($page) && $page == 'test'){echo ' class="active"';}?>><a href="test.php">Test Page</a></li>
-
+          <li><a href="list_students.php">Students</a></li>
         </ul>
         <ul class="nav navbar-nav pull-right">
           
