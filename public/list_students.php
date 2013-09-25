@@ -86,15 +86,15 @@ if ($session->is_logged_in()){
         		
         		?>
         
-	        	<li class="span3">
+	        	<li class="">
 				  	<div class="thumbnail">
 				    <a href="view_student_cv.php?s=<?php echo $student->username; ?>">
 				    
 				    <?php 
 			         if (!empty($profile_picture_of_student->filename)) {
-			         	echo '<img src="../' . $profile_picture_of_student->image_path() . '" data-src="js/holder.js/200x200" class="img-rounded" />'; 
+			         	echo '<img src="../' . $profile_picture_of_student->image_path() . '" width="200" data-src="js/holder.js/200x200" class="img-rounded" />'; 
 			         } else {
-			         	echo '<img src="img/default-prof-pic.jpg" data-src="js/holder.js/200x200" alt="Default profile picture" />';
+			         	echo '<img src="img/default-prof-pic.jpg" width="200" data-src="js/holder.js/200x200" alt="Default profile picture" />';
 			         } 
 			         ?>
 				    

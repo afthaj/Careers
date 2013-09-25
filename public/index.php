@@ -63,14 +63,27 @@ if ($session->is_logged_in()){
         
         <div class="row">
         
-        <div class="span4">
-        <h2>Subheading 1</h2>
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rhoncus consectetur lectus, sit amet semper nisi lacinia varius. Etiam a tempus eros, ac dictum nisl. Quisque eu dignissim metus. Fusce id pretium risus. Phasellus adipiscing elit in mi semper tincidunt. Nullam lorem tortor, dapibus et nisl ac, fringilla scelerisque sem. Praesent commodo ipsum ut congue elementum.</p>
-        </div>
+        <div class="span8">
         
-        <div class="span4">
-        <h2>Subheading 2</h2>
-        <p class="lead">Aenean aliquam leo libero, ut tempor lorem cursus vitae. Donec porttitor diam orci, nec mollis diam pulvinar a. In tempus fermentum libero tempus mollis. Vestibulum volutpat nulla sed neque consequat, vel venenatis magna vestibulum. Duis placerat quam non pretium congue.</p>
+        	<ul class="nav nav-tabs">
+		      <li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+		      <li><a href="#research" data-toggle="tab">Research</a></li>
+		      <li><a href="#work_experience" data-toggle="tab">Work Experience</a></li>
+		      <li><a href="#education" data-toggle="tab">Education</a></li>
+		    </ul>
+		    
+		    <div id="tab_content" class="tab-content">
+	      	
+		      	<div class="tab-pane active in" id="overview"></div>
+		      
+		      	<div class="tab-pane fade" id="research"></div>
+		      	
+		      	<div class="tab-pane fade" id="work_experience"></div>
+		      	
+		      	<div class="tab-pane fade" id="education"></div>
+	      
+	    	</div>
+        
         </div>
         
         <div class="span4">
@@ -82,23 +95,21 @@ if ($session->is_logged_in()){
         
         </div>
         
+        <hr></hr>
+        
         <div class="marketing">
         
         <div class="row">
         
         <div class="span4">
-        <h2>Subheading 4</h2>
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rhoncus consectetur lectus, sit amet semper nisi lacinia varius. Etiam a tempus eros, ac dictum nisl. Quisque eu dignissim metus. Fusce id pretium risus. Phasellus adipiscing elit in mi semper tincidunt. Nullam lorem tortor, dapibus et nisl ac, fringilla scelerisque sem. Praesent commodo ipsum ut congue elementum.</p>
+	        <h2>Subheading 4</h2>
+	        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rhoncus consectetur lectus, sit amet semper nisi lacinia varius. Etiam a tempus eros, ac dictum nisl. Quisque eu dignissim metus. Fusce id pretium risus. Phasellus adipiscing elit in mi semper tincidunt. Nullam lorem tortor, dapibus et nisl ac, fringilla scelerisque sem. Praesent commodo ipsum ut congue elementum.</p>
         </div>
         
-        <div class="span4">
-        <h2>Subheading 5</h2>
-        <p class="lead">Aenean aliquam leo libero, ut tempor lorem cursus vitae. Donec porttitor diam orci, nec mollis diam pulvinar a. In tempus fermentum libero tempus mollis. Vestibulum volutpat nulla sed neque consequat, vel venenatis magna vestibulum. Duis placerat quam non pretium congue.</p>
-        </div>
         
-        <div class="span4">
-        <h2>Subheading 6</h2>
-        <p class="lead">Aenean pharetra nisi a lorem tincidunt mattis. Quisque arcu eros, varius eu sapien sit amet, luctus volutpat neque. Maecenas turpis massa, ornare at ipsum ut, elementum cursus sem. Nunc ac lacus faucibus, lacinia nisl vel, venenatis metus. Curabitur luctus enim sapien, et euismod nisl mollis eu.</p>
+        
+        <div class="span8">
+        	<iframe width="420" height="315" src="//www.youtube.com/embed/NvEcv3etKG8" frameborder="0" allowfullscreen></iframe>
         </div>
         
         </div>

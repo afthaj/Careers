@@ -175,7 +175,7 @@ if ($session->is_logged_in()){
 		        		<h5>Tel. Number</h5>
 		        		<p><?php echo $details_of_student_to_read_update->telephone_number;?></p>
 		        		<br />
-		        		<a href="#" class="btn btn-success" target="_blank">Download CV</a>
+		        		<a href="<?php if (!empty($student_to_read_update->cv_file_name)){ echo $student_to_read_update->cv_file_path(); } else { echo '#'; } ?>" class="btn btn-success" target="_blank">Download CV</a>
 	        		
 	        		<?php } } ?>
 	        	</div>
@@ -217,7 +217,7 @@ if ($session->is_logged_in()){
       			
       			<thead>
 	      			<tr align="center">
-	      				<td><h5>Programming/Scripting Languages</h5></td>
+	      				<td><h5>Programming Languages</h5></td>
 	      				<td><h5>Technologies</h5></td>
 	      				<td><h5>Subject Areas</h5></td>
 	      				<td><h5>Concepts</h5></td>
@@ -230,7 +230,7 @@ if ($session->is_logged_in()){
       					<ul>
       					<?php foreach($skills as $skill){ 
       					
-      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 2){
+      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 1){
       						
       						?>
 			      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
@@ -241,7 +241,7 @@ if ($session->is_logged_in()){
       					<ul>
       					<?php foreach($skills as $skill){ 
       					
-      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 1){
+      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 2){
       						
       						?>
 			      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>

@@ -15,6 +15,10 @@ class Student extends DatabaseObject {
 	public $research_project_desc;
 	public $cv_file_name;
 	
+	// change $upload_dir when changing between Mac and PC
+	
+	protected $doc_dir = 'docs/uploads'; 				// for mac 
+	//protected $doc_dir = 'public/docs/uploads';			// for PC
 	
 	public function get_user($id){
 		global $database;
@@ -26,6 +30,10 @@ class Student extends DatabaseObject {
 		$result_array = self::find_by_sql($sql);
 	
 		return !empty($result_array) ? array_shift($result_array) : false;
+	}
+	
+	public function cv_file_path(){
+		return $this->doc_dir.DS.$this->cv_file_name;
 	}
 	
 }
