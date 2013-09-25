@@ -116,9 +116,9 @@ if ($session->is_logged_in()){
       <?php require_once('../includes/layouts/navbar.php');?>
       
       <header class="jumbotron subhead">
-		 <div class="container-fluid">
+		 <div class="container">
 		 
-		 <div class="row-fluid">
+		 <div class="row">
 		 
 		 <div class="span3">
 		 
@@ -144,9 +144,9 @@ if ($session->is_logged_in()){
       
       <!-- Begin page content -->
       
-      <div class="container-fluid">
+      <div class="container">
       
-      <div class="row-fluid">
+      <div class="row">
       
         <div class="span3 sidebar">
 	        <div class="sidenav" data-spy="affix" data-offset-top="275">

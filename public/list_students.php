@@ -50,16 +50,16 @@ if ($session->is_logged_in()){
       <!-- Begin page content -->
       
       <header class="jumbotron subhead">
-        <div class="container-fluid">
+        <div class="container">
           <h1>List of Students</h1>
         </div>
       </header>
         
         <!-- Start Content -->
-        <div class="container-fluid">
+        <div class="container">
         
         <?php if ($session->is_logged_in() && $session->object_type == 3){ ?>
-        <div class="row-fluid">
+        <div class="row">
         	<br />
 	        <a href="create_student.php" class="btn btn-primary"><i class="icon-plus icon-white"></i> Add New Student</a>
 	        <br />
@@ -68,7 +68,7 @@ if ($session->is_logged_in()){
         
         <div class="row">
         
-        <div class="span12">
+        <div class="">
         
         <section>
         
