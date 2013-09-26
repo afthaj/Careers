@@ -41,40 +41,6 @@ $prof_institution_object = new ProfessionalInstitution();
 //check login
 if ($session->is_logged_in()){
 	
-	//GET request stuff
-	if (isset($_GET['s'])){
-		$details_of_student_to_read_update = $user_login_object->get_user_by_username($_GET['s']);
-		$student_to_read_update = $student_object->get_user($details_of_student_to_read_update->id);
-		
-		//for student's degree program
-		$degree_program_of_student_to_read_update = $degree_program_object->find_by_id($student_to_read_update->degree_program_id);
-		
-		//get the student's papers
-		$papers_of_student = $student_paper_object->get_papers_of_student($student_to_read_update->id);
-		
-		//get the student's work experience
-		$employers = $student_company_object->get_companies_of_student($student_to_read_update->id);
-		
-		//get the student's educational qualifications
-		$edu_quals = $student_edu_qual_object->get_edu_quals_of_student($student_to_read_update->id);
-		
-		//get the student's professional qualifications
-		$prof_quals = $student_prof_qual_object->get_prof_quals_of_student($student_to_read_update->id);
-		
-		//get the student's schools attended
-		$schools = $student_school_object->get_schools_of_student($student_to_read_update->id);
-		 
-		//get the student's skills
-		$skills = $student_skill_object->get_skills_for_student($student_to_read_update->id);
-		
-		//get the student's profile picture
-        $profile_picture_of_student = $photo_object->get_profile_picture(2, $student_to_read_update->id);
-	
-	} else {
-		$session->message("No Student has been selected to view.");
-		redirect_to("list_students.php");
-	}
-	
 	//check object_type
 	if ($session->object_type == 3){
 		//admin
@@ -93,8 +59,40 @@ if ($session->is_logged_in()){
 		
 	}
 
+}
+
+//GET request stuff
+if (!empty($_GET['s'])){
+	$details_of_student_to_read_update = $user_login_object->get_user_by_username($_GET['s']);
+	$student_to_read_update = $student_object->get_user($details_of_student_to_read_update->id);
+
+	//for student's degree program
+	$degree_program_of_student_to_read_update = $degree_program_object->find_by_id($student_to_read_update->degree_program_id);
+
+	//get the student's papers
+	$papers_of_student = $student_paper_object->get_papers_of_student($student_to_read_update->id);
+
+	//get the student's work experience
+	$employers = $student_company_object->get_companies_of_student($student_to_read_update->id);
+
+	//get the student's educational qualifications
+	$edu_quals = $student_edu_qual_object->get_edu_quals_of_student($student_to_read_update->id);
+
+	//get the student's professional qualifications
+	$prof_quals = $student_prof_qual_object->get_prof_quals_of_student($student_to_read_update->id);
+
+	//get the student's schools attended
+	$schools = $student_school_object->get_schools_of_student($student_to_read_update->id);
+		
+	//get the student's skills
+	$skills = $student_skill_object->get_skills_for_student($student_to_read_update->id);
+
+	//get the student's profile picture
+	$profile_picture_of_student = $photo_object->get_profile_picture(2, $student_to_read_update->id);
+
 } else {
-	redirect_to("login.php");
+	$session->message("No Student has been selected to view.");
+	redirect_to("list_students.php");
 }
 
 ?>
@@ -124,7 +122,7 @@ if ($session->is_logged_in()){
 		 
 		 <?php 
          if (!empty($profile_picture_of_student->filename)) {
-         	echo '<img src="../' . $profile_picture_of_student->image_path() . '" width="200" class="img-rounded" />'; 
+         	echo '<img src="../' . $profile_picture_of_student->image_path() . '" width="200" class="img-rounded"/>'; 
          } else {
          	echo '<img src="img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Default profile picture" />';
          } 
@@ -151,9 +149,6 @@ if ($session->is_logged_in()){
         <div class="span3 sidebar">
 	        <div class="sidenav" data-spy="affix" data-offset-top="275">
 	        	<a href="list_students.php" class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back to List of Students</a><br />
-	        	<?php if ($session->object_type == 2 && $user->username == $_GET['s']) { ?>
-	        	<a href="view_profile.php" class="btn btn-success btn-block"><i class="icon-edit icon-white"></i> Edit Details</a><br />
-	        	<?php } ?>
 	        	<div class="well">
 	        		<h4>Student Details</h4><br />
 	        		
@@ -195,8 +190,10 @@ if ($session->is_logged_in()){
         <ul class="nav nav-tabs">
 	      <li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
 	      <li><a href="#research" data-toggle="tab">Research</a></li>
+	      <!-- 
 	      <li><a href="#work_experience" data-toggle="tab">Work Experience</a></li>
 	      <li><a href="#education" data-toggle="tab">Education</a></li>
+	       -->
 	    </ul>
 	    
 	    <div id="tab_content" class="tab-content">
@@ -209,74 +206,83 @@ if ($session->is_logged_in()){
       			<p><?php echo $student_to_read_update->executive_summary; ?></p>
       		</div>
       		
-      		<?php if($skills) { ?>
-      		<div class="well">
-      			<h3>Skills &amp; Expertise</h3>
-      			
-      			<table class="table table-bordered table-hover">
-      			
-      			<thead>
-	      			<tr align="center">
-	      				<td><h5>Programming Languages</h5></td>
-	      				<td><h5>Technologies</h5></td>
-	      				<td><h5>Subject Areas</h5></td>
-	      				<td><h5>Concepts</h5></td>
-	      			</tr>
-      			</thead>
-      			
-      			<tbody>
-      				<tr valign="top">
-      					<td>
-      					<ul>
-      					<?php foreach($skills as $skill){ 
-      					
-      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 1){
-      						
-      						?>
-			      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
-			      		<?php } } ?>
-		      			</ul>
-      					</td>
-      					<td>
-      					<ul>
-      					<?php foreach($skills as $skill){ 
-      					
-      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 2){
-      						
-      						?>
-			      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
-			      		<?php } } ?>
-		      			</ul>
-      					</td>
-      					<td>
-      					<ul>
-			      		<?php foreach($skills as $skill){ 
-      					
-      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 3){
-      						
-      						?>
-			      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
-			      		<?php } } ?>
-		      			</ul>
-      					</td>
-      					<td>
-      					<ul>
-			      		<?php foreach($skills as $skill){ 
-      					
-      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 4){
-      						
-      						?>
-			      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
-			      		<?php } } ?>
-		      			</ul>
-      					</td>
-      				</tr>
-      			</tbody>
-      			
-      			</table>
-      			
-      		</div>
-      		<?php } ?>
+      		
+      		<?php if ($session->is_logged_in()) { 
+	        			
+        			if ($session->object_type == 5 && $company_object->find_by_id($company_user->company_id)->verified_flag != 1) { 
+        			
+        			 } else { 
+        			 
+        			 	if ($skills) { ?>
+        		
+		        		<div class="well">
+			      			<h3>Skills &amp; Expertise</h3>
+			      			
+			      			<table class="table table-bordered table-hover">
+			      			
+			      			<thead>
+				      			<tr align="center">
+				      				<td><h5>Programming Languages</h5></td>
+				      				<td><h5>Technologies</h5></td>
+				      				<td><h5>Subject Areas</h5></td>
+				      				<td><h5>Concepts</h5></td>
+				      			</tr>
+			      			</thead>
+			      			
+			      			<tbody>
+			      				<tr valign="top">
+			      					<td>
+			      					<ul>
+			      					<?php foreach($skills as $skill){ 
+			      					
+			      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 1){
+			      						
+			      						?>
+						      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
+						      		<?php } } ?>
+					      			</ul>
+			      					</td>
+			      					<td>
+			      					<ul>
+			      					<?php foreach($skills as $skill){ 
+			      					
+			      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 2){
+			      						
+			      						?>
+						      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
+						      		<?php } } ?>
+					      			</ul>
+			      					</td>
+			      					<td>
+			      					<ul>
+						      		<?php foreach($skills as $skill){ 
+			      					
+			      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 3){
+			      						
+			      						?>
+						      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
+						      		<?php } } ?>
+					      			</ul>
+			      					</td>
+			      					<td>
+			      					<ul>
+						      		<?php foreach($skills as $skill){ 
+			      					
+			      						if ($skill_object->find_by_id($skill->skill_id)->skill_type == 4){
+			      						
+			      						?>
+						      			<li><?php echo $skill_object->find_by_id($skill->skill_id)->skill_name; ?></li>
+						      		<?php } } ?>
+					      			</ul>
+			      					</td>
+			      				</tr>
+			      			</tbody>
+			      			
+			      			</table>
+			      			
+			      		</div>
+        		
+        		<?php } } } ?>
 	      
 	      	</div>
 	      
@@ -291,29 +297,39 @@ if ($session->is_logged_in()){
       			<h4>Project Description</h4>
       			<p><?php echo $student_to_read_update->research_project_desc; ?></p>
       		</div>
-	      	<?php if($papers_of_student) { ?>
-	      	<div class="well">
-      			<h4>Published Material</h4>
-      			
-      			<ul>
-      			<?php foreach($papers_of_student as $paper_of_student){
-      				
-      				$paper = $paper_object->find_by_id($paper_of_student->paper_id)
-
-      				?>
-	      			<li>
-	      			<?php echo $paper->title; ?> <?php echo '(' . $paper->year . ')'; ?>
-	      			<ul>
-	      				
-	      				<li><b>Authors:</b> <?php echo $paper->authors; ?></li>
-	      				<li><b>Abstract:</b> <?php echo $paper->abstract; ?></li>
-	      			</ul>
-	      			</li>
-	      		<?php } ?>
-      			</ul>
-      			
-      		</div>
-      		<?php } ?>
+	      	
+	      	
+	      	<?php if ($session->is_logged_in()) { 
+	        			
+        			if ($session->object_type == 5 && $company_object->find_by_id($company_user->company_id)->verified_flag != 1) { 
+        			
+        			 } else { 
+        			 
+        			 	if ($papers_of_student) { ?>
+        		
+		        		<div class="well">
+			      			<h4>Published Material</h4>
+			      			
+			      			<ul>
+			      			<?php foreach($papers_of_student as $paper_of_student){
+			      				
+			      				$paper = $paper_object->find_by_id($paper_of_student->paper_id)
+			
+			      				?>
+				      			<li>
+				      			<?php echo $paper->title; ?> <?php echo '(' . $paper->year . ')'; ?>
+				      			<ul>
+				      				
+				      				<li><b>Authors:</b> <?php echo $paper->authors; ?></li>
+				      				<li><b>Abstract:</b> <?php echo $paper->abstract; ?></li>
+				      			</ul>
+				      			</li>
+				      		<?php } ?>
+			      			</ul>
+			      			
+			      		</div>
+        		
+        		<?php } } } ?>
 	      	
 	   		</div>
 	      	

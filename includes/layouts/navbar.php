@@ -12,18 +12,18 @@
       
       <div class="nav-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
-          <li<?php if (isset($page) && $page == 'index'){echo ' class="active"';}?>><a href="index.php"><i class="icon-home icon-white"></i></a></li>
+          <li<?php if (!empty($page) && $page == 'index'){echo ' class="active"';}?>><a href="index.php"><i class="icon-home icon-white"></i></a></li>
           <li><a href="list_students.php">Students</a></li>
         </ul>
         <ul class="nav navbar-nav pull-right">
           
-          <?php if (isset($session->id) && ($session->object_type == 3 || $session->object_type == 2 || $session->object_type == 5) ) { // object_type 3 is admin, 2 is student, 5 is company_user ?>
+          <?php if (!empty($session->id) && ($session->object_type == 3 || $session->object_type == 2 || $session->object_type == 5) ) { // object_type 3 is admin, 2 is student, 5 is company_user ?>
           	<li class="dropdown">
           	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          	<i class="icon-user icon-white"></i> <?php if (isset($user->id)) { echo $user->full_name(); } ?> <b class="caret"></b>
+          	<i class="icon-user icon-white"></i> <?php if (!empty($user->id)) { echo $user->full_name(); } ?> <b class="caret"></b>
           	</a>
           	<ul class="dropdown-menu">
-          		<li><a href="view_profile.php"><i class="icon-wrench"></i> View Profile</a></li>
+          		<!-- <li><a href="view_profile.php"><i class="icon-wrench"></i> View Profile</a></li> -->
           		<li><a href="logout.php"><i class="icon-off"></i> Logout</a></li>
           		<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
           		<li class="divider"></li>
