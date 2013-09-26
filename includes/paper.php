@@ -14,6 +14,14 @@ class Paper extends DatabaseObject {
 	public $abstract;
 	public $file_name;
 	
+	// change $upload_dir when changing between Mac and PC
+	
+	protected $doc_dir = 'docs/uploads'; 				// for mac
+	//protected $doc_dir = 'public/docs/uploads';			// for PC
+	
+	public function paper_file_path(){
+		return $this->doc_dir.DS.$this->file_name;
+	}
 	
 }
 

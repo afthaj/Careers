@@ -317,11 +317,17 @@ if (!empty($_GET['s'])){
 			
 			      				?>
 				      			<li>
-				      			<?php echo $paper->title; ?> <?php echo '(' . $paper->year . ')'; ?>
+				      			<?php if (!empty($paper->file_name)) { ?>
+				      			<a href="<?php echo '../' . $paper->paper_file_path(); ?>" target="_blank"><?php echo $paper->title; ?> <?php echo '(' . $paper->year . ')'; ?></a>
+				      			<?php } else { 
+				      				echo $paper->title; ?> <?php echo '(' . $paper->year . ')'; 
+				      			} ?>
 				      			<ul>
 				      				
 				      				<li><b>Authors:</b> <?php echo $paper->authors; ?></li>
+				      				<?php if (!empty($paper->abstract)) { ?>
 				      				<li><b>Abstract:</b> <?php echo $paper->abstract; ?></li>
+				      				<?php } ?>
 				      			</ul>
 				      			</li>
 				      		<?php } ?>
