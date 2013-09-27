@@ -32,6 +32,56 @@ if ($session->is_logged_in()){
     <title>Home &middot; <?php echo WEB_APP_NAME; ?></title>
     <?php require_once('../includes/layouts/header.php');?>
     
+    <style>
+    
+     /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+    
+    </style>
+    
   </head>
 
   <body>
@@ -57,64 +107,64 @@ if ($session->is_logged_in()){
 
         <!-- Start Content -->
         
-        <?php echo $session->message; ?>
-        
-        <div class="marketing">
-        
-        <div class="row">
-        
-        <div class="span8">
-        
-        	<ul class="nav nav-tabs">
-		      <li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
-		      <li><a href="#research" data-toggle="tab">Research</a></li>
-		      <li><a href="#work_experience" data-toggle="tab">Work Experience</a></li>
-		      <li><a href="#education" data-toggle="tab">Education</a></li>
-		    </ul>
-		    
-		    <div id="tab_content" class="tab-content">
-	      	
-		      	<div class="tab-pane active in" id="overview"></div>
-		      
-		      	<div class="tab-pane fade" id="research"></div>
-		      	
-		      	<div class="tab-pane fade" id="work_experience"></div>
-		      	
-		      	<div class="tab-pane fade" id="education"></div>
-	      
-	    	</div>
-        
-        </div>
-        
-        <div class="span4">
-        <h2>Subheading 3</h2>
-        <p class="lead">Aenean pharetra nisi a lorem tincidunt mattis. Quisque arcu eros, varius eu sapien sit amet, luctus volutpat neque. Maecenas turpis massa, ornare at ipsum ut, elementum cursus sem. Nunc ac lacus faucibus, lacinia nisl vel, venenatis metus. Curabitur luctus enim sapien, et euismod nisl mollis eu.</p>
-        </div>
-        
-        </div>
-        
-        </div>
-        
-        <hr></hr>
-        
-        <div class="marketing">
-        
-        <div class="row">
-        
-        <div class="span4">
-	        <h2>Subheading 4</h2>
-	        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rhoncus consectetur lectus, sit amet semper nisi lacinia varius. Etiam a tempus eros, ac dictum nisl. Quisque eu dignissim metus. Fusce id pretium risus. Phasellus adipiscing elit in mi semper tincidunt. Nullam lorem tortor, dapibus et nisl ac, fringilla scelerisque sem. Praesent commodo ipsum ut congue elementum.</p>
-        </div>
-        
-        
-        
-        <div class="span8">
-        	<iframe width="420" height="315" src="//www.youtube.com/embed/NvEcv3etKG8" frameborder="0" allowfullscreen></iframe>
-        </div>
-        
-        </div>
-        
-        </div>
+        <!-- Marketing messaging and featurettes
+	    ================================================== -->
+	    <!-- Wrap the rest of the page in another container to center all the content. -->
+	
+	    <div class="container marketing">
+	
+	      <!-- Three columns of text below the carousel -->
+	      <div class="row">
+	        <div class="span4">
+	          <img class="img-circle" data-src="holder.js/140x140">
+	          <h2>Career Fair 2013</h2>
+	          <p>In order to cater to the need of better communication between the final year undergraduates of the UCSC, who are about to start their professional career, and prospective employers from the corporate sector of the industry, we expect to organize a Career Fair this year at UCSC for the first time ever.</p>
+	        </div><!-- /.span4 -->
+	        <div class="span4">
+	          <img class="img-circle" data-src="holder.js/140x140">
+	          <h2>UCSC</h2>
+	          <p>The main objective of the UCSC is to provide high quality undergraduate degree programs to students in the fields of Computer Science and Information and Communication Technology. At present, 780 internal undergraduate students are enrolled at the institution. Over the years it has been able to establish itself as the Centre of Excellence in the streams of Computer Science and Information Communication Technology among all other universities in Sri Lanka
+	          </p>
+	          <p><a class="btn" href="http://www.ucsc.lk" target="_blank">Visit Website &raquo;</a></p>
+	        </div><!-- /.span4 -->
+	        <div class="span4">
+	          <img class="img-circle" data-src="holder.js/140x140">
+	          <h2>Research & Innovation</h2>
+	          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+	          <p><a class="btn" href="list_students.php">View Students &raquo;</a></p>
+	        </div><!-- /.span4 -->
+	      </div><!-- /.row -->
+	
+	
+	      <!-- START THE FEATURETTES -->
+	
+	      <hr class="featurette-divider">
+	
+	      <div class="featurette">
+	        <img class="featurette-image pull-right" src="img/logo-no-border.png">
+	        <h2 class="featurette-heading">University of Colombo School of Computing <br /><span class="muted">Pioneers of IT Education in Sri Lanka!</span></h2>
+	        <p class="lead">The University of Colombo School of Computing (UCSC) is the pioneer in ICT education in Sri Lanka. Formed in 2002, it is an integral part of the University of Colombo and has consistently produced graduates of the highest caliber that excel in all forms of industry.</p>
+	      </div>
+	
+	      <hr class="featurette-divider">
+	
+	      <div class="featurette">
+	        <img class="featurette-image pull-left" src="img/browser-icon-chrome.png">
+	        <h2 class="featurette-heading">The best of the best! <br /><span class="muted">All in one place...</span></h2>
+	        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+	      </div>
+	
+	      <hr class="featurette-divider">
+	
+	      <div class="featurette">
+	        <img class="featurette-image pull-right" src="img/browser-icon-firefox.png">
+	        <h2 class="featurette-heading">Shaping the future! <br /><span class="muted">One research problem at a time...</span></h2>
+	        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+	      </div>
+	
+	      <hr class="featurette-divider">
+	
+	      <!-- /END THE FEATURETTES -->
         
         <!-- End Content -->
         

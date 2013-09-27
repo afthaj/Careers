@@ -122,7 +122,7 @@ if (!empty($_GET['s'])){
 		 
 		 <?php 
          if (!empty($profile_picture_of_student->filename)) {
-         	echo '<img src="../' . $profile_picture_of_student->image_path() . '" width="200" class="img-rounded"/>'; 
+         	echo '<img src="' . $profile_picture_of_student->image_path() . '" width="200" class="img-rounded"/>'; 
          } else {
          	echo '<img src="img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Default profile picture" />';
          } 
@@ -318,7 +318,7 @@ if (!empty($_GET['s'])){
 			      				?>
 				      			<li>
 				      			<?php if (!empty($paper->file_name)) { ?>
-				      			<a href="<?php echo '../' . $paper->paper_file_path(); ?>" target="_blank"><?php echo $paper->title; ?> <?php echo '(' . $paper->year . ')'; ?></a>
+				      			<a href="<?php echo '' . $paper->paper_file_path(); ?>" target="_blank"><?php echo $paper->title; ?> <?php echo '(' . $paper->year . ')'; ?></a>
 				      			<?php } else { 
 				      				echo $paper->title; ?> <?php echo '(' . $paper->year . ')'; 
 				      			} ?>
