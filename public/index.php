@@ -118,25 +118,27 @@ if ($session->is_logged_in()){
 	        <div class="span4">
 	          <img class="img-circle" data-src="holder.js/140x140">
 	          <h2>Career Fair 2013</h2>
-	          <p>In order to cater to the need of better communication between the final year undergraduates of the UCSC, who are about to start their professional career, and prospective employers from the corporate sector of the industry, we expect to organize a Career Fair this year at UCSC for the first time ever.</p>
+	          <p>The inaugural Career Fair, organized by the University of Colombo School of Computing aims to strengthen the ties between the academic and the corporate worlds. It provides an opportunity for leading firms to recruit the best IT talent the UCSC has to offer in an organized, highly interactive environment. The undergraduates in turn get an opportunity to showcase their talent and meet with prospective employers in a familiar setting.</p>
 	        </div><!-- /.span4 -->
 	        <div class="span4">
 	          <img class="img-circle" data-src="holder.js/140x140">
 	          <h2>UCSC</h2>
-	          <p>The main objective of the UCSC is to provide high quality undergraduate degree programs to students in the fields of Computer Science and Information and Communication Technology. At present, 780 internal undergraduate students are enrolled at the institution. Over the years it has been able to establish itself as the Centre of Excellence in the streams of Computer Science and Information Communication Technology among all other universities in Sri Lanka
+	          <p>The main objective of the UCSC is to provide high quality undergraduate degree programs to students in the fields of Computer Science and Information and Communication Technology. At present, 780 internal undergraduate students are enrolled at the institution. Over the years it has been able to establish itself as the Centre of Excellence in the streams of Computer Science and Information Communication Technology among all other universities in Sri Lanka.
 	          </p>
 	          <p><a class="btn" href="http://www.ucsc.lk" target="_blank">Visit Website &raquo;</a></p>
 	        </div><!-- /.span4 -->
 	        <div class="span4">
 	          <img class="img-circle" data-src="holder.js/140x140">
 	          <h2>Research & Innovation</h2>
-	          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+	          <p>The talent available at the Career Fair focuses their efforts on research and innovation. The students are the best in their respective streams and have been chosen for their academic prowess. The quality of their work is unparalled and would be a major asset to any organisation willing to hire them.</p>
 	          <p><a class="btn" href="list_students.php">View Students &raquo;</a></p>
 	        </div><!-- /.span4 -->
 	      </div><!-- /.row -->
 	
 	
 	      <!-- START THE FEATURETTES -->
+	      
+	      <!-- 
 	
 	      <hr class="featurette-divider">
 	
@@ -149,9 +151,9 @@ if ($session->is_logged_in()){
 	      <hr class="featurette-divider">
 	
 	      <div class="featurette">
-	        <img class="featurette-image pull-left" src="img/browser-icon-chrome.png">
+	        <img class="featurette-image pull-left img-rounded" src="img/ucsc-entrance.jpg">
 	        <h2 class="featurette-heading">The best of the best! <br /><span class="muted">All in one place...</span></h2>
-	        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+	        <p class="lead">The talent at the UCSC is second to none and many leading companies consistently headhunt our graduates. It is the one-stop shop to equip your organisation with the human resources needed to gain that competitive edge in any business area.</p>
 	      </div>
 	
 	      <hr class="featurette-divider">
@@ -159,10 +161,12 @@ if ($session->is_logged_in()){
 	      <div class="featurette">
 	        <img class="featurette-image pull-right" src="img/browser-icon-firefox.png">
 	        <h2 class="featurette-heading">Shaping the future! <br /><span class="muted">One research problem at a time...</span></h2>
-	        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+	        <p class="lead">Focussing on problems ranging from public transportation to suicide prevention, the research efforts of the undergraduates are of the highest caliber. We at UCSC firmly believe in the concept that research students make the best employees as they have the expertise to think outside the box and come up with solutions.</p>
 	      </div>
 	
 	      <hr class="featurette-divider">
+	
+		  -->
 	
 	      <!-- /END THE FEATURETTES -->
         

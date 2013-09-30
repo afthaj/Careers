@@ -14,6 +14,7 @@
         <ul class="nav navbar-nav">
           <li<?php if (!empty($page) && $page == 'index'){echo ' class="active"';}?>><a href="index.php"><i class="icon-home icon-white"></i></a></li>
           <li><a href="list_students.php">Students</a></li>
+          <li><a href="contact_us.php">Contact Us</a></li>
         </ul>
         <ul class="nav navbar-nav pull-right">
           
