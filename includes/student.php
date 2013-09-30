@@ -15,9 +15,8 @@ class Student extends DatabaseObject {
 	public $research_project_desc;
 	public $cv_file_name;
 	
-	// change $upload_dir when changing between Mac and PC
-	
-	protected $doc_dir = 'docs/uploads'; 				// for mac 
+	// change $upload_dir when changing between Mac and PC	
+	//protected $doc_dir;				// for mac 
 	//protected $doc_dir = 'public/docs/uploads';			// for PC
 	
 	public function get_user($id){
@@ -34,6 +33,27 @@ class Student extends DatabaseObject {
 	
 	public function cv_file_path(){
 		return $this->doc_dir.DS.$this->cv_file_name;
+	}
+	
+	public function get_cv_pdf(){
+		global $database;
+		$doc_dir = realpath(dirname(__FILE__)) . '/../cv/';
+		$file = $doc_dir . $this->cv_file_name;
+		
+		header('Content-Description: File Transfer');
+		header('Content-Type: application/pdf');
+		header('Content-Disposition: inline; filename='.basename($file));
+		header('Content-Transfer-Encoding: binary');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Pragma: public');
+		header('Content-Length: ' . filesize($file));
+		ob_clean();
+		flush();
+		
+		readfile($file);
+		
+		exit;
 	}
 	
 }

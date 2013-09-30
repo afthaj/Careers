@@ -29,7 +29,7 @@ if ($session->is_logged_in()){
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Contat Us &middot; <?php echo WEB_APP_NAME; ?></title>
+    <title>Contact Us &middot; <?php echo WEB_APP_NAME; ?></title>
     <?php require_once('../includes/layouts/header.php');?>
     
     <style>
@@ -68,7 +68,7 @@ if ($session->is_logged_in()){
        	  	
 	       	  <div class="span3">
 	       	  	<div class="sidenav" data-spy="affix" data-offset-top="200">
-		        	<a href="index.php" class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back to Home Page</a>
+		        	<a href="." class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back to Home Page</a>
 		        </div>
 	       	  </div>
 	       	  
@@ -87,7 +87,7 @@ if ($session->is_logged_in()){
 		       	  	<div class="span9">
 			       	  	<h3>University of Colombo School of Computing</h3>
 			       	  	<p><i class="icon-home"></i> <br />No. 35, <br />Reid Avenue, <br />Colombo 07.</p>
-			       	  	<p><i class="icon-envelope"></i> <br />info@careers.ucsc.lk</p>
+			       	  	<p><i class="icon-envelope"></i> <br />info<img src="img/at-sign.gif">careers.ucsc.lk</p>
 		       	  	</div>
 	       	  	</div>
 	       	  <!-- 

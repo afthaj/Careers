@@ -3,10 +3,12 @@
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
 if (PHP_OS == 'WINNT'){
-	defined('SITE_ROOT') ? null : define('SITE_ROOT', 'C:'.DS.'xampp'.DS.'htdocs'.DS.'webdev'.DS.'Gaman');
+	defined('SITE_ROOT') ? null : define('SITE_ROOT', 'C:'.DS.'xampp'.DS.'htdocs'.DS.'webdev'.DS.'Careers');
+	defined('HTTP_BASE') ? null : define('HTTP_BASE', 'http:'.DS.DS.'localhost'.DS.'webdev'.DS.'Careers'.DS.'public');
 	require_once("config_windows.php");
 } else {
 	defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'Users'.DS.'aftha'.DS.'Sites'.DS.'2. Eclipse Workspace'.DS.'Gaman'.DS.'public');
+	defined('HTTP_BASE') ? null : define('HTTP_BASE', 'http:'.DS.DS.'careers.ucsc.lk');
 	require_once("config_mac.php");
 }
 

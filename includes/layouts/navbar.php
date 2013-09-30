@@ -8,13 +8,13 @@
         <span class="icon-bar"></span>
       </a>
 
-      <a class="brand" href="index.php"><?php echo WEB_APP_SHORT_NAME; ?></a>
+      <a class="brand" href="."><?php echo WEB_APP_SHORT_NAME; ?></a>
       
       <div class="nav-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
-          <li<?php if (!empty($page) && $page == 'index'){echo ' class="active"';}?>><a href="index.php"><i class="icon-home icon-white"></i></a></li>
-          <li><a href="list_students.php">Students</a></li>
-          <li><a href="contact_us.php">Contact Us</a></li>
+          <li<?php if (!empty($page) && $page == 'index'){echo ' class="active"';}?>><a href="."><i class="icon-home icon-white"></i></a></li>
+          <li><a href="<?php echo HTTP_BASE.DS; ?>students">Students</a></li>
+          <li><a href="<?php echo HTTP_BASE.DS; ?>contact">Contact Us</a></li>
         </ul>
         <ul class="nav navbar-nav pull-right">
           
@@ -25,10 +25,10 @@
           	</a>
           	<ul class="dropdown-menu">
           		<!-- <li><a href="view_profile.php"><i class="icon-wrench"></i> View Profile</a></li> -->
-          		<li><a href="logout.php"><i class="icon-off"></i> Logout</a></li>
+          		<li><a href="logout"><i class="icon-off"></i> Logout</a></li>
           		<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
           		<li class="divider"></li>
-          		<li><a href="list_students.php"><i class="icon-info-sign"></i> View All Students</a></li>
+          		<li><a href="students"><i class="icon-info-sign"></i> View All Students</a></li>
           		<li><a href="create_student.php"><i class="icon-plus"></i> Add Student</a></li>
           		<li><a href="#"><i class="icon-search"></i> Search for Student</a></li>
           		<li class="divider"></li>
@@ -39,7 +39,7 @@
           	</ul>
           	</li>
           <?php } else { ?>
-          	<li><a href="login.php">Login</a></li>
+          	<li><a href="login">Login</a></li>
           <?php } ?>
           
         </ul>

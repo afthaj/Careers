@@ -13,7 +13,7 @@
     <link href="css/flexslider.css" rel="stylesheet" />
     <link href="css/responsiveslides.css" rel="stylesheet" />
     
-    <!-- FontAwesome CSS  
+    <!-- FontAwesome CSS 
     <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.css"/>
     -->
     
@@ -84,6 +84,8 @@
     <script src="js/jquery.js"></script>
     
     <script src="js/bootstrap.js"></script>
+    
+    <!-- 
     <script src="js/bootstrap-affix.js"></script>
 	<script src="js/bootstrap-alert.js"></script>
     <script src="js/bootstrap-button.js"></script>
@@ -97,138 +99,8 @@
     <script src="js/bootstrap-tooltip.js"></script>
     <script src="js/bootstrap-transition.js"></script>
     <script src="js/bootstrap-typeahead.js"></script>
-    
+    -->
     <script src="js/application.js"></script>
     <script src="js/holder.js"></script>
     <script src="js/html5shiv.js"></script>
     <script src="js/prettify.js"></script>
-    
-    <!-- flexslider -->
-    
-    <script defer src="js/jquery.flexslider.js"></script>
-    <script type="text/javascript">
-		$(window).load(function(){
-	      $('.flexslider').flexslider({
-	        animation: "slide",
-	        start: function(slider){
-	          $('body').removeClass('loading');
-	        }
-	      });
-	    });
-	</script>
-	
-	<!-- end flexslider -->
-    
-    <!-- responsive slides -->
-    
-    <script defer src="js/responsiveslides.js"></script>
-    <script>
-    // You can also use "$(window).load(function() {"
-    $(function () {
-
-      /* Slideshow 4 */
-      $("#responsive_slider").responsiveSlides({
-        auto: false,
-        pager: false,
-        nav: true,
-        speed: 500,
-        namespace: "callbacks",
-        before: function () {
-          $('.events').append("<li>before event fired.</li>");
-        },
-        after: function () {
-          $('.events').append("<li>after event fired.</li>");
-        }
-      });
-
-    });
-  </script>
-  
-  <!-- end responsive slides -->
-  
-  <!-- Google Charts -->
-  
-  <script type="text/javascript" src="js/jsapi.js"></script>
-  <script type="text/javascript">
-
-  google.load("visualization", "1", {packages:["corechart"]});
-
-  google.setOnLoadCallback(drawChart);
-
-  function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
-
-        var options = {
-          title: 'Company Performance',
-          hAxis: {title: 'Year', titleTextStyle: {color: 'blue'}}
-        };
-
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-    
-     <script type="text/javascript">
-
-     google.load("visualization", "1", {packages:["corechart"]});
-
-     google.setOnLoadCallback(drawChart);
-
-     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
-
-        var options = {
-          title: 'Company Performance'
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('chart_2_div'));
-        chart.draw(data, options);
-      }
-    </script>
-    
-    <script type="text/javascript">
-    
-    // Load the Visualization API and the piechart package.
-    google.load('visualization', '1', {'packages':['corechart']});
-      
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.setOnLoadCallback(drawChart);
-      
-    function drawChart() {
-      var jsonData = $.ajax({
-          url: "ajax_files/getData.php",
-          dataType:"json",
-          async: false
-          }).responseText;
-          
-      // Create our data table out of JSON data loaded from server.
-      var data = new google.visualization.DataTable(jsonData);
-
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.PieChart(document.getElementById('chart_3_div'));
-      chart.draw(data, {width: 800, height: 480, title: 'Breakdown of Vegies'});
-    }
-
-    </script>
-    
-    
-    
-    <!-- End Google Charts -->
-    
-    <!-- Google Maps -->
-    
-    
-    
-    

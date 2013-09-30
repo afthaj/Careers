@@ -92,7 +92,7 @@ if (!empty($_GET['s'])){
 
 } else {
 	$session->message("No Student has been selected to view.");
-	redirect_to("list_students.php");
+	redirect_to("students");
 }
 
 ?>
@@ -148,7 +148,7 @@ if (!empty($_GET['s'])){
       
         <div class="span3 sidebar">
 	        <div class="sidenav" data-spy="affix" data-offset-top="275">
-	        	<a href="list_students.php" class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back to List of Students</a><br />
+	        	<a href="." class="btn btn-primary btn-block"><i class="icon-arrow-left icon-white"></i> Back to List of Students</a><br />
 	        	<div class="well">
 	        		<h4>Student Details</h4><br />
 	        		
@@ -170,7 +170,11 @@ if (!empty($_GET['s'])){
 		        		<h5>Tel. Number</h5>
 		        		<p><?php echo $details_of_student_to_read_update->telephone_number;?></p>
 		        		<br />
-		        		<a href="<?php if (!empty($student_to_read_update->cv_file_name)){ echo $student_to_read_update->cv_file_path(); } else { echo '#'; } ?>" class="btn btn-success" target="_blank">Download CV</a>
+		        		<a href="<?php echo $details_of_student_to_read_update->username; ?>/cv" class="btn btn-success" target="_blank">Download CV</a>
+		        		
+		        		<?php //echo $details_of_student_to_read_update->username; ?>
+		        		
+		        		<?php //if (!empty($student_to_read_update->cv_file_name)){ echo $student_to_read_update->cv_file_path(); } else { echo '#'; } ?>
 	        		
 	        		<?php } } ?>
 	        	</div>

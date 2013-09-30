@@ -88,7 +88,7 @@ if ($session->is_logged_in()){
         
 	        	<li class="">
 				  	<div class="thumbnail">
-				    <a href="view_student_cv.php?s=<?php echo $student->username; ?>">
+				    <a href="students/<?php echo $student->username; ?>">
 				    
 				    <?php 
 			         if (!empty($profile_picture_of_student->filename)) {
@@ -102,7 +102,7 @@ if ($session->is_logged_in()){
 				    
 				    </a>
 				    <h3 align="center">
-				    <a href="view_student_cv.php?s=<?php echo $student->username; ?>" class="btn btn-primary btn-block"><?php echo $student->full_name(); ?></a>
+				    <a href="students/<?php echo $student->username; ?>" class="btn btn-primary btn-block"><?php echo $student->full_name(); ?></a>
 				    </h3>
 				    </div>
 				</li>

@@ -92,7 +92,7 @@ if (isset($_POST['submit'])){
       .form-signin {
         max-width: 300px;
         padding: 19px 29px 29px;
-        margin: 0 auto 20px;
+        margin: 50px auto 20px;
         background-color: #fff;
         border: 1px solid #e5e5e5;
         -webkit-border-radius: 5px;
@@ -126,6 +126,12 @@ if (isset($_POST['submit'])){
   </head>
 
   <body>
+  
+  <div class="wrap">
+  
+  <!-- Fixed navbar -->
+  <?php $page = 'login';?>
+  <?php require_once('../includes/layouts/navbar.php');?>
 
     <div class="container">
 
@@ -135,7 +141,7 @@ if (isset($_POST['submit'])){
         	<h2 class="form-signin-heading">Please sign in</h2>
         </div>
         
-        <?php echo $session->message; ?>
+        
         
         <div class="control-group">
         	<div class="controls">
@@ -167,6 +173,8 @@ if (isset($_POST['submit'])){
       </form>
 
     </div> <!-- /container -->
+    
+    </div>
 
     <?php require_once('../includes/layouts/scripts.php');?>
 
