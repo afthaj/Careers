@@ -17,7 +17,7 @@ class StudentSchool extends DatabaseObject {
 		global $database;
 		
 		$sql  = "SELECT * FROM " . static::$table_name;
-		$sql .= " WHERE student_id = " . $studentid;
+		$sql .= " WHERE student_id = " . mysql_real_escape_string($studentid);
 		$sql .= " ORDER BY end_year DESC";
 		
 		return self::find_by_sql($sql);

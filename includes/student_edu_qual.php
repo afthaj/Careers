@@ -17,7 +17,7 @@ class StudentEduQual extends DatabaseObject {
 		global $database;
 		
 		$sql  = "SELECT * FROM " . static::$table_name;
-		$sql .= " WHERE student_id = " . $studentid;
+		$sql .= " WHERE student_id = " . mysql_real_escape_string($studentid);
 		$sql .= " ORDER BY year DESC";
 		
 		return self::find_by_sql($sql);

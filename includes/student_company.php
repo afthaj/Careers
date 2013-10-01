@@ -20,7 +20,7 @@ class StudentCompany extends DatabaseObject {
 		global $database;
 		
 		$sql  = "SELECT * FROM " . static::$table_name;
-		$sql .= " WHERE student_id = " . $studentid;
+		$sql .= " WHERE student_id = " . mysql_real_escape_string($studentid);
 		
 		return self::find_by_sql($sql);
 	}

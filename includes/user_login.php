@@ -18,9 +18,13 @@ class UserLogin extends DatabaseObject {
 	
 	public function get_user($id){
 		global $database;
+		
+		if (!isset($id) || $id === ''){
+			return false;
+		}
 	
 		$sql  = "SELECT * FROM " . static::$table_name;
-		$sql .= " WHERE id = " . $id;
+		$sql .= " WHERE id = " . mysql_real_escape_string($id);
 		$sql .= " LIMIT 1";
 	
 		$result_array = self::find_by_sql($sql);
@@ -30,9 +34,13 @@ class UserLogin extends DatabaseObject {
 	
 	public function get_user_by_username($un){
 		global $database;
+		
+		if (!isset($un) || $un === ''){
+			return false;
+		}
 	
 		$sql  = "SELECT * FROM " . static::$table_name;
-		$sql .= " WHERE username = '" . $un . "'";
+		$sql .= " WHERE username = '" . mysql_real_escape_string($un) . "'";
 		$sql .= " LIMIT 1";
 	
 		$result_array = self::find_by_sql($sql);

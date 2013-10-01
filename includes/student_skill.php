@@ -15,7 +15,7 @@ class StudentSkill extends DatabaseObject {
 		global $database;
 	
 		$sql  = "SELECT * FROM " . static::$table_name;
-		$sql .= " WHERE student_id = " . $id;
+		$sql .= " WHERE student_id = " . mysql_real_escape_string($id);
 	
 		return static::find_by_sql($sql);
 	}
@@ -24,7 +24,7 @@ class StudentSkill extends DatabaseObject {
 		global $database;
 	
 		$sql  = "SELECT * FROM " . static::$table_name;
-		$sql .= " WHERE skill_id = " . $id;
+		$sql .= " WHERE skill_id = " . mysql_real_escape_string($id);
 	
 		return static::find_by_sql($sql);
 	}

@@ -15,7 +15,7 @@ class CompanyUser extends DatabaseObject {
 		global $database;
 	
 		$sql  = "SELECT * FROM " . static::$table_name;
-		$sql .= " WHERE login_id = " . $id;
+		$sql .= " WHERE login_id = " . mysql_real_escape_string($id);
 		$sql .= " LIMIT 1";
 	
 		$result_array = self::find_by_sql($sql);

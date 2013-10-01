@@ -1,25 +1,34 @@
 <?php
+require_once("session.php");
 
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
+defined('SITE_ROOT') ? null : define('SITE_ROOT', realpath(dirname(__FILE__) . '/../'));
 
-if (PHP_OS == 'WINNT'){
-	defined('SITE_ROOT') ? null : define('SITE_ROOT', 'C:'.DS.'xampp'.DS.'htdocs'.DS.'webdev'.DS.'Careers');
-	defined('HTTP_BASE') ? null : define('HTTP_BASE', 'http:'.DS.DS.'localhost'.DS.'webdev'.DS.'Careers'.DS.'public');
-	require_once("config_windows.php");
-} else {
-	defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'Users'.DS.'aftha'.DS.'Sites'.DS.'2. Eclipse Workspace'.DS.'Gaman'.DS.'public');
-	defined('HTTP_BASE') ? null : define('HTTP_BASE', 'http:'.DS.DS.'careers.ucsc.lk');
-	require_once("config_mac.php");
+if ($session->is_logged_in() && empty($_SERVER['HTTPS'])){
+	$redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+	header("Location: $redirect");
+	exit;
 }
 
-require_once("functions.php");
+$protocol = (empty($_SERVER['HTTPS'])) ? "http://" : "https://";
 
-require_once("session.php");
+if (PHP_OS === 'WINNT'){
+	//defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'localhost/webdev/Careers/public');
+	defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'career-fair.lk');
+	require_once("config_windows.php");
+} else if(PHP_OS === "DARWIN") {
+	defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'localhost/webdev/Careers/public');
+	require_once("config_mac.php");
+}elseif (PHP_OS === "Linux"){
+	defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'careers.ucsc.lk');
+	require_once("config_server.php");
+}
+
+require_once("message.php");
+require_once("functions.php");
 require_once("database.php");
 require_once("pagination.php");
-
 require_once("database_object.php");
-
 require_once("admin_level.php");
 require_once("admin_user.php");
 require_once("company_user.php");
@@ -43,6 +52,8 @@ require_once("student_school.php");
 require_once("student_skill.php");
 require_once("student.php");
 require_once("user_login.php");
+
+clean_getpost();
 
 
 ?>

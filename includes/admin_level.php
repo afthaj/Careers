@@ -14,7 +14,7 @@ class AdminLevel extends DatabaseObject {
 		global $database;
 		
 		$sql  = "SELECT * FROM " . static::$table_name;
-		$sql .= " WHERE id = " . $level_number;
+		$sql .= " WHERE id = " . mysql_real_escape_string($level_number);
 		$sql .= " LIMIT 1";
 		
 		$result_array = self::find_by_sql($sql);
