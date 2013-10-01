@@ -1,31 +1,24 @@
 
 <meta charset="utf-8">
-<meta
-	name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<base
-	href="<?php echo HTTP_BASE;?>/">
-<!-- CSS -->
-<link href="css/bootswatch-cerulean/bootstrap.css"
-	rel="stylesheet">
-<link href="css/bootstrap-responsive.css"
-	rel="stylesheet">
-<link href="css/prettify.css"
-	rel="stylesheet">
-<link href="css/bootswatch-cerulean/docs.css"
-	rel="stylesheet">
-<link href="css/bootswatch-cerulean/gaman-styles.css"
-	rel="stylesheet">
 
-<link
-	href="css/flexslider.css" rel="stylesheet" />
-<link href="css/responsiveslides.css"
-	rel="stylesheet" />
+<base href="<?php echo HTTP_BASE;?>/">
+
+<!-- CSS -->
+<link href="css/bootswatch-cerulean/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/prettify.css" rel="stylesheet">
+<link href="css/bootswatch-cerulean/docs.css" rel="stylesheet">
+<link href="css/bootswatch-cerulean/gaman-styles.css" rel="stylesheet">
+
+<link href="css/flexslider.css" rel="stylesheet" />
+<link href="css/responsiveslides.css" rel="stylesheet" />
 
 <!-- FontAwesome CSS 
-    <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.css"/>
-    -->
+<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.css"/>
+-->
 
 <style type="text/css">
 
@@ -64,11 +57,10 @@ html,body {
 	}
 }
 
-/* Custom page CSS
-      -------------------------------------------------- */
+/* Custom page CSS -------------------------------------------------- */
 
-/* Message Display Styles 
- ------------------------------------------------------- */
+/* Message Display Styles ------------------------------------------------------- */
+
 .error {
 	border: rgba(0, 0, 0, 0.15) 1px solid;
 	background: url(img/dialog-error.png) rgba(255, 229, 229, 0.95)
@@ -108,7 +100,7 @@ html,body {
 
 .read-text-box{
 	text-align: justify;
-	line-height: 40px;
+	line-height: 30px;
 }
 </style>
 

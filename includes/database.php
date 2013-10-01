@@ -4,8 +4,12 @@ if (PHP_OS == 'WINNT' || PHP_OS == 'WIN32' || PHP_OS == 'Windows'){
 	//windows
 	
 	require_once("config_windows.php");
+} else if (PHP_OS == 'Linux') {
+	//server (running linux)
+	
+	require_once("config_server.php");
 } else {
-	//OS X and linux
+	//OS X
 	
 	require_once("config_mac.php");
 }

@@ -5,23 +5,31 @@ defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 defined('SITE_ROOT') ? null : define('SITE_ROOT', realpath(dirname(__FILE__) . '/../'));
 
 if ($session->is_logged_in() && empty($_SERVER['HTTPS'])){
+	
 	$redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	header("Location: $redirect");
 	exit;
+	
 }
 
 $protocol = (empty($_SERVER['HTTPS'])) ? "http://" : "https://";
 
-if (PHP_OS === 'WINNT'){
+if (PHP_OS == 'WINNT' || PHP_OS == 'WIN32' || PHP_OS == 'Windows'){
+	
 	//defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'localhost/webdev/Careers/public');
 	defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'career-fair.lk');
 	require_once("config_windows.php");
-} else if(PHP_OS === "DARWIN") {
-	defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'localhost/webdev/Careers/public');
+	
+} else if (PHP_OS == "Darwin") {
+	
+	defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'careers-ucsc.lk');
 	require_once("config_mac.php");
-}elseif (PHP_OS === "Linux"){
+	
+} else if (PHP_OS == "Linux"){
+	
 	defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'careers.ucsc.lk');
 	require_once("config_server.php");
+	
 }
 
 require_once("message.php");
