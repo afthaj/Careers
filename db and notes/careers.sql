@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 27, 2013 at 12:14 AM
+-- Generation Time: Oct 01, 2013 at 11:33 PM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.6
 
@@ -648,7 +648,7 @@ CREATE TABLE `obj_students_skills` (
   PRIMARY KEY (`id`),
   KEY `student_id` (`student_id`),
   KEY `skill_id` (`skill_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2285 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2303 ;
 
 --
 -- Dumping data for table `obj_students_skills`
@@ -1297,17 +1297,17 @@ INSERT INTO `obj_students_skills` VALUES(641, 17, 25);
 INSERT INTO `obj_students_skills` VALUES(642, 17, 32);
 INSERT INTO `obj_students_skills` VALUES(643, 17, 41);
 INSERT INTO `obj_students_skills` VALUES(644, 17, 43);
-INSERT INTO `obj_students_skills` VALUES(645, 17, 16);
-INSERT INTO `obj_students_skills` VALUES(646, 17, 14);
-INSERT INTO `obj_students_skills` VALUES(647, 17, 15);
-INSERT INTO `obj_students_skills` VALUES(648, 17, 30);
-INSERT INTO `obj_students_skills` VALUES(649, 17, 59);
+INSERT INTO `obj_students_skills` VALUES(645, 17, 23);
+INSERT INTO `obj_students_skills` VALUES(646, 17, 34);
+INSERT INTO `obj_students_skills` VALUES(647, 17, 11);
+INSERT INTO `obj_students_skills` VALUES(648, 17, 35);
+INSERT INTO `obj_students_skills` VALUES(649, 17, 102);
 INSERT INTO `obj_students_skills` VALUES(650, 17, 87);
 INSERT INTO `obj_students_skills` VALUES(651, 17, 97);
 INSERT INTO `obj_students_skills` VALUES(652, 17, 61);
 INSERT INTO `obj_students_skills` VALUES(653, 17, 66);
 INSERT INTO `obj_students_skills` VALUES(654, 17, 93);
-INSERT INTO `obj_students_skills` VALUES(655, 17, 63);
+INSERT INTO `obj_students_skills` VALUES(655, 17, 60);
 INSERT INTO `obj_students_skills` VALUES(656, 17, 62);
 INSERT INTO `obj_students_skills` VALUES(657, 17, 58);
 INSERT INTO `obj_students_skills` VALUES(658, 17, 106);
@@ -2936,6 +2936,24 @@ INSERT INTO `obj_students_skills` VALUES(2281, 54, 104);
 INSERT INTO `obj_students_skills` VALUES(2282, 54, 108);
 INSERT INTO `obj_students_skills` VALUES(2283, 54, 107);
 INSERT INTO `obj_students_skills` VALUES(2284, 54, 109);
+INSERT INTO `obj_students_skills` VALUES(2285, 17, 2);
+INSERT INTO `obj_students_skills` VALUES(2286, 17, 5);
+INSERT INTO `obj_students_skills` VALUES(2287, 17, 84);
+INSERT INTO `obj_students_skills` VALUES(2288, 17, 90);
+INSERT INTO `obj_students_skills` VALUES(2289, 17, 99);
+INSERT INTO `obj_students_skills` VALUES(2290, 17, 68);
+INSERT INTO `obj_students_skills` VALUES(2291, 17, 91);
+INSERT INTO `obj_students_skills` VALUES(2292, 17, 67);
+INSERT INTO `obj_students_skills` VALUES(2293, 17, 78);
+INSERT INTO `obj_students_skills` VALUES(2294, 17, 64);
+INSERT INTO `obj_students_skills` VALUES(2295, 17, 98);
+INSERT INTO `obj_students_skills` VALUES(2296, 17, 71);
+INSERT INTO `obj_students_skills` VALUES(2297, 17, 85);
+INSERT INTO `obj_students_skills` VALUES(2298, 17, 24);
+INSERT INTO `obj_students_skills` VALUES(2299, 17, 55);
+INSERT INTO `obj_students_skills` VALUES(2300, 17, 52);
+INSERT INTO `obj_students_skills` VALUES(2301, 17, 104);
+INSERT INTO `obj_students_skills` VALUES(2302, 17, 107);
 
 -- --------------------------------------------------------
 
