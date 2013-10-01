@@ -1,0 +1,79 @@
+technologies
+
+| JSP
+| MySQL
+| Android Development
+| Joomla
+| CSS
+| Apache Tomcat
+| Glassfish
+| LaTeX
+| Microsoft Office
+16 - Adobe Photoshop
+14 - Adobe Fireworks
+15 - Adobe Illustrator
+30 - Git
+
+| JSP
+| MySQL
+23 + Apache Struts
+34 + Hibernate
+| Android Development
+11 + .NET Framework
+| Joomla
+35 + HTML
+| CSS
+| Apache Tomcat
+| Glassfish
+24 + Apache Subversion
+55 + XML
+52 + SOAP
+| LaTeX
+| Microsoft Office
+
+
+subject areas
+
+59 - Business Analysis
+| Neural Networks and Computing
+| System Analysis and Design
+| Compilers and Automata Theory
+| Data Structures and Algorithms
+| Statistics
+63 - Computer Graphics and Image Processing
+| Computational Pattern Recognition
+| Bio-Informatics
+
+102 + Web Services
+60 + CMS
+
+84 + Linux
+90 + Shell Scripting
+99 + UML
+68 + DBMS
+91 + Social Media Marketing
+67 + Data-mining
+78 + High Performance Computing
+64 + Cryptography
+98 + System Programming
+71 + Electronics
+85 + Natural Language Processing
+| Neural Networks and Computing
+| System Analysis and Design
+| Compilers and Automata Theory
+| Data Structures and Algorithms
+| Statistics
+| Computational Pattern Recognition
+| Bio-Informatics
+
+concepts
+
+| Object-oriented Programming
+| Research Methods and Concepts
+| Software Development Life Cycle
+
+| Object-oriented Programming
+104 + Middleware Architectures
+| Research Methods and Concepts
+107 + Operating System Concepts
+| Software Development Life Cycle
