@@ -152,8 +152,8 @@ if (!empty($_GET['s'])){
 
 		<!-- Begin page content -->
 
-		<div class="container" style="margin-top: 60px;">
-
+		<div class="container" style="margin-top: 25px;">
+			<div class="info-block">Please login to view more details.</div>
 			<div class="row">
 
 				<div class="span3 sidebar">

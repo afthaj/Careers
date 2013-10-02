@@ -36,7 +36,12 @@ class Student extends DatabaseObject {
 
 	public function get_cv_pdf(){
 		global $database;
-		$file = SITE_ROOT . '/cv/' . $this->cv_file_name;
+		$file = SITE_ROOT . DS . 'cv' . DS . $this->cv_file_name;
+		if ($this->cv_file_name === '' || !file_exists($file)){
+			header('HTTP/1.0 404 Not Found');
+			require_once(SITE_ROOT . DS . 'www' . DS . 'not-found.php');
+			exit;
+		}
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/pdf');
 		header('Content-Disposition: inline; filename='.basename($file)."'");

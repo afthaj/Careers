@@ -1,31 +1,3 @@
-<?php
-require_once("../includes/initialize.php");
-
-$user_login_object = new UserLogin();
-
-if ($session->is_logged_in()){
-
-	if ($session->object_type == 3){
-		//admin
-		$user = $user_login_object->get_user($_SESSION['id']);
-
-
-	} else if ($session->object_type == 2){
-		//student
-		$user = $user_login_object->get_user($_SESSION['id']);
-
-
-	} else if ($session->object_type == 5){
-		//company_user
-		$user = $user_login_object->get_user($_SESSION['id']);
-
-
-	}
-
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
