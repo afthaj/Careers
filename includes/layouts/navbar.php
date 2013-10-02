@@ -35,17 +35,13 @@
 									Logout</a></li>
 							<?php if ($session->is_logged_in() && $session->object_type == 3) { ?>
 							<li class="divider"></li>
-							<li><a href="students"><i class="icon-info-sign"></i> View All
-									Students</a></li>
-							<li><a href="create_student.php"><i class="icon-plus"></i> Add
-									Student</a></li>
+							<li><a href="students"><i class="icon-info-sign"></i> View All Students</a></li>
+							<li><a href="create_student.php"><i class="icon-plus"></i> Add Student</a></li>
 							<li><a href="#"><i class="icon-search"></i> Search for Student</a>
 							</li>
 							<li class="divider"></li>
-							<li><a href="list_admin_users.php"><i class="icon-info-sign"></i>
-									View All Admin Users</a></li>
-							<li><a href="create_admin_user.php"><i class="icon-plus"></i> Add
-									Admin User</a></li>
+							<li><a href="list_admin_users.php"><i class="icon-info-sign"></i> View All Admin Users</a></li>
+							<li><a href="create_admin_user.php"><i class="icon-plus"></i> Add Admin User</a></li>
 							<li><a href="#"><i class="icon-search"></i> Search for Admin User</a>
 							</li>
 							<?php } ?>
@@ -54,7 +50,7 @@
 					<?php } else { ?>
 					<li
 					<?php if (!empty($page) && $page == 'login'){echo ' class="active"';}?>><a
-						href="<?php echo HTTP_BASE; ?>/login">Login</a></li>
+						href="<?php echo HTTP_BASE . '/login'; ?>">Login</a></li>
 					<?php } ?>
 
 				</ul>

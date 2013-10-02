@@ -153,10 +153,6 @@ if (!empty($_GET['s'])){
 		<!-- Begin page content -->
 
 		<div class="container" style="margin-top: 25px;">
-		
-			<?php if (!$session->is_logged_in()) :?>
-				<div class="info-block">Please login to view more details.</div>
-			<?php endif ?>
 			
 			<div class="row">
 
@@ -212,6 +208,10 @@ if (!empty($_GET['s'])){
 				<!-- Start Content -->
 
 				<div class="span9">
+				
+				<?php if (!$session->is_logged_in()) :?>
+				<div class="info-block">Please login to view more details.</div>
+				<?php endif ?>
 
 					<section>
 

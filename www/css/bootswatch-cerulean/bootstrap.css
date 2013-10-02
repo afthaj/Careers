@@ -3133,7 +3133,7 @@ table th[class*="span"],
   min-height: 20px;
   margin-left: auto;
   margin-right: auto;
-  width: 400px;
+  /* width: 400px; */
   padding: 10px 30px 10px 70px;
   margin-bottom: 20px;
   background-color: #CFE7FA;

@@ -3,7 +3,7 @@ require_once("../includes/initialize.php");
 
 
 if ($session->is_logged_in()){
-	redirect_to("index.php");
+	redirect_to(".");
 }
 
 redirect_to_ssl();
@@ -35,7 +35,7 @@ if (isset($_POST['submit'])){
 
 		if ($found_user_admin){
 			$session->login($found_user_admin, $object_type_admin->id);
-			redirect_to("index.php");
+			redirect_to(".");
 		} else {
 			$msg_obj->add_error("Username or password is incorrect. ");
 		}
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])){
 
 		if ($found_user_student){
 			$session->login($found_user_student, $object_type_student->id);
-			redirect_to("index.php");
+			redirect_to(".");
 		} else {
 			$msg_obj->add_error("Username or password is incorrect. ");
 		}
@@ -63,7 +63,7 @@ if (isset($_POST['submit'])){
 
 		if ($found_user_company_user){
 			$session->login($found_user_company_user, $object_type_company_user->id);
-			redirect_to("index.php");
+			redirect_to(".");
 		} else {
 			$msg_obj->add_error("Username or password is incorrect. ");
 		}
@@ -139,7 +139,7 @@ body {
 
 		<div class="container">
 			<?php $msg_obj->display_errors(); ?>
-			<form class="form-signin" action="<?php echo '/login'; ?>"
+			<form class="form-signin" action="<?php echo HTTP_BASE . '/login'; ?>"
 				method="post">
 
 				<div class="control-group">
