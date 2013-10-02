@@ -1,5 +1,5 @@
 RewriteEngine on
-#RewriteBase /webdev/Careers/public/
+#RewriteBase /webdev/Careers/www/
 RewriteBase /
 
 RewriteCond %{DOCUMENT_ROOT}/$1.php -f

@@ -131,7 +131,7 @@ if ($session->is_logged_in()){
 				<!-- Three columns of text below the carousel -->
 				<div class="row">
 					<div class="span4">
-						<img class="img-circle" data-src="holder.js/140x140">
+						<img class="img-rounded" src="img/career-fair-logo.png" width="140" />
 						<div class="well home-text-box">
 							<h2>Career Fair 2013</h2>
 							<p class="read-text-box">The inaugural Career Fair,
@@ -149,7 +149,7 @@ if ($session->is_logged_in()){
 					</div>
 					<!-- /.span4 -->
 					<div class="span4">
-						<img class="img-circle" data-src="holder.js/140x140">
+						<img class="img-rounded" src="img/logo-no-border.png" width="140">
 						<div class="well home-text-box">
 							<h2>UCSC</h2>
 							<p class="read-text-box">The main objective of the UCSC is
@@ -168,7 +168,7 @@ if ($session->is_logged_in()){
 					</div>
 					<!-- /.span4 -->
 					<div class="span4">
-						<img class="img-circle" data-src="holder.js/140x140">
+						<img class="img-rounded" src="img/lab-photo-1.jpg" width="140">
 						<div class="well home-text-box">
 							<h2>Research &amp; Innovation</h2>
 							<p class="read-text-box">The talent available at the Career Fair focuses their efforts							
