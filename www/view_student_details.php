@@ -153,7 +153,11 @@ if (!empty($_GET['s'])){
 		<!-- Begin page content -->
 
 		<div class="container" style="margin-top: 25px;">
-			<div class="info-block">Please login to view more details.</div>
+		
+			<?php if (!$session->is_logged_in()) :?>
+				<div class="info-block">Please login to view more details.</div>
+			<?php endif ?>
+			
 			<div class="row">
 
 				<div class="span3 sidebar">
