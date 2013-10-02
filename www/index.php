@@ -142,6 +142,9 @@ if ($session->is_logged_in()){
 								interactive environment. The undergraduates in turn get an
 								opportunity to showcase their talent and meet with prospective
 								employers in a familiar setting.</p>
+								<p>
+								<a class="btn btn-primary" href="http://careers.ucsc.lk/docs/UCSC_Career_Fair_2013.pdf" target="_blank">Read More &raquo;</a>
+							</p>
 						</div>
 					</div>
 					<!-- /.span4 -->
