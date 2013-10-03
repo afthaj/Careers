@@ -61,12 +61,34 @@ class UserLogin extends DatabaseObject {
 	
 		$username = $database->escape_value($username);
 		$password = $database->escape_value($password);
+		
+		if ($object_type === false || $object_type === ''){
+			return false;
+		}
 	
 		$sql  = "SELECT * FROM " . static::$table_name;
 		$sql .= " WHERE username = '{$username}' AND password = '{$password}' AND object_type = '{$object_type}'";
 		$sql .= " LIMIT 1";
 	
 		$result_array = self::find_by_sql($sql);
+	
+		return !empty($result_array) ? array_shift($result_array) : false;
+	}	
+	
+	public function get_object_type_by_username($un){
+		global $database;
+	
+		if (!isset($un) || $un === ''){
+			return false;
+		}
+	
+		$sql  = "SELECT object_type FROM " . static::$table_name;
+		$sql .= " WHERE username = '" . mysql_real_escape_string($un) . "'";
+		$sql .= " LIMIT 1";
+	
+		$result_array = self::find_by_sql($sql);
+		
+		//var_dump(array_shift($result_array));
 	
 		return !empty($result_array) ? array_shift($result_array) : false;
 	}

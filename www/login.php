@@ -7,74 +7,28 @@ if ($session->is_logged_in()){
 }
 
 redirect_to_ssl();
-
-$ot_object = new ObjectType();
-$object_type_admin = $ot_object->get_object_type_by_name("admin");
-
-$ot_object2 = new ObjectType();
-$object_type_student = $ot_object2->get_object_type_by_name("student");
-
-$ot_object3 = new ObjectType();
-$object_type_company_user = $ot_object3->get_object_type_by_name("company_user");
-
 $user_login_object = new UserLogin();
 
-$ot = new ObjectType();
-$user_objects = $ot->get_user_objects();
-
 if (isset($_POST['submit'])){
-
-	$object_type = trim($_POST['object_type']);
-
-	if ($object_type == $object_type_admin->id) {
-
-		$username = trim($_POST['username']);
-		$password = trim($_POST['password']);
-
-		$found_user_admin = $user_login_object->authenticate($username, $password, $object_type_admin->id);
-
-		if ($found_user_admin){
-			$session->login($found_user_admin, $object_type_admin->id);
+	$username = trim($_POST['username']);
+	$password = trim($_POST['password']);
+	$obj_type = $user_login_object->get_object_type_by_username($username);
+	if ($obj_type !== false){
+		$obj_type_val = (int) $obj_type->object_type;
+		$found_user = $user_login_object->authenticate($username, $password, $obj_type_val);
+		if ($found_user){
+			$session->login($found_user, $obj_type_val);
 			redirect_to(".");
 		} else {
 			$msg_obj->add_error("Username or password is incorrect. ");
 		}
-
-	} else if ($object_type == $object_type_student->id) {
-
-		$username = trim($_POST['username']);
-		$password = trim($_POST['password']);
-
-		$found_user_student = $user_login_object->authenticate($username, $password, $object_type_student->id);
-
-		if ($found_user_student){
-			$session->login($found_user_student, $object_type_student->id);
-			redirect_to(".");
-		} else {
-			$msg_obj->add_error("Username or password is incorrect. ");
-		}
-
-	} else if ($object_type == $object_type_company_user->id) {
-
-		$username = trim($_POST['username']);
-		$password = trim($_POST['password']);
-
-		$found_user_company_user = $user_login_object->authenticate($username, $password, $object_type_company_user->id);
-
-		if ($found_user_company_user){
-			$session->login($found_user_company_user, $object_type_company_user->id);
-			redirect_to(".");
-		} else {
-			$msg_obj->add_error("Username or password is incorrect. ");
-		}
-
+	}else{
+		$msg_obj->add_error("Username or password is incorrect. ");
 	}
 
-} else {
-	$username = "";
-	$password = "";
-}
 
+
+}
 
 ?>
 
@@ -139,8 +93,8 @@ body {
 
 		<div class="container">
 			<?php $msg_obj->display_errors(); ?>
-			<form class="form-signin" action="<?php echo HTTP_BASE . '/login'; ?>"
-				method="post">
+			<form class="form-signin"
+				action="<?php echo HTTP_BASE . '/login'; ?>" method="post">
 
 				<div class="control-group">
 					<h2 class="form-signin-heading">Please sign in</h2>
@@ -151,29 +105,14 @@ body {
 				<div class="control-group">
 					<div class="controls">
 						<input type="text" name="username" class="form-control"
-							placeholder="User Name"
-							value="<?php echo htmlentities($username); ?>">
+							placeholder="User Name" value="">
 					</div>
 				</div>
 
 				<div class="control-group">
 					<div class="controls">
 						<input type="password" name="password" class="form-control"
-							placeholder="Password"
-							value="<?php echo htmlentities($password); ?>">
-					</div>
-				</div>
-
-				<div class="control-group">
-					<div class="controls">
-						<label class="control-label">Login as:</label> <select
-							name="object_type">
-							<?php for ($i = 0; $i < count($user_objects); $i++) { ?>
-							<option value="<?php echo $user_objects[$i]->id; ?>">
-								<?php echo $user_objects[$i]->display_name; ?>
-							</option>
-							<?php } ?>
-						</select>
+							placeholder="Password" value="">
 					</div>
 				</div>
 

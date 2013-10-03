@@ -1,7 +1,7 @@
 <?php
 require_once("../includes/initialize.php");
 
-if ($session->is_logged_in() && $session->object_type == 5){
+if ($session->is_logged_in() && $session->object_type === 3){
 	
 	$user = AdminUser::find_by_id($_SESSION['id']);
 	$p = new Photo();
@@ -27,8 +27,8 @@ if ($session->is_logged_in() && $session->object_type == 5){
 		}
 	}
 	
-} else {
-	redirect_to("login.php");
+} else {	
+	redirect_to("login.php");	
 }
 
 

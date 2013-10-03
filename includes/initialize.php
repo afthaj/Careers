@@ -16,8 +16,8 @@ $protocol = (empty($_SERVER['HTTPS'])) ? "http://" : "https://";
 
 if (PHP_OS == 'WINNT' || PHP_OS == 'WIN32' || PHP_OS == 'Windows'){
 	
-	defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'localhost/webdev/Careers/www');
-	//defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'career-fair.lk');
+	//defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'localhost/webdev/Careers/www');
+	defined('HTTP_BASE') ? null : define('HTTP_BASE', $protocol . 'career-fair.lk');
 	require_once("config_windows.php");
 	
 } else if (PHP_OS == "Darwin") {

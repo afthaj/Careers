@@ -15,10 +15,6 @@ RewriteRule ^contact$ contact_us.php [QSA]
 RewriteRule ^login$ login.php [QSA]
 RewriteRule ^logout$ logout.php [QSA]
 
-
-#RewriteRule ^students/css/(.*)$ css/$1 [QSA]
-#RewriteRule ^students/js/(.*)$ js/$1 [QSA]
-#RewriteRule ^students/img/(.*)$ img/$1 [QSA]
 RewriteRule ^students/ajax_files/(.*)$ ajax_files/$1 [QSA]
 
 ErrorDocument 404 /not-found.php

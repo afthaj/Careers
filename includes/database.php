@@ -30,11 +30,15 @@ class MySQLDatabase{
 	public function open_connection(){
 		$this->connection = mysql_connect(DB_SERVER, DB_USER, DB_PASS);
 		if (!$this->connection){
-			die("Database connection failed: ". mysql_error());
+			//die("Database connection failed: ". mysql_error());
+			echo '<h1>Something went wrong. Please come back later.</h1>';
+			exit;
 		} else {
 			$db_select = mysql_select_db(DB_NAME, $this->connection);
 			if (!$this->connection){
-				die("Database selection failed: ". mysql_error());
+				//die("Database selection failed: ". mysql_error());
+				echo '<h1>Something went wrong. Please come back later.</h1>';
+				exit;
 			}
 		}
 	}

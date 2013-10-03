@@ -6,6 +6,9 @@ redirect_to_ssl();
 //init code
 $user_login_object = new UserLogin();
 $student_object = new Student();
+$admin_user_object = new AdminUser();
+$company_user_object = new CompanyUser();
+
 
 //check login
 if ($session->is_logged_in()){
