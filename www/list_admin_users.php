@@ -77,9 +77,9 @@ if ($session->is_logged_in() && $session->object_type == 5) {
         		$user_profile_picture = $pic->get_profile_picture('5', $users[$i]->id);
         		
         		if (!empty($user_profile_picture->filename)) {
-        			echo '<img src="../' . $user_profile_picture->image_path() . '" width="100" class="img-rounded" />';
+        			echo '<img src="../' . $user_profile_picture->image_path() . '" style="width: 100px;" class="img-rounded" />';
         		} else {
-        			echo '<img src="img/default-prof-pic.jpg" width="100" class="img-rounded" alt="Please upload a profile picture" />';
+        			echo '<img src="img/default-prof-pic.jpg" style="width: 100px;" class="img-rounded" alt="Please upload a profile picture" />';
         		}
         		
         		?>

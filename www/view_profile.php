@@ -207,9 +207,9 @@ if ($session->is_logged_in()){
 		 
 		 <?php 
          if (!empty($profile_picture_of_student->filename)) {
-         	echo '<img src="../' . $profile_picture_of_student->image_path() . '" width="200" class="img-rounded" />'; 
+         	echo '<img src="../' . $profile_picture_of_student->image_path() . '" style="width: 200px; height: 200px;" class="img-rounded" />'; 
          } else {
-         	echo '<img src="img/default-prof-pic.jpg" width="200" class="img-rounded" alt="Please upload a profile picture" />';
+         	echo '<img src="img/default-prof-pic.jpg" style="width: 200px; height: 200px;" class="img-rounded" alt="Please upload a profile picture" />';
          }
          ?>
 		 

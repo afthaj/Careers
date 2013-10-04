@@ -1,7 +1,3 @@
-/* @import url(//fonts.googleapis.com/css?family=Telex); */
-@import url("http://fonts.googleapis.com/css?family=Lato:300, 400,700,900,400italic");
-/* @import url("http://fonts.googleapis.com/css?family=Roboto"); */
-
 /*!
  * Bootstrap v2.3.2
  *
@@ -13,11 +9,10 @@
  */
 
 .clearfix {
-  *zoom: 1;
+  zoom: 1;
 }
 
-.clearfix:before,
-.clearfix:after {
+.clearfix:before, .clearfix:after {
   display: table;
   line-height: 0;
   content: "";
@@ -61,8 +56,8 @@ audio,
 canvas,
 video {
   display: inline-block;
-  *display: inline;
-  *zoom: 1;
+  display: inline;
+  zoom: 1;
 }
 
 audio:not([controls]) {
@@ -116,43 +111,28 @@ img {
   max-width: none;
 }
 
-button,
-input,
-select,
-textarea {
+button,input,select,textarea {
   margin: 0;
   font-size: 100%;
   vertical-align: middle;
 }
 
-button,
-input {
+button,input {
   *overflow: visible;
   line-height: normal;
 }
 
-button::-moz-focus-inner,
-input::-moz-focus-inner {
+button::-moz-focus-inner,input::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
 
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
+button,html input[type="button"],input[type="reset"],input[type="submit"] {
   cursor: pointer;
   -webkit-appearance: button;
 }
 
-label,
-select,
-button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"],
-input[type="radio"],
-input[type="checkbox"] {
+label,select,button,input[type="button"],input[type="reset"],input[type="submit"],input[type="radio"],input[type="checkbox"] {
   cursor: pointer;
 }
 
@@ -163,8 +143,7 @@ input[type="search"] {
   -webkit-appearance: textfield;
 }
 
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button {
+input[type="search"]::-webkit-search-decoration,input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
 
@@ -239,8 +218,7 @@ a {
   text-decoration: none;
 }
 
-a:hover,
-a:focus {
+a:hover,a:focus {
   color: #157ab5;
   text-decoration: underline;
 }
@@ -6516,3 +6494,5 @@ i[class^="icon-"] {
 .affix {
   position: fixed;
 }
+
+@import url("https://fonts.googleapis.com/css?family=Lato:300, 400,700,900,400italic");

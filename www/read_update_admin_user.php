@@ -105,9 +105,9 @@ if ($session->is_logged_in() && $session->object_type == 5){
 		 	
 		 <?php 
          if (!empty($profile_picture_of_other_admin_users->filename)) {
-         	echo '<img src="../../' . $profile_picture_of_other_admin_users->image_path() . '" width="200" class="img-rounded pull-right" />'; 
+         	echo '<img src="../../' . $profile_picture_of_other_admin_users->image_path() . '"style="width: 200px; height: 200px;" class="img-rounded pull-right" />'; 
          } else {
-         	echo '<img src="../img/default-prof-pic.jpg" width="200" class="img-rounded pull-right" alt="Please upload a profile picture" />';
+         	echo '<img src="../img/default-prof-pic.jpg" style="width: 200px; height: 200px;" class="img-rounded pull-right" alt="Please upload a profile picture" />';
          } 
          ?>
 		 	

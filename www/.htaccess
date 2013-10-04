@@ -14,6 +14,7 @@ RewriteRule ^students/$ students [R]
 RewriteRule ^contact$ contact_us.php [QSA]
 RewriteRule ^login$ login.php [QSA]
 RewriteRule ^logout$ logout.php [QSA]
+RewriteRule ^register$ company_register.php [QSA]
 
 RewriteRule ^students/ajax_files/(.*)$ ajax_files/$1 [QSA]
 

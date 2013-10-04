@@ -94,9 +94,9 @@ $bus_personnel = BusPersonnel::find_all();
 	        		$bus_personnel_profile_picture = $pic->get_profile_picture('4', $bus_personnel[$i]->id);
 	        		
 	        		if (!empty($bus_personnel_profile_picture->filename)) {
-	        			echo '<img src="../../' . $bus_personnel_profile_picture->image_path() . '" width="100" class="img-rounded" />';
+	        			echo '<img src="../../' . $bus_personnel_profile_picture->image_path() . '" style="width: 100px;" class="img-rounded" />';
 	        		} else {
-	        			echo '<img src="../img/default-prof-pic.jpg" width="100" class="img-rounded" alt="Please upload a profile picture" />';
+	        			echo '<img src="../img/default-prof-pic.jpg" style="width: 100px;" class="img-rounded" alt="Please upload a profile picture" />';
 	        		}
 	        		
 	        		?>
