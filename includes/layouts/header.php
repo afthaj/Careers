@@ -6,8 +6,7 @@
 <meta name="author" content="">
 <meta name="google"
 	value="notranslate">
-<meta name="ROBOTS"
-	content="INDEX, FOLLOW">
+
 <meta
 	name="description" content="The UCSC Career Fair, organized by the University of Colombo School of Computing is a project that aims to strengthen the ties between academia and the corporate world. It provides an opportunity for the corporate sector to recruit prospective employees by accessing a pool of fresh graduates.">
 <meta
