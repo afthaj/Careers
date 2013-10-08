@@ -30,7 +30,6 @@ if ($session->is_logged_in()){
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>

@@ -99,7 +99,6 @@ if (!empty($_GET['s'])){
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:og="http://ogp.me/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -107,13 +106,13 @@ if (!empty($_GET['s'])){
 <head>
 <?php require_once('../includes/layouts/header.php');?>
 <meta property="og:site_name" content="UCSC Career Fair" />
-<meta property="og:title" content="Student Profile" />
-<meta property="og:type" content="person" />
+<meta property="og:title" content="<?php echo $details_of_student_to_read_update->full_name(); ?> - UCSC Career Fair '13" />
+<meta property="og:type" content="website" />
 
 
 <?php if ($details_of_student_to_read_update !== false):?>
 <title><?php echo $details_of_student_to_read_update->full_name();?></title>
-<meta property="og:description"	content="<?php echo $details_of_student_to_read_update->full_name();?>" />
+<meta property="og:description"	content="<?php echo $student_to_read_update->executive_summary; ?>" />
 <meta property="og:url"	content="http://careers.ucsc.lk/students/<?php echo $details_of_student_to_read_update->username; ?>" />
 <meta property="og:image" content="http://careers.ucsc.lk/img/uploads/<?php echo $profile_picture_of_student->filename?>" />
 <?php else:?>
