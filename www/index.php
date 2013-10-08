@@ -29,8 +29,7 @@ if ($session->is_logged_in()){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Home &middot; <?php echo WEB_APP_NAME; ?>
-</title>
+<title><?php echo WEB_APP_NAME; ?></title>
 <?php require_once('../includes/layouts/header.php');?>
 
 <style>

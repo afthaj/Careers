@@ -35,7 +35,7 @@ if (isset($_POST['submit'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Login &middot; <?php echo WEB_APP_NAME; ?>
+<title>Login | <?php echo WEB_APP_NAME; ?>
 </title>
 <?php require_once('../includes/layouts/header.php');?>
 

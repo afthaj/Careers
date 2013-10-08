@@ -66,7 +66,7 @@ if (!empty($_GET['s'])){
 	$details_of_student_to_read_update = $user_login_object->get_user_by_username($_GET['s']);
 
 	if ($details_of_student_to_read_update === false){
-		$msg_obj->add_error("Student does not exist.");		
+		$msg_obj->add_error("Student does not exist.");
 	}else{
 		$student_to_read_update = $student_object->get_user($details_of_student_to_read_update->id);
 
@@ -101,11 +101,25 @@ if (!empty($_GET['s'])){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-<title>Student Profile &middot; <?php echo WEB_APP_NAME; ?>
-</title>
 <?php require_once('../includes/layouts/header.php');?>
+<meta property="og:site_name" content="UCSC Career Fair" />
+<meta property="og:title" content="Student Profile" />
+<meta property="og:type" content="person" />
+
+
+<?php if ($details_of_student_to_read_update !== false):?>
+<title><?php echo $details_of_student_to_read_update->full_name();?></title>
+<meta property="og:description"	content="<?php echo $details_of_student_to_read_update->full_name();?>" />
+<meta property="og:url"	content="http://careers.ucsc.lk/students/<?php echo $details_of_student_to_read_update->username; ?>" />
+<meta property="og:image" content="http://careers.ucsc.lk/img/uploads/<?php echo $profile_picture_of_student->filename?>" />
+<?php else:?>
+<title>UCSC Career Fair 2013</title>
+<?php endif ?>
+
 </head>
 
 <body>
@@ -153,12 +167,13 @@ if (!empty($_GET['s'])){
 		<!-- Begin page content -->
 
 		<div class="container" style="margin-top: 25px;">
-			
+
 			<div class="row">
 
 				<div class="span3 sidebar">
 					<div class="sidenav" data-spy="affix" data-offset-top="275">
-						<a href="<?php echo HTTP_BASE .'/students';?>" class="btn btn-primary btn-block"><i
+						<a href="<?php echo HTTP_BASE .'/students';?>"
+							class="btn btn-primary btn-block"><i
 							class="icon-arrow-left icon-white"></i> Back to List of Students</a><br />
 						<div class="well">
 							<h4>Student Details</h4>
@@ -208,10 +223,10 @@ if (!empty($_GET['s'])){
 				<!-- Start Content -->
 
 				<div class="span9">
-				
-				<?php if (!$session->is_logged_in()) :?>
-				<div class="info-block">Please login to view more details.</div>
-				<?php endif ?>
+
+					<?php if (!$session->is_logged_in()) :?>
+					<div class="info-block">Please login to view more details.</div>
+					<?php endif ?>
 
 					<section>
 
@@ -338,7 +353,7 @@ if (!empty($_GET['s'])){
 									<p style="font-weight: bold;">
 										<?php echo $student_to_read_update->research_project_title; ?>
 									</p>
-									<br/>
+									<br />
 									<h4>Project Description</h4>
 									<p class="read-text-box">
 										<?php echo $student_to_read_update->research_project_desc; ?>

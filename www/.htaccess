@@ -1,21 +1,18 @@
+Options -Indexes
 RewriteEngine on
 #RewriteBase /webdev/Careers/www/
 RewriteBase /
 
-RewriteCond %{DOCUMENT_ROOT}/$1.php -f
-RewriteRule ^([a-zA-Z0-9_-]+)/?$ /$1.php [QSA]
+RewriteRule ^contact$ contact_us.php [L]
+RewriteRule ^login$ login.php [L]
+RewriteRule ^logout$ logout.php [L]
+RewriteRule ^register$ company_register.php [L]
+RewriteRule ^(students|students/)$ list_students.php [L]
+RewriteRule ^(companies|companies/)$ list_companies.php [L]
+
 
 RewriteRule ^students/([^/][A-Za-z0-9\.]+)$ view_student_details.php?s=$1 [QSA]
-
-RewriteRule ^students$ list_students.php [QSA]
-RewriteRule ^students/([^/][A-Za-z0-9\.]+)/cv$ view_cv_pdf.php?s=$1
-RewriteRule ^students/$ students [R]
-
-RewriteRule ^contact$ contact_us.php [QSA]
-RewriteRule ^login$ login.php [QSA]
-RewriteRule ^logout$ logout.php [QSA]
-RewriteRule ^register$ company_register.php [QSA]
-
+RewriteRule ^students/([^/][A-Za-z0-9\.]+)/cv/?$ view_cv_pdf.php?s=$1
 RewriteRule ^students/ajax_files/(.*)$ ajax_files/$1 [QSA]
 
 ErrorDocument 404 /not-found.php
