@@ -179,18 +179,25 @@ body {
 	bottom: 5px;
 }
 
-.tooltip {
+.tooltip>p {
 	text-align: left;
 }
 </style>
 <script type="text/javascript">
 $(function () {	
-	$(".tooltip_icon").tooltip();
+	$("#tooltip_regcode").tooltip({
+		html: true,
+		title: '<p style="text-align: left;">Registration code has been sent to <?php echo $token_status->email; ?>. If you have not received it, please contact us.</p>'
+	});
+
+	$("#tooltip_password").tooltip({
+		html: true,
+		title: '<p style="text-align: left;">Password must be at least 6 characters long and must contain at least one special character.</p>'
+	});
 });
 
 </script>
 </head>
-
 <body>
 	<!-- Part 1: Wrap all page content here -->
 	<div id="wrap">
@@ -241,12 +248,10 @@ $(function () {
 					<div class="controls">
 						<input type="text" name="reg_code" class="form-control"
 							placeholder="Registration Code" value="" autocomplete="off"> <a
-							href="#" class="tooltip_icon" data-toggle="tooltip"
-							data-placement="right"
-							onclick="return false;" 
-							title="Registration code has been sent to <?php echo $token_status->email; ?>. If you have not received it, please contact us.">?</a>
+							id="tooltip_regcode" href="#" class="tooltip_icon"
+							data-toggle="tooltip" data-placement="right"
+							onclick="return false;">?</a>
 
-						<div class="tooltip">test</div>
 					</div>
 
 				</div>
@@ -268,6 +273,10 @@ $(function () {
 					<div class="controls">
 						<input type="password" name="password" class="form-control"
 							placeholder="Password" value="" autocomplete="off">
+							<a href="#" id="tooltip_password"
+							class="tooltip_icon" data-toggle="tooltip" data-placement="right"
+							onclick="return false;">?</a>
+
 					</div>
 				</div>
 
