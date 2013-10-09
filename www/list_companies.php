@@ -160,6 +160,14 @@ if ($session->is_logged_in()){
 								<?php echo $companies[$i]->additional_resources;?>
 							</p>
 							<?php } ?>
+							
+							<?php if ($companies[$i]->technologies !== NULL || count($companies[$i]->technologies) > 0 ) { ?>
+							<br/>
+							<h3>Technologies Used</h3>
+							<p class="intro-text">
+								<?php echo $companies[$i]->technologies;?>
+							</p>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
