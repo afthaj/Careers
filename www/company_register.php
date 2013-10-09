@@ -105,6 +105,7 @@ if ($isTokenValid && isset($_POST['submit'])){
 <title>Register | <?php echo WEB_APP_NAME; ?>
 </title>
 <?php require_once('../includes/layouts/header.php'); ?>
+<script src="js/bootstrap-tooltip.js"></script>
 <style type="text/css">
 body {
 	background-color: #f5f5f5;
@@ -160,7 +161,34 @@ body {
 	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 }
+
+.tooltip_icon {
+	cursor: pointer;
+	display: inline-block;
+	font-size: 13px;
+	width: 20px;
+	height: 20px;
+	background-color: #89A4CC;
+	line-height: 20px;
+	color: white;
+	font-weight: bold;
+	border-radius: 10px;
+	text-align: center;
+	position: relative;
+	margin: 0 0 0 20px;
+	bottom: 5px;
+}
+
+.tooltip {
+	text-align: left;
+}
 </style>
+<script type="text/javascript">
+$(function () {	
+	$(".tooltip_icon").tooltip();
+});
+
+</script>
 </head>
 
 <body>
@@ -194,10 +222,14 @@ body {
 
 				<div class="well">
 					<h4>Company Name</h4>
-					<p style="font-weight: bold;"><?php echo $token_status->name; ?></p>
+					<p style="font-weight: bold;">
+						<?php echo $token_status->name; ?>
+					</p>
 					<br />
 					<h4>Given Email Address</h4>
-					<p style="font-weight: bold;"><?php echo $token_status->email; ?></p>
+					<p style="font-weight: bold;">
+						<?php echo $token_status->email; ?>
+					</p>
 					<h5 style="font-weight: 100; color: blue;">This email address will
 						be your username for the web account.</h5>
 				</div>
@@ -208,8 +240,15 @@ body {
 				<div class="control-group">
 					<div class="controls">
 						<input type="text" name="reg_code" class="form-control"
-							placeholder="Registration Code" value="" autocomplete="off">
+							placeholder="Registration Code" value="" autocomplete="off"> <a
+							href="#" class="tooltip_icon" data-toggle="tooltip"
+							data-placement="right"
+							onclick="return false;" 
+							title="Registration code has been sent to <?php echo $token_status->email; ?>. If you have not received it, please contact us.">?</a>
+
+						<div class="tooltip">test</div>
 					</div>
+
 				</div>
 				<div class="control-group">
 					<div class="controls">
@@ -243,6 +282,11 @@ body {
 				<div class="form-actions">
 					<button class="btn btn-large btn-primary" type="submit"
 						name="submit">Register</button>
+				</div>
+
+				<div class="well">
+					Contact the <a href="mailto:webmaster@careers.ucsc.lk">webmaster</a>
+					if you are having difficulty.
 				</div>
 
 			</form>

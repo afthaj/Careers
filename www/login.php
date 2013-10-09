@@ -48,7 +48,7 @@ body {
 }
 
 .form-signin {
-	max-width: 300px;
+	max-width: 400px;
 	padding: 19px 29px 29px;
 	margin: 100px auto 20px;
 	background-color: #fff;
@@ -120,6 +120,7 @@ body {
 						name="submit">Sign in</button>
 				</div>
 
+				<div class="well">Contact the <a href="mailto:webmaster@careers.ucsc.lk">webmaster</a> if you are having difficulty.</div>
 			</form>
 
 		</div>

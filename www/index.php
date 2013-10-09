@@ -84,6 +84,10 @@ if ($session->is_logged_in()){
 	line-height: 1;
 	letter-spacing: -1px;
 }
+
+.masthead h1 {
+	font-size: 80px;
+}
 </style>
 
 </head>
@@ -99,9 +103,10 @@ if ($session->is_logged_in()){
 
 		<div class="jumbotron masthead">
 			<div class="container">
-				<img src="img/logo.png" alt="UCSC Logo" style="width: 200px; height: 200px;" />
+				<img src="img/logo.png" alt="UCSC Logo"
+					style="width: 200px; height: 200px;" />
 				<h1>
-					<?php echo INSTITUTE_SHORT_NAME . " " . WEB_APP_NAME; ?>
+					<?php echo WEB_APP_NAME; ?>
 				</h1>
 				<h3>
 					<?php echo WEB_APP_CATCH_PHRASE; ?>
@@ -150,7 +155,8 @@ if ($session->is_logged_in()){
 					</div>
 					<!-- /.span4 -->
 					<div class="span4">
-						<img class="img-rounded" src="img/logo-no-border.png" style="width: 140px; height: 140px;">
+						<img class="img-rounded" src="img/logo-no-border.png"
+							style="width: 140px; height: 140px;">
 						<div class="well home-text-box">
 							<h2>UCSC</h2>
 							<p class="read-text-box">The main objective of the UCSC is to
@@ -169,7 +175,8 @@ if ($session->is_logged_in()){
 					</div>
 					<!-- /.span4 -->
 					<div class="span4">
-						<img class="img-rounded" src="img/lab-photo-1.jpg" style="width: 140px; height: 140px;">
+						<img class="img-rounded" src="img/lab-photo-1.jpg"
+							style="width: 140px; height: 140px;">
 						<div class="well home-text-box">
 							<h2>Research &amp; Innovation</h2>
 							<p class="read-text-box">The talent available at the Career Fair

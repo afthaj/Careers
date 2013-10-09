@@ -1,6 +1,6 @@
 <?php
 require_once("../includes/initialize.php");
-$companies = Company::find_all();
+$companies = Company::get_sorted_list();
 $user_login_object = new UserLogin();
 
 if ($session->is_logged_in()){
@@ -80,7 +80,7 @@ if ($session->is_logged_in()){
 
 /* Thin out the marketing headings */
 .featurette-heading {
-	font-size: 50px;
+	font-size: 24px;
 	font-weight: 300;
 	line-height: 1;
 	letter-spacing: -1px;
@@ -91,6 +91,7 @@ if ($session->is_logged_in()){
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 25px;
+	text-align: justify;
 }
 </style>
 
@@ -115,14 +116,13 @@ if ($session->is_logged_in()){
 		<div class="container">
 
 			<!-- Start Content -->
-
-			<?php for($i = 0; $i < count($companies) ; $i++){ 
-				$orientation = ($i % 2 === 0) ? 'featurette-image pull-right' : 'featurette-image pull-left';
-				?>
-			<!-- START THE FEATURETTES -->
-
+			<div class="accordion" id="accordion2"
+				style="max-width: 700px; margin: 50px auto;">
+				<?php for($i = 0; $i < count($companies) ; $i++) { ?>
+				<!-- START THE FEATURETTES -->
+				<!--  
 			<div class="featurette">
-				<div class="<?php echo $orientation;?>"					
+				<div class="featurette-image pull-right"					
 					style="width: 250px; height: 250px; background: url('<?php echo HTTP_BASE . '/img/uploads/' .  $companies[$i]->logo_filename; ?>') no-repeat center center;">
 				</div>
 				<h2 class="featurette-heading">
@@ -133,13 +133,43 @@ if ($session->is_logged_in()){
 					<?php echo $companies[$i]->description;?>
 				</p>
 			</div>
+			-->
+				<div class="accordion-group">
+					<div class="accordion-heading">
 
-			<hr class="featurette-divider">
+						<div class="featurette-heading">
+							<a class="accordion-toggle" data-toggle="collapse" 
+							<?php if ($companies[$i]->logo_filename !== NULL || count($companies[$i]->logo_filename) > 0 ) { ?>
+							name="<?php echo 'ccc'.$companies[$i]->logo_filename;?>"
+							style="line-height: 100px; vertical-align: middle; margin: 20px; min-width: 250px; min-height: 100px; background: url('<?php echo HTTP_BASE . '/img/uploads/' .  $companies[$i]->logo_filename; ?>') no-repeat right center;"
+							<?php } ?>
+								data-parent="#accordion2" href="#collapse_<?php echo $i;?>"><?php echo $companies[$i]->name;?>
+							</a>
+						</div>
 
-			<!-- /END THE FEATURETTES -->
 
-			<?php } ?>
+					</div>
+					<div id="collapse_<?php echo $i;?>" class="accordion-body collapse">
+						<div class="accordion-inner">
+							<p class="intro-text">
+								<?php echo $companies[$i]->description;?>
+							</p>							
+							<?php if ($companies[$i]->additional_resources !== NULL || count($companies[$i]->additional_resources) > 0 ) { ?>
+							<h3>Additional Resources</h3>
+							<p class="intro-text">
+								<?php echo $companies[$i]->additional_resources;?>
+							</p>
+							<?php } ?>
+						</div>
+					</div>
+				</div>
 
+				<hr class="featurette-divider">
+
+				<!-- /END THE FEATURETTES -->
+
+				<?php } ?>
+			</div>
 			<!-- End Content -->
 
 		</div>

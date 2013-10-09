@@ -114,7 +114,7 @@ if (!empty($_GET['s'])){
 <title><?php echo $details_of_student_to_read_update->full_name();?></title>
 <meta property="og:description"	content="<?php echo $student_to_read_update->executive_summary; ?>" />
 <meta property="og:url"	content="http://careers.ucsc.lk/students/<?php echo $details_of_student_to_read_update->username; ?>" />
-<meta property="og:image" content="http://careers.ucsc.lk/img/uploads/<?php echo $profile_picture_of_student->filename?>" />
+<meta property="og:image" content="<?php echo HTTP_BASE . '/img/uploads/' . $profile_picture_of_student->filename; ?>" />
 <?php else:?>
 <title>UCSC Career Fair 2013</title>
 <?php endif ?>
