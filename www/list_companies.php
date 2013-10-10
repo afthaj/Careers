@@ -23,7 +23,6 @@ if ($session->is_logged_in()){
 	}
 
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +30,6 @@ if ($session->is_logged_in()){
 <title>Companies | <?php echo WEB_APP_NAME; ?>
 </title>
 <?php require_once('../includes/layouts/header.php');?>
-
 <style>
 
 /* MARKETING CONTENT
@@ -81,9 +79,20 @@ if ($session->is_logged_in()){
 /* Thin out the marketing headings */
 .featurette-heading {
 	font-size: 24px;
-	font-weight: 300;
-	line-height: 1;
-	letter-spacing: -1px;
+	font-weight: 300;	
+	padding: 20px;	
+}
+
+.featurette-heading a {
+	text-decoration: none;
+}
+
+.featurette-heading:HOVER a,accordion-toggle a:HOVER {
+	color: #2D42DD;
+}
+
+.featurette-heading:HOVER {
+	cursor: pointer;
 }
 
 .intro-text {
@@ -94,11 +103,8 @@ if ($session->is_logged_in()){
 	text-align: justify;
 }
 </style>
-
 </head>
-
 <body>
-
 	<!-- Part 1: Wrap all page content here -->
 	<div id="wrap">
 
@@ -137,32 +143,35 @@ if ($session->is_logged_in()){
 				<div class="accordion-group">
 					<div class="accordion-heading">
 
-						<div class="featurette-heading">
-							<a class="accordion-toggle" data-toggle="collapse" 
-							<?php if ($companies[$i]->logo_filename !== NULL || count($companies[$i]->logo_filename) > 0 ) { ?>
-							name="<?php echo 'ccc'.$companies[$i]->logo_filename;?>"
-							style="line-height: 100px; vertical-align: middle; margin: 20px; min-width: 250px; min-height: 100px; background: url('<?php echo HTTP_BASE . '/img/uploads/' .  $companies[$i]->logo_filename; ?>') no-repeat right center;"
-							<?php } ?>
+						<div class="featurette-heading accordion-toggle"
+							id="#collapse_<?php echo $i;?>" data-toggle="collapse"
+							data-parent="#accordion2" href="#collapse_<?php echo $i;?>">
+							<img src="img/drop_down.png" style="width: 12px; height: 12px;" />
+							<a id="#collapse_<?php echo $i;?>" class="accordion-toggle" 
+								data-toggle="collapse" style="display: inline; line-height: 40px;"
 								data-parent="#accordion2" href="#collapse_<?php echo $i;?>"><?php echo $companies[$i]->name;?>
 							</a>
+							<?php if ($companies[$i]->logo_filename !== NULL || count($companies[$i]->logo_filename) > 0 ) { ?>
+							<img
+								src="img/uploads/<?php echo $companies[$i]->logo_filename;?>"
+								style="max-width: 300px; min-height: 100px; margin-left: 130px;" />
+							<?php } ?>
 						</div>
-
-
 					</div>
 					<div id="collapse_<?php echo $i;?>" class="accordion-body collapse">
 						<div class="accordion-inner">
 							<p class="intro-text">
 								<?php echo $companies[$i]->description;?>
-							</p>							
+							</p>
 							<?php if ($companies[$i]->additional_resources !== NULL || count($companies[$i]->additional_resources) > 0 ) { ?>
 							<h3>Additional Resources</h3>
 							<p class="intro-text">
 								<?php echo $companies[$i]->additional_resources;?>
 							</p>
 							<?php } ?>
-							
+
 							<?php if ($companies[$i]->technologies !== NULL || count($companies[$i]->technologies) > 0 ) { ?>
-							<br/>
+							<br />
 							<h3>Technologies Used</h3>
 							<p class="intro-text">
 								<?php echo $companies[$i]->technologies;?>
@@ -184,10 +193,7 @@ if ($session->is_logged_in()){
 
 		<div id="push"></div>
 	</div>
-
 	<?php require_once('../includes/layouts/footer.php');?>
-
-	<?php require_once('../includes/layouts/scripts.php');?>
 
 </body>
 </html>

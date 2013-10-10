@@ -1,14 +1,12 @@
 <meta charset="utf-8">
 <meta
 	name="viewport" content="width=device-width, initial-scale=1.0">
-<meta
-	name="description" content="UCSC Career Fair 2013">
 <meta name="author" content="">
 <meta name="google"
 	value="notranslate">
-
 <meta
-	name="description" content="The UCSC Career Fair, organized by the University of Colombo School of Computing is a project that aims to strengthen the ties between academia and the corporate world. It provides an opportunity for the corporate sector to recruit prospective employees by accessing a pool of fresh graduates.">
+	name="description"
+	content="The UCSC Career Fair, organized by the University of Colombo School of Computing is a project that aims to strengthen the ties between academia and the corporate world. It provides an opportunity for the corporate sector to recruit prospective employees by accessing a pool of fresh graduates.">
 <meta
 	http-equiv="content-type" content="text/html;charset=UTF-8">
 <base
@@ -19,21 +17,19 @@
 	href="css/bootswatch-cerulean/bootstrap.css" rel="stylesheet">
 <link
 	href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/prettify.css" rel="stylesheet">
+<link
+	href="css/prettify.css" rel="stylesheet">
 <link
 	href="css/bootswatch-cerulean/docs.css" rel="stylesheet">
 <link
 	href="css/bootswatch-cerulean/gaman-styles.css" rel="stylesheet">
-
 <link
 	href="css/flexslider.css" rel="stylesheet" />
 <link
 	href="css/responsiveslides.css" rel="stylesheet" />
-
 <style type="text/css">
-
 /* Sticky footer styles
-      -------------------------------------------------- */
+-------------------------------------------------- */
 html,body {
 	height: 100%;
 	/* The html and body elements cannot have any padding or margin. */
@@ -119,7 +115,8 @@ html,body {
     <![endif]-->
 
 <!-- Fav and touch icons -->
-<link rel="shortcut icon" href="img/favicon.ico">
+<link
+	rel="shortcut icon" href="img/favicon.ico">
 
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
