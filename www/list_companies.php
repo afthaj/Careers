@@ -154,7 +154,7 @@ if ($session->is_logged_in()){
 							<?php if ($companies[$i]->logo_filename !== NULL || count($companies[$i]->logo_filename) > 0 ) { ?>
 							<img
 								src="img/uploads/<?php echo $companies[$i]->logo_filename;?>"
-								style="max-width: 300px; min-height: 100px; margin-left: 130px;" />
+								style="max-width: 300px; min-height: 100px; margin-left: 120px;" />
 							<?php } ?>
 						</div>
 					</div>
