@@ -79,8 +79,8 @@ if ($session->is_logged_in()){
 /* Thin out the marketing headings */
 .featurette-heading {
 	font-size: 24px;
-	font-weight: 300;	
-	padding: 20px;	
+	font-weight: 300;
+	padding: 20px;
 }
 
 .featurette-heading a {
@@ -102,6 +102,11 @@ if ($session->is_logged_in()){
 	line-height: 25px;
 	text-align: justify;
 }
+
+span.clear {
+	clear: left;
+	display: block;
+}
 </style>
 </head>
 <body>
@@ -112,9 +117,9 @@ if ($session->is_logged_in()){
 		<?php $page = 'companies';?>
 		<?php require_once('../includes/layouts/navbar.php');?>
 
-		<div class="jumbotron masthead">
+		<div class="jumbotron subhead">
 			<div class="container">
-				<h3>Participating Companies</h3>
+				<h1 style="display: inline;">Participating Companies</h1>
 			</div>
 		</div>
 
@@ -125,36 +130,31 @@ if ($session->is_logged_in()){
 			<div class="accordion" id="accordion2"
 				style="max-width: 700px; margin: 50px auto;">
 				<?php for($i = 0; $i < count($companies) ; $i++) { ?>
-				<!-- START THE FEATURETTES -->
-				<!--  
-			<div class="featurette">
-				<div class="featurette-image pull-right"					
-					style="width: 250px; height: 250px; background: url('<?php echo HTTP_BASE . '/img/uploads/' .  $companies[$i]->logo_filename; ?>') no-repeat center center;">
-				</div>
-				<h2 class="featurette-heading">
-					<?php echo $companies[$i]->name;?>
-					<span class="muted"></span>
-				</h2>
-				<p class="intro-text" style="text-align: justify">
-					<?php echo $companies[$i]->description;?>
-				</p>
-			</div>
-			-->
+				
+				<!-- START THE FEATURETTES -->				
+				
 				<div class="accordion-group">
 					<div class="accordion-heading">
-
 						<div class="featurette-heading accordion-toggle"
 							id="#collapse_<?php echo $i;?>" data-toggle="collapse"
-							data-parent="#accordion2" href="#collapse_<?php echo $i;?>">
-							<img src="img/drop_down.png" style="width: 12px; height: 12px;" />
-							<a id="#collapse_<?php echo $i;?>" class="accordion-toggle" 
-								data-toggle="collapse" style="display: inline; line-height: 40px;"
-								data-parent="#accordion2" href="#collapse_<?php echo $i;?>"><?php echo $companies[$i]->name;?>
-							</a>
+							data-parent="#accordion2" href="#collapse_<?php echo $i;?>"
+							style="min-height: 100px;">
+							<div style="float: left;">
+								<img src="img/drop_down.png" style="width: 12px; height: 12px;" />
+								<a id="#collapse_<?php echo $i;?>" class="accordion-toggle"
+									data-toggle="collapse"
+									style="display: inline; line-height: 100px;"
+									data-parent="#accordion2" href="#collapse_<?php echo $i;?>"><?php echo $companies[$i]->name;?>
+								</a>
+							</div>
 							<?php if ($companies[$i]->logo_filename !== NULL || count($companies[$i]->logo_filename) > 0 ) { ?>
-							<img
-								src="img/uploads/<?php echo $companies[$i]->logo_filename;?>"
-								style="max-width: 300px; min-height: 100px; margin-left: 120px;" />
+							<div style="height: 100px; display: table; float: right; margin-right: 20px;">
+								<div style="display: table-cell; vertical-align: middle;">
+									<img id="#logo_<?php echo $i;?>"
+										src="img/logos/<?php echo $companies[$i]->logo_filename;?>"
+										style="display: inline; float: right; line-height: 80px;" />
+								</div>
+							</div>
 							<?php } ?>
 						</div>
 					</div>

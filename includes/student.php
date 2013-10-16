@@ -15,6 +15,10 @@ class Student extends DatabaseObject {
 	public $research_project_desc;
 	public $cv_file_name;
 
+	public static function find_all(){
+		return static::find_by_sql("SELECT * FROM " . static::$table_name . ' , user_logins WHERE user_students.login_id=user_logins.id ORDER BY first_name, last_name');
+	}
+
 	public function get_user($id){
 		global $database;
 		if (!isset($id) || $id===''){
@@ -45,6 +49,28 @@ class Student extends DatabaseObject {
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/pdf');
 		header('Content-Disposition: inline; filename='.basename($file)."'");
+		header('Content-Transfer-Encoding: binary');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Pragma: public');
+		header('Content-Length: ' . filesize($file));
+		ob_clean();
+		flush();
+		readfile($file);
+		exit;
+	}
+
+	public static function get_cv_bundle(){
+		global $database;
+		$file = SITE_ROOT . DS . 'cv' . DS . 'ucsc_career-fair_cv_bundle.zip';
+		if (!file_exists($file)){
+			header('HTTP/1.0 404 Not Found');
+			require_once(SITE_ROOT . DS . 'www' . DS . 'not-found.php');
+			exit;
+		}
+		header('Content-Description: File Transfer');
+		header("Content-Type: application/zip");
+		header('Content-Disposition: attachment; filename="'.basename($file).'"');
 		header('Content-Transfer-Encoding: binary');
 		header('Expires: 0');
 		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');

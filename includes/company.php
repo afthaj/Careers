@@ -5,7 +5,7 @@ require_once("database.php");
 class Company extends DatabaseObject {
 
 	protected static $table_name = "obj_companies";
-	protected static $db_fields = array('id', 'name', 'verified_flag', 'token', 'reg_code' , 'description', 'logo_filename', 'email', 'additional_resources', 'technologies');
+	protected static $db_fields = array('id', 'name', 'verified_flag', 'token', 'reg_code' , 'description', 'logo_filename', 'email', 'additional_resources', 'technologies', 'pref_cv_link');
 
 	public $id;
 	public $name;
@@ -17,6 +17,7 @@ class Company extends DatabaseObject {
 	public $email;
 	public $additional_resources;
 	public $technologies;
+	public $pref_cv_link;
 
 	public function get_company($id){
 		global $database;
