@@ -46,6 +46,7 @@ class Student extends DatabaseObject {
 			require_once(SITE_ROOT . DS . 'www' . DS . 'not-found.php');
 			exit;
 		}
+		session_write_close();
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/pdf');
 		header('Content-Disposition: inline; filename='.basename($file)."'");
@@ -68,6 +69,7 @@ class Student extends DatabaseObject {
 			require_once(SITE_ROOT . DS . 'www' . DS . 'not-found.php');
 			exit;
 		}
+		session_write_close();
 		header('Content-Description: File Transfer');
 		header("Content-Type: application/zip");
 		header('Content-Disposition: attachment; filename="'.basename($file).'"');

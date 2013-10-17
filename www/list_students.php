@@ -65,6 +65,10 @@ if ($session->is_logged_in()){
 						href="<?php echo $company_object->find_by_id($company_user->company_id)->pref_cv_link; ?>"
 						class="btn btn-success" target="_blank">View Preferred Student
 						List</a>
+						<a
+						style="color: #fff; display: block; margin-top: 5px;"
+						href="https://docs.google.com/spreadsheet/ccc?key=0Atq-iA3K3wmhdFRPTTZQakpUOFRJNXQzcmtZUTliaEE&usp=sharing"
+						class="btn btn-success" target="_blank">View Job Preferences</a>
 				</div>
 				<?php endif ?>
 			</div>
