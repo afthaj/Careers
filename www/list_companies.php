@@ -163,14 +163,14 @@ span.clear {
 							<p class="intro-text">
 								<?php echo $companies[$i]->description;?>
 							</p>
-							<?php if ($companies[$i]->additional_resources !== NULL || count($companies[$i]->additional_resources) > 0 ) { ?>
+							<?php if ($companies[$i]->additional_resources !== NULL && $companies[$i]->additional_resources !== '') { ?>
 							<h3>Additional Resources</h3>
 							<p class="intro-text">
 								<?php echo $companies[$i]->additional_resources;?>
 							</p>
 							<?php } ?>
 
-							<?php if ($companies[$i]->technologies !== NULL || count($companies[$i]->technologies) > 0 ) { ?>
+							<?php if ($companies[$i]->technologies !== NULL && $companies[$i]->technologies !== '' ) { ?>
 							<br />
 							<h3>Technologies Used</h3>
 							<p class="intro-text">
