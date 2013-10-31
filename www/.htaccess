@@ -14,5 +14,6 @@ RewriteRule ^students/([^/][A-Za-z0-9\.]+)$ view_student_details.php?s=$1 [QSA]
 RewriteRule ^students/([^/][A-Za-z0-9\.]+)/cv/?$ view_cv_pdf.php?s=$1
 RewriteRule ^students/ajax_files/(.*)$ ajax_files/$1 [QSA]
 RewriteRule ^download/cv_bundle$ download_cv.php
+RewriteRule ^download/ucsc_cv_bundle$ download_ucsc_cv.php
 
 ErrorDocument 404 /not-found.php

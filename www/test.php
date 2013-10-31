@@ -49,7 +49,7 @@ require_once("../includes/password.php");
 
 							<?php $msg_obj->display_errors(); ?>
 
-							<?php //$hash = password_hash("", PASSWORD_BCRYPT); echo $hash;?>
+							<?php $hash = password_hash("test", PASSWORD_BCRYPT); echo '<br/>' . $hash . '<br/>';?>
 
 							<?php 
 							function crypto_rand_secure($min, $max) {

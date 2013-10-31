@@ -5,7 +5,7 @@ require_once("database.php");
 class Company extends DatabaseObject {
 
 	protected static $table_name = "obj_companies";
-	protected static $db_fields = array('id', 'name', 'verified_flag', 'token', 'reg_code' , 'description', 'logo_filename', 'email', 'additional_resources', 'technologies', 'pref_cv_link');
+	protected static $db_fields = array('id', 'name', 'verified_flag', 'token', 'reg_code' , 'description', 'logo_filename', 'email', 'additional_resources', 'technologies', 'pref_cv_link','cv_bundle');
 
 	public $id;
 	public $name;
@@ -18,6 +18,7 @@ class Company extends DatabaseObject {
 	public $additional_resources;
 	public $technologies;
 	public $pref_cv_link;
+	public $cv_bundle;
 
 	public function get_company($id){
 		global $database;
@@ -109,7 +110,7 @@ class Company extends DatabaseObject {
 
 		return !empty($result_array) ? array_shift($result_array) : false;
 	}
-	
+
 	public static function get_sorted_list(){
 		return static::find_by_sql("SELECT * FROM " . static::$table_name . ' ORDER BY name');
 	}
